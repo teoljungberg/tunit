@@ -12,5 +12,32 @@ module Rtest
       assert_equal Test::PREFIX, /^test_/
       assert_includes klass.runnable_methods, "test_foo"
     end
+
+    def test_run_handles_assertions
+      k = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+      }.new
+
+      k.run "test_even_eh"
+      assert_equal 1, k.assertions
+    end
+
+    def test_run_handles_failures
+      k = Class.new(Test) {
+        def test_fail_even_eh
+          assert 1.even?
+        end
+      }.new
+
+      k.run "test_fail_even_eh"
+
+      exp_error = Rtest::Assertion
+      exp_msg   = "Failed assertion, no message given."
+
+      assert exp_error === k.failures.first
+      assert_equal exp_msg, k.failures.first.message
+    end
   end
 end
