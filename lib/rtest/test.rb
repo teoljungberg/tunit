@@ -1,8 +1,11 @@
 require 'rtest/runnable'
+require 'rtest/assertions'
 
 module Rtest
   class Test < Runnable
     PREFIX = /^test_/
+
+    include Assertions
 
     def self.runnable_methods
       methods_matching PREFIX
