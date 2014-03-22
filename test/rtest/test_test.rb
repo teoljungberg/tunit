@@ -51,5 +51,20 @@ module Rtest
         k.run "test_odd_eh"
       end
     end
+
+    def test_run_runs_all_tests
+      k = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+
+        def test_includes_eh
+          assert [1, 2].include?(2)
+        end
+      }.new
+
+      k.run
+      assert_equal 2, k.assertions
+    end
   end
 end

@@ -17,8 +17,14 @@ module Rtest
     end
     attr_accessor :assertions, :failures
 
-    def run test
-      run_single_method test
+    def run test = nil
+      if test
+        run_single_method test
+      else
+        self.class.runnable_methods.each { |test|
+          run_single_method test
+        }
+      end
     end
 
     private
