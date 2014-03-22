@@ -40,6 +40,21 @@ module Rtest
       assert_equal exp_msg, k.failures.first.message
     end
 
+    def test_run_handles_empty_tests
+      k = Class.new(Test) {
+        def test_empty
+        end
+      }.new
+
+      k.run "test_empty"
+
+      exp_error = Rtest::EmptyTest
+      exp_msg   = "Empty test, 'test_empty'"
+
+      assert exp_error === k.failures.first
+      assert_equal exp_msg, k.failures.first.message
+    end
+
     def test_run_passes_through_errors
       k = Class.new(Test) {
         def test_even_eh

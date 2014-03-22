@@ -13,6 +13,12 @@ module Rtest
     end
   end
 
+  class EmptyTest < Assertion
+    def result_label
+      "_Empty"
+    end
+  end
+
   module Assertions
     def assert test, msg = nil
       msg ||= "Failed assertion, no message given."

@@ -32,12 +32,17 @@ module Rtest
     def run_single_method test
       capture_exceptions do
         send test
+        if self.assertions.zero?
+          raise ::Rtest::EmptyTest, "Empty test, '#{test}'"
+        end
       end
     end
 
     def capture_exceptions
       yield
     rescue Assertion => e
+      self.failures << e
+    rescue EmptyTest => e
       self.failures << e
     end
   end
