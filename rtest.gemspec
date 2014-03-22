@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Rtest::VERSION
   spec.authors       = ["Teo Ljungberg"]
   spec.email         = ["teo.ljungberg@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{My take on a TDD testing framework}
+  spec.description   = %q{It's basicly minitest}
   spec.homepage      = ""
   spec.license       = "MIT"
 
