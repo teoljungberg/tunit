@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'rtest/test'
 
 module Rtest
-  class MetaTest < Minitest::Test
+  class MetaMeta < Minitest::Test
     def test_runnable_methods
       klass = Class.new(Test) {
         def test_foo; end
