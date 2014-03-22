@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'rtest/assertions'
+require 'rtest/test'
 
 module Rtest
   class AssertionErrorTest < Minitest::Test
@@ -37,6 +38,32 @@ module Rtest
 
     def test_result_label
       assert_equal "_Empty", assertion.result_label
+    end
+  end
+
+  class AssertionsTest < Minitest::Test
+    def setup
+      self.klass = Class.new(Test) {
+        include Assertions
+        def test_assert
+          assert 2.even?
+        end
+
+        def test_refute
+          refute 1.even?
+        end
+      }.new
+    end
+    attr_accessor :klass
+
+    def test_assert
+      klass.run "test_assert"
+      assert_equal 1, klass.assertions
+    end
+
+    def test_refute
+      klass.run "test_refute"
+      assert_equal 1, klass.assertions
     end
   end
 end

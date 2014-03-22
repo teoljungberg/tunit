@@ -29,6 +29,10 @@ module Rtest
       end
       true
     end
-  end
 
+    def refute test, msg = nil
+      msg ||= "Failed assertion, no message given."
+      ! assert !test, msg
+    end
+  end
 end
