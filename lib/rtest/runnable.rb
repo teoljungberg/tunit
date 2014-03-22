@@ -4,6 +4,10 @@ module Rtest
       raise NotImplementedError, "subclass responsibility"
     end
 
+    def run test
+      raise NotImplementedError, "subclass responsibility"
+    end
+
     private
 
     def self.methods_matching re

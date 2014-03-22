@@ -26,5 +26,14 @@ module Rtest
 
       assert_includes klass.runnable_methods, "test_foo"
     end
+
+    def test_run_is_a_subclass_responsibility
+      e = assert_raises NotImplementedError do
+        Runnable.new.run "test_foo"
+      end
+
+      exp = "subclass responsibility"
+      assert_equal exp, e.message
+    end
   end
 end
