@@ -39,5 +39,17 @@ module Rtest
       assert exp_error === k.failures.first
       assert_equal exp_msg, k.failures.first.message
     end
+
+    def test_run_passes_through_errors
+      k = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+      }.new
+
+      assert_raises NoMethodError do
+        k.run "test_odd_eh"
+      end
+    end
   end
 end
