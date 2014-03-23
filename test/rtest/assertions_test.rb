@@ -44,13 +44,20 @@ module Rtest
   class AssertionsTest < Minitest::Test
     def setup
       self.klass = Class.new(Test) {
-        include Assertions
         def test_assert
           assert 2.even?
         end
 
         def test_refute
           refute 1.even?
+        end
+
+        def test_assert_equal
+          assert_equal 1, 2
+        end
+
+        def test_refute_equal
+          refute_equal 1, 2
         end
       }.new
     end
@@ -63,6 +70,16 @@ module Rtest
 
     def test_refute
       klass.run "test_refute"
+      assert_equal 1, klass.assertions
+    end
+
+    def test_assert_equal
+      klass.run "test_assert_equal"
+      assert_equal 1, klass.assertions
+    end
+
+    def test_refute_equal
+      klass.run "test_refute_equal"
       assert_equal 1, klass.assertions
     end
   end

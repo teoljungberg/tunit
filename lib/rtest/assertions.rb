@@ -30,9 +30,19 @@ module Rtest
       true
     end
 
+    def assert_equal exp, act, msg = nil
+      msg ||= "Failed assertion, no message given."
+      assert exp == act, msg
+    end
+
     def refute test, msg = nil
       msg ||= "Failed assertion, no message given."
       ! assert !test, msg
+    end
+
+    def refute_equal exp, act, msg = nil
+      msg ||= "Failed assertion, no message given."
+      refute exp == act, msg
     end
   end
 end
