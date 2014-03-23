@@ -71,7 +71,7 @@ module Rtest
       exp_msg = "Empty test, 'test_empty'"
       failure = result.failures.first
 
-      assert_instance_of Rtest::EmptyTest, failure
+      assert_instance_of Rtest::Empty, failure
       assert_equal exp_msg, failure.message
     end
 

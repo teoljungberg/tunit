@@ -21,7 +21,7 @@ module Rtest
         time_it do
           send name
           if self.assertions.zero?
-            raise ::Rtest::EmptyTest, "Empty test, '#{name}'"
+            raise ::Rtest::Empty, "Empty test, '#{name}'"
           end
         end
       end
@@ -53,7 +53,7 @@ module Rtest
       yield
     rescue Assertion => e
       self.failures << e
-    rescue EmptyTest, Skip => e
+    rescue Empty, Skip => e
       self.failures << e
     end
   end

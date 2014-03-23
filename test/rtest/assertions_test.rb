@@ -22,14 +22,14 @@ module Rtest
     end
   end
 
-  class EmptyTestErrorTest < Minitest::Test
+  class EmptyTest < Minitest::Test
     def setup
-      self.assertion = EmptyTest.new
+      self.assertion = Empty.new
     end
     attr_accessor :assertion
 
     def test_error
-      assert_instance_of EmptyTest, assertion.error
+      assert_instance_of Empty, assertion.error
     end
 
     def test_result_code

@@ -13,7 +13,7 @@ module Rtest
     end
   end
 
-  class EmptyTest < Assertion
+  class Empty < Assertion
     def result_label
       "_Empty"
     end
