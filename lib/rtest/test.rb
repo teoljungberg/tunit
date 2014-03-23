@@ -21,6 +21,11 @@ module Rtest
       self
     end
 
+    def skipped?
+      failure = self.failures.first
+      failure && Skip === failure
+    end
+
     private
 
     def run_single_method test
@@ -45,7 +50,7 @@ module Rtest
       yield
     rescue Assertion => e
       self.failures << e
-    rescue EmptyTest => e
+    rescue EmptyTest, Skip => e
       self.failures << e
     end
   end

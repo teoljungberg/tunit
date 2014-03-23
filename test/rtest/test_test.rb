@@ -35,7 +35,7 @@ module Rtest
       result  = klass.new("test_fail_even_eh").run
 
       exp_msg = "Failed assertion, no message given."
-      failure = result.failures.pop
+      failure = result.failures.first
 
       assert_instance_of Rtest::Assertion, failure
       assert_equal exp_msg, failure.message
@@ -50,7 +50,7 @@ module Rtest
       result  = klass.new("test_empty").run
 
       exp_msg = "Empty test, 'test_empty'"
-      failure = result.failures.pop
+      failure = result.failures.first
 
       assert_instance_of Rtest::EmptyTest, failure
       assert_equal exp_msg, failure.message
@@ -66,8 +66,9 @@ module Rtest
       result  = klass.new("test_super_complex_implementation").run
 
       exp_msg = "Skipped 'test_super_complex_implementation'"
-      failure = result.failures.pop
+      failure = result.failures.first
 
+      assert result.skipped?
       assert_instance_of Rtest::Skip, failure
       assert_equal exp_msg, failure.message
     end
@@ -82,7 +83,7 @@ module Rtest
       result  = klass.new("test_super_complex_implementation").run
 
       exp_msg = "implement me when IQ > 80"
-      failure = result.failures.pop
+      failure = result.failures.first
 
       assert_equal exp_msg, failure.message
     end
