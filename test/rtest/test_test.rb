@@ -22,6 +22,7 @@ module Rtest
 
       result = klass.new("test_even_eh").run
 
+      assert result.passed?
       assert_equal 1, result.assertions
     end
 

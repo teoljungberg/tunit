@@ -21,9 +21,16 @@ module Rtest
       self
     end
 
+    def passed?
+      !failure
+    end
+
     def skipped?
-      failure = self.failures.first
       failure && Skip === failure
+    end
+
+    def failure
+      self.failures.first
     end
 
     private
