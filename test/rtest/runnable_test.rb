@@ -29,7 +29,7 @@ module Rtest
 
     def test_run_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do
-        Runnable.new.run "test_foo"
+        Runnable.new.run
       end
 
       exp = "subclass responsibility"

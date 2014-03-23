@@ -14,25 +14,25 @@ module Rtest
     end
 
     def test_run_handles_assertions
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_even_eh
           assert 2.even?
         end
-      }.new
+      }
 
-      result = k.run "test_even_eh"
+      result = klass.new("test_even_eh").run
 
       assert_equal 1, result.assertions
     end
 
     def test_run_handles_failures
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_fail_even_eh
           assert 1.even?
         end
-      }.new
+      }
 
-      result  = k.run "test_fail_even_eh"
+      result  = klass.new("test_fail_even_eh").run
 
       exp_msg = "Failed assertion, no message given."
       failure = result.failures.pop
@@ -42,12 +42,12 @@ module Rtest
     end
 
     def test_run_handles_empty_tests
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_empty
         end
-      }.new
+      }
 
-      result  = k.run "test_empty"
+      result  = klass.new("test_empty").run
 
       exp_msg = "Empty test, 'test_empty'"
       failure = result.failures.pop
@@ -57,13 +57,13 @@ module Rtest
     end
 
     def test_run_handles_skipped_tests
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_super_complex_implementation
           skip
         end
-      }.new
+      }
 
-      result  = k.run "test_super_complex_implementation"
+      result  = klass.new("test_super_complex_implementation").run
 
       exp_msg = "Skipped 'test_super_complex_implementation'"
       failure = result.failures.pop
@@ -73,13 +73,13 @@ module Rtest
     end
 
     def test_run_skipped_tests_can_have_customized_messages
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_super_complex_implementation
           skip "implement me when IQ > 80"
         end
-      }.new
+      }
 
-      result  = k.run "test_super_complex_implementation"
+      result  = klass.new("test_super_complex_implementation").run
 
       exp_msg = "implement me when IQ > 80"
       failure = result.failures.pop
@@ -88,18 +88,18 @@ module Rtest
     end
 
     def test_run_passes_through_errors
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_even_eh
           assert 2.even?
         end
-      }.new
+      }
 
       assert_raises NoMethodError do
-        k.run "test_odd_eh"
+        klass.new("test_odd_eh").run
       end
     end
 
-    def test_run_runs_all_tests
+    def test_run_runs_all_tests_if_no_name_is_given
       k = Class.new(Test) {
         def test_even_eh
           assert 2.even?
@@ -116,13 +116,13 @@ module Rtest
     end
 
     def test_run_times_each_run
-      k = Class.new(Test) {
+      klass = Class.new(Test) {
         def test_even_eh
           assert 2.even?
         end
-      }.new
+      }
 
-      result = k.run "test_even_eh"
+      result = klass.new("test_even_eh").run
 
       assert_instance_of Float, result.time
     end

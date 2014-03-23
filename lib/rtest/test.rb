@@ -10,18 +10,12 @@ module Rtest
       methods_matching PREFIX
     end
 
-    def initialize
-      self.assertions = 0
-      self.failures   = []
-    end
-    attr_accessor :assertions, :failures, :time
-
-    def run test = nil
-      if test
-        run_single_method test
+    def run
+      if name
+        run_single_method name
       else
-        self.class.runnable_methods.each { |test_name|
-          run_single_method test_name
+        self.class.runnable_methods.each { |test|
+          run_single_method test
         }
       end
       self

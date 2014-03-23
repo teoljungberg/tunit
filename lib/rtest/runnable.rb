@@ -4,7 +4,14 @@ module Rtest
       raise NotImplementedError, "subclass responsibility"
     end
 
-    def run test
+    def initialize name = nil
+      self.name       = name
+      self.assertions = 0
+      self.failures   = []
+    end
+    attr_accessor :name, :assertions, :failures, :time
+
+    def run
       raise NotImplementedError, "subclass responsibility"
     end
 
