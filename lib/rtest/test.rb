@@ -14,7 +14,7 @@ module Rtest
       self.assertions = 0
       self.failures   = []
     end
-    attr_accessor :assertions, :failures
+    attr_accessor :assertions, :failures, :time
 
     def run test = nil
       if test
@@ -30,11 +30,20 @@ module Rtest
 
     def run_single_method test
       capture_exceptions do
-        send test
-        if self.assertions.zero?
-          raise ::Rtest::EmptyTest, "Empty test, '#{test}'"
+        time_it do
+          send test
+          if self.assertions.zero?
+            raise ::Rtest::EmptyTest, "Empty test, '#{test}'"
+          end
         end
       end
+    end
+
+    def time_it
+      t0 = Time.now
+      yield
+    ensure
+      self.time = Time.now - t0
     end
 
     def capture_exceptions

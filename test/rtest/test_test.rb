@@ -81,5 +81,17 @@ module Rtest
       k.run
       assert_equal 2, k.assertions
     end
+
+    def test_run_times_each_run
+      k = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+      }.new
+
+      k.run "test_even_eh"
+      test_time = Time.new k.time
+      assert_instance_of Time, test_time
+    end
   end
 end
