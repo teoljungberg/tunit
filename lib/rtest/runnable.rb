@@ -15,4 +15,3 @@ module Rtest
     end
   end
 end
-

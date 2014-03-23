@@ -20,8 +20,8 @@ module Rtest
       if test
         run_single_method test
       else
-        self.class.runnable_methods.each { |test|
-          run_single_method test
+        self.class.runnable_methods.each { |test_name|
+          run_single_method test_name
         }
       end
     end

@@ -15,7 +15,7 @@ module Rtest
     def test_runnable_methods_can_be_customized_to_find_your_tests
       super_klass = Class.new(Runnable) {
         def self.runnable_methods
-          methods_matching /^test_/
+          methods_matching(/^test_/)
         end
       }
 
