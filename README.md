@@ -10,7 +10,50 @@ _NOTE_ This is very unstable and is just a playground for my ideas.
 
 ## Usage
 
-TODO: Write usage instructions here
+I personally _love_ TDD frameworks like minitest, so I tried to mimic their
+behaviour and patterns as close as I possibly could. As with minitest, this is
+just plain ruby.
+
+```ruby
+class BlahTest < Rtest::Test
+  def setup
+    self.blah = Blah.new
+  end
+  attr_accessor :blah
+
+  def test_the_answer_to_everything
+    assert_equal 42, blah.the_ultimate_answer
+  end
+
+  def test_packing_list
+    assert_includes blah.packing_list, "towel"
+  end
+
+  def test_that_will_be_skipped
+    skip "test this later"
+  end
+end
+```
+
+What's important to me is that `BlahTest` is just a simple subclass, and
+`test_the_answer_to_everything` is a simple method. Assertions and
+lazily-loaded variables are just methods, everything is just a simple method
+definition away.
+
+I'm a strong believer in that you should only mock and stub things so you can
+assert on something else. That's why a `test`-method must have assertions in
+`rtest`
+
+```ruby
+class EmptyTest < Rtest::Test
+  def test_im_going_to_fail
+  end
+
+  def test_so_will_i
+    1 + 1 == 2
+  end
+end
+```
 
 ## Contributing
 
