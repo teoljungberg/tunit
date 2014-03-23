@@ -35,9 +35,10 @@ module Rtest
 
       exp_error = Rtest::Assertion
       exp_msg   = "Failed assertion, no message given."
+      failure   = k.failures.pop
 
-      assert exp_error === k.failures.first
-      assert_equal exp_msg, k.failures.first.message
+      assert exp_error === failure
+      assert_equal exp_msg, failure.message
     end
 
     def test_run_handles_empty_tests
@@ -50,9 +51,11 @@ module Rtest
 
       exp_error = Rtest::EmptyTest
       exp_msg   = "Empty test, 'test_empty'"
+      failure   = k.failures.pop
 
-      assert exp_error === k.failures.first
-      assert_equal exp_msg, k.failures.first.message
+      assert exp_error === failure
+      assert_equal exp_msg, failure.message
+
     end
 
     def test_run_passes_through_errors
