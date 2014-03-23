@@ -10,13 +10,20 @@ module Rtest
       methods_matching PREFIX
     end
 
+    def self.run_all
+      runnable_methods.map { |test|
+        new(test).run
+      }
+    end
+
     def run
-      if name
-        run_single_method name
-      else
-        self.class.runnable_methods.each { |test|
-          run_single_method test
-        }
+      capture_exceptions do
+        time_it do
+          send name
+          if self.assertions.zero?
+            raise ::Rtest::EmptyTest, "Empty test, '#{name}'"
+          end
+        end
       end
       self
     end
@@ -34,17 +41,6 @@ module Rtest
     end
 
     private
-
-    def run_single_method test
-      capture_exceptions do
-        time_it do
-          send test
-          if self.assertions.zero?
-            raise ::Rtest::EmptyTest, "Empty test, '#{test}'"
-          end
-        end
-      end
-    end
 
     def time_it
       t0 = Time.now

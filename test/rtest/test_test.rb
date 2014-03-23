@@ -13,6 +13,24 @@ module Rtest
       assert_includes klass.runnable_methods, "test_foo"
     end
 
+    def test_run_all_runs_all_tests_in_a_new_scope
+      klass = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+
+        def test_includes_eh
+          assert [1, 2].include?(2)
+        end
+      }
+
+      result     = klass.run_all
+      assertions = result.map(&:assertions).inject(:+)
+
+      assert_equal 2, assertions
+    end
+
+
     def test_run_handles_assertions
       klass = Class.new(Test) {
         def test_even_eh
@@ -99,22 +117,6 @@ module Rtest
       assert_raises NoMethodError do
         klass.new("test_odd_eh").run
       end
-    end
-
-    def test_run_runs_all_tests_if_no_name_is_given
-      k = Class.new(Test) {
-        def test_even_eh
-          assert 2.even?
-        end
-
-        def test_includes_eh
-          assert [1, 2].include?(2)
-        end
-      }.new
-
-      result = k.run
-
-      assert_equal 2, result.assertions
     end
 
     def test_run_times_each_run
