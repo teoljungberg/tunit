@@ -68,6 +68,26 @@ module Rtest
       tc.refute_equal 1, 2
     end
 
+    def test_assert_includes
+      self.assertion_count = 2
+      tc.assert_includes [2], 2
+    end
+
+    def test_refute_includes
+      self.assertion_count = 2
+      tc.refute_includes [1], 2
+    end
+
+    def test_assert_respond_to
+      self.assertion_count = 1
+      tc.assert_respond_to tc, :assert
+    end
+
+    def test_refute_respond_to
+      self.assertion_count = 1
+      tc.refute_respond_to tc, :omg
+    end
+
     def teardown
       assert_equal assertion_count, tc.assertions,
         "Expected #{assertion_count} assertions to have been made to #{tc.inspect}, but was #{tc.assertions}"

@@ -35,6 +35,17 @@ module Rtest
       assert exp == act, msg
     end
 
+    def assert_includes collection, obj, msg = nil
+      msg ||= "Expected #{collection.inspect} to include #{obj}"
+      assert_respond_to collection, :include?
+      assert collection.include?(obj), msg
+    end
+
+    def assert_respond_to obj, meth, msg = nil
+      msg ||= "Expected #{obj.inspect} (#{obj.class}) to respond to ##{meth}"
+      assert obj.respond_to?(meth), msg
+    end
+
     def refute test, msg = nil
       msg ||= "Failed assertion, no message given."
       ! assert !test, msg
@@ -43,6 +54,17 @@ module Rtest
     def refute_equal exp, act, msg = nil
       msg ||= "Failed assertion, no message given."
       refute exp == act, msg
+    end
+
+    def refute_includes collection, obj, msg = nil
+      msg ||= "Expected #{collection.inspect} to not include #{obj}"
+      assert_respond_to collection, :include?
+      refute collection.include?(obj), msg
+    end
+
+    def refute_respond_to obj, meth, msg = nil
+      msg ||= "Expected #{obj.inspect} (#{obj.class}) to not respond to #{meth}"
+      refute obj.respond_to?(meth), msg
     end
   end
 end
