@@ -3,9 +3,8 @@ require 'rtest/assertions'
 
 module Rtest
   class Test < Runnable
-    PREFIX = /^test_/
-
     include Assertions
+    PREFIX = /^test_/
 
     def self.runnable_methods
       methods_matching PREFIX
