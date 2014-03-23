@@ -33,11 +33,10 @@ module Rtest
 
       k.run "test_fail_even_eh"
 
-      exp_error = Rtest::Assertion
       exp_msg   = "Failed assertion, no message given."
       failure   = k.failures.pop
 
-      assert exp_error === failure
+      assert_instance_of Rtest::Assertion, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -49,11 +48,10 @@ module Rtest
 
       k.run "test_empty"
 
-      exp_error = Rtest::EmptyTest
       exp_msg   = "Empty test, 'test_empty'"
       failure   = k.failures.pop
 
-      assert exp_error === failure
+      assert_instance_of Rtest::EmptyTest, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -66,11 +64,10 @@ module Rtest
 
       k.run "test_super_complex_implementation"
 
-      exp_error = Rtest::Skip
       exp_msg   = "Skipped 'test_super_complex_implementation'"
       failure   = k.failures.pop
 
-      assert exp_error === failure
+      assert_instance_of Rtest::Skip, failure
       assert_equal exp_msg, failure.message
     end
 

@@ -10,7 +10,7 @@ module Rtest
     attr_accessor :assertion
 
     def test_error
-      assert Assertion === assertion.error
+      assert_instance_of Assertion, assertion.error
     end
 
     def test_result_code
@@ -29,7 +29,7 @@ module Rtest
     attr_accessor :assertion
 
     def test_error
-      assert EmptyTest === assertion.error
+      assert_instance_of EmptyTest, assertion.error
     end
 
     def test_result_code
@@ -48,7 +48,7 @@ module Rtest
     attr_accessor :assertion
 
     def test_error
-      assert Skip === assertion.error
+      assert_instance_of Skip, assertion.error
     end
 
     def test_result_code
