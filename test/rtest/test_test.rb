@@ -55,9 +55,39 @@ module Rtest
 
       assert exp_error === failure
       assert_equal exp_msg, failure.message
-
     end
 
+    def test_run_handles_skipped_tests
+      k = Class.new(Test) {
+        def test_super_complex_implementation
+          skip
+        end
+      }.new
+
+      k.run "test_super_complex_implementation"
+
+      exp_error = Rtest::Skip
+      exp_msg   = "Skipped 'test_super_complex_implementation'"
+      failure   = k.failures.pop
+
+      assert exp_error === failure
+      assert_equal exp_msg, failure.message
+    end
+
+    def test_run_skipped_tests_can_have_customized_messages
+      k = Class.new(Test) {
+        def test_super_complex_implementation
+          skip "implement me when IQ > 80"
+        end
+      }.new
+
+      k.run "test_super_complex_implementation"
+
+      exp_msg = "implement me when IQ > 80"
+      failure = k.failures.pop
+
+      assert_equal exp_msg, failure.message
+    end
     def test_run_passes_through_errors
       k = Class.new(Test) {
         def test_even_eh

@@ -41,6 +41,25 @@ module Rtest
     end
   end
 
+  class SkipTest < Minitest::Test
+    def setup
+      self.assertion = Skip.new
+    end
+    attr_accessor :assertion
+
+    def test_error
+      assert Skip === assertion.error
+    end
+
+    def test_result_code
+      assert_equal "S", assertion.result_code
+    end
+
+    def test_result_label
+      assert_equal "Skipped", assertion.result_label
+    end
+  end
+
   class AssertionsTest < Minitest::Test
     def setup
       self.tc = Class.new(Test).new

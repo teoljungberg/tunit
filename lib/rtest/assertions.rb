@@ -19,7 +19,19 @@ module Rtest
     end
   end
 
+  class Skip < Assertion
+    def result_label
+      "Skipped"
+    end
+  end
+
   module Assertions
+    def skip msg = nil, bt = caller
+      method_responsible = bt[0][/`.*'/][1..-2]
+      msg ||= "Skipped '#{method_responsible}'"
+      raise ::Rtest::Skip, msg, bt
+    end
+
     def assert test, msg = nil
       msg ||= "Failed assertion, no message given."
       self.assertions += 1
