@@ -20,8 +20,9 @@ module Rtest
         end
       }.new
 
-      k.run "test_even_eh"
-      assert_equal 1, k.assertions
+      result = k.run "test_even_eh"
+
+      assert_equal 1, result.assertions
     end
 
     def test_run_handles_failures
@@ -31,10 +32,10 @@ module Rtest
         end
       }.new
 
-      k.run "test_fail_even_eh"
+      result  = k.run "test_fail_even_eh"
 
-      exp_msg   = "Failed assertion, no message given."
-      failure   = k.failures.pop
+      exp_msg = "Failed assertion, no message given."
+      failure = result.failures.pop
 
       assert_instance_of Rtest::Assertion, failure
       assert_equal exp_msg, failure.message
@@ -46,10 +47,10 @@ module Rtest
         end
       }.new
 
-      k.run "test_empty"
+      result  = k.run "test_empty"
 
-      exp_msg   = "Empty test, 'test_empty'"
-      failure   = k.failures.pop
+      exp_msg = "Empty test, 'test_empty'"
+      failure = result.failures.pop
 
       assert_instance_of Rtest::EmptyTest, failure
       assert_equal exp_msg, failure.message
@@ -62,10 +63,10 @@ module Rtest
         end
       }.new
 
-      k.run "test_super_complex_implementation"
+      result  = k.run "test_super_complex_implementation"
 
-      exp_msg   = "Skipped 'test_super_complex_implementation'"
-      failure   = k.failures.pop
+      exp_msg = "Skipped 'test_super_complex_implementation'"
+      failure = result.failures.pop
 
       assert_instance_of Rtest::Skip, failure
       assert_equal exp_msg, failure.message
@@ -78,13 +79,14 @@ module Rtest
         end
       }.new
 
-      k.run "test_super_complex_implementation"
+      result  = k.run "test_super_complex_implementation"
 
       exp_msg = "implement me when IQ > 80"
-      failure = k.failures.pop
+      failure = result.failures.pop
 
       assert_equal exp_msg, failure.message
     end
+
     def test_run_passes_through_errors
       k = Class.new(Test) {
         def test_even_eh
@@ -108,8 +110,9 @@ module Rtest
         end
       }.new
 
-      k.run
-      assert_equal 2, k.assertions
+      result = k.run
+
+      assert_equal 2, result.assertions
     end
 
     def test_run_times_each_run
@@ -119,9 +122,9 @@ module Rtest
         end
       }.new
 
-      k.run "test_even_eh"
-      test_time = Time.new k.time
-      assert_instance_of Time, test_time
+      result = k.run "test_even_eh"
+
+      assert_instance_of Float, result.time
     end
   end
 end

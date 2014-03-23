@@ -24,6 +24,7 @@ module Rtest
           run_single_method test_name
         }
       end
+      self
     end
 
     private
