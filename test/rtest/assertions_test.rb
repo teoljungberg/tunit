@@ -43,44 +43,34 @@ module Rtest
 
   class AssertionsTest < Minitest::Test
     def setup
-      self.klass = Class.new(Test) {
-        def test_assert
-          assert 2.even?
-        end
-
-        def test_refute
-          refute 1.even?
-        end
-
-        def test_assert_equal
-          assert_equal 1, 2
-        end
-
-        def test_refute_equal
-          refute_equal 1, 2
-        end
-      }.new
+      self.tc = Class.new(Test).new
+      self.assertion_count = 0
     end
-    attr_accessor :klass
+    attr_accessor :tc, :assertion_count
 
     def test_assert
-      klass.run "test_assert"
-      assert_equal 1, klass.assertions
+      self.assertion_count = 1
+      tc.assert "truthy"
     end
 
     def test_refute
-      klass.run "test_refute"
-      assert_equal 1, klass.assertions
+      self.assertion_count = 1
+      tc.refute false
     end
 
     def test_assert_equal
-      klass.run "test_assert_equal"
-      assert_equal 1, klass.assertions
+      self.assertion_count = 1
+      tc.assert_equal 1, 1
     end
 
     def test_refute_equal
-      klass.run "test_refute_equal"
-      assert_equal 1, klass.assertions
+      self.assertion_count = 1
+      tc.refute_equal 1, 2
+    end
+
+    def teardown
+      assert_equal assertion_count, tc.assertions,
+        "Expected #{assertion_count} assertions to have been made to #{tc.inspect}, but was #{tc.assertions}"
     end
   end
 end
