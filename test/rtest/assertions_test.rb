@@ -88,6 +88,16 @@ module Rtest
       tc.refute_respond_to tc, :omg
     end
 
+    def test_assert_instance_of
+      self.assertion_count = 1
+      tc.assert_instance_of String, "omg"
+    end
+
+    def test_refute_instance_of
+      self.assertion_count = 1
+      tc.refute_instance_of String, 1
+    end
+
     def teardown
       assert_equal assertion_count, tc.assertions,
         "Expected #{assertion_count} assertions to have been made to #{tc.inspect}, but was #{tc.assertions}"

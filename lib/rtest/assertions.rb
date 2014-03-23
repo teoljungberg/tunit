@@ -46,6 +46,11 @@ module Rtest
       assert obj.respond_to?(meth), msg
     end
 
+    def assert_instance_of klass, obj, msg = nil
+      msg ||= "Expected #{obj.inspect} to be an instance of #{klass}, not #{obj.class}"
+      assert obj.instance_of?(klass), msg
+    end
+
     def refute test, msg = nil
       msg ||= "Failed assertion, no message given."
       ! assert !test, msg
@@ -65,6 +70,11 @@ module Rtest
     def refute_respond_to obj, meth, msg = nil
       msg ||= "Expected #{obj.inspect} (#{obj.class}) to not respond to #{meth}"
       refute obj.respond_to?(meth), msg
+    end
+
+    def refute_instance_of klass, obj, msg = nil
+      msg ||= "Expected #{obj.inspect} not to be an instance of #{klass}"
+      refute obj.instance_of?(klass), msg
     end
   end
 end
