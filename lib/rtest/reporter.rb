@@ -6,7 +6,11 @@ module Rtest
       self.count      = 0
       self.results    = []
     end
-    attr_accessor :options, :assertions, :count, :results
+    attr_accessor :options, :assertions, :count, :results, :start_time
+
+    def start
+      self.start_time = Time.now
+    end
 
     def record result
       self.count += 1

@@ -8,6 +8,12 @@ module Rtest
     end
     attr_accessor :reporter
 
+    def test_start_time
+      reporter.start
+
+      assert_instance_of Time, reporter.start_time
+    end
+
     def test_record_passing_test
       reporter.record PassingTest.new(:test_even_eh).run
 
