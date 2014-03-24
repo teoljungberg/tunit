@@ -3,10 +3,16 @@
 `rtest` is my take on building a testing framework, it's heavily influenced by
 [minitest](https://github.com/seattlerb/minitest).
 
-I wanted to see how much code and effort is needed to build a testing framework
-of my own. This is the outcome of it
 
 _NOTE_ This is very unstable and is just a playground for my ideas.
+
+## Credit
+Since this is heavily influenced by
+[Ryan Davis](https://twitter.com/the_zenspider)' minitest there are a lot of
+similarities between the two frameworks.
+
+I wanted to see how much code and effort are needed to build a testing
+framework of my own, while looking at the learnings of minitest.
 
 ## Usage
 
