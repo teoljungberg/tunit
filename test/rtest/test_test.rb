@@ -130,5 +130,53 @@ module Rtest
 
       assert_instance_of Float, result.time
     end
+
+    def test_passed_eh
+      klass = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+      assert result.passed?
+    end
+
+    def test_passed_eh_is_only_true_if_not_a_failure
+      klass = Class.new(Test) {
+        def test_even_eh
+          assert 1.even?
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+      refute result.passed?
+    end
+
+    def test_failure
+      klass = Class.new(Test) {
+        def test_even_eh
+          assert 1.even?
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_instance_of ::Rtest::Assertion, result.failure
+    end
+
+    def test_skipped_eh
+      klass = Class.new(Test) {
+        def test_even_eh
+          skip
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_instance_of ::Rtest::Skip, result.failure
+      assert result.skipped?
+    end
+
   end
 end
