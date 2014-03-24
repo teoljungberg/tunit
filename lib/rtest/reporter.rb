@@ -6,7 +6,9 @@ module Rtest
       self.count      = 0
       self.results    = []
     end
-    attr_accessor :options, :assertions, :count, :results, :start_time
+    attr_accessor :options, :assertions, :count, :results
+    attr_accessor :start_time, :total_time
+    attr_accessor :failures, :skips, :errors
 
     def start
       self.start_time = Time.now
@@ -22,6 +24,14 @@ module Rtest
     def passed?
       results.all?(&:skipped?)
     end
+
+    def report
+      total           = results.group_by {|r| r.failure.class }
+      total.default   = []
+
+      self.total_time = Time.now - start_time
+      self.failures   = total[Assertion].size
+      self.skips      = total[Skip].size
+    end
   end
 end
-

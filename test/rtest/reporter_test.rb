@@ -38,5 +38,29 @@ module Rtest
 
       refute reporter.passed?
     end
+
+    def test_report_collects_total_time
+      reporter.start
+      reporter.record PassingTest.new(:test_even_eh).run
+      reporter.report
+
+      assert_instance_of Float, reporter.total_time
+    end
+
+    def test_report_collects_failures
+      reporter.start
+      reporter.record FailingTest.new(:test_fail_even_eh).run
+      reporter.report
+
+      assert_equal 1, reporter.failures
+    end
+
+    def test_report_collects_skips
+      reporter.start
+      reporter.record SkippedTest.new(:test_skip).run
+      reporter.report
+
+      assert_equal 1, reporter.skips
+    end
   end
 end
