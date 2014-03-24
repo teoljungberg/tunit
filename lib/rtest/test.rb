@@ -40,6 +40,10 @@ module Rtest
       self.failures.first
     end
 
+    def code
+      failure && failure.result_code || "."
+    end
+
     private
 
     def time_it

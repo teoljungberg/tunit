@@ -178,5 +178,51 @@ module Rtest
       assert result.skipped?
     end
 
+    def test_code_for_success
+      klass = Class.new(Test) {
+        def test_even_eh
+          assert 2.even?
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_equal ".", result.code
+    end
+
+    def test_code_for_failure
+      klass = Class.new(Test) {
+        def test_even_eh
+          refute 2.even?
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_equal "F", result.code
+    end
+
+    def test_code_for_skipped
+      klass = Class.new(Test) {
+        def test_even_eh
+          skip
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_equal "S", result.code
+    end
+
+    def test_code_for_empty_test
+      klass = Class.new(Test) {
+        def test_even_eh
+        end
+      }
+
+      result = klass.new("test_even_eh").run
+
+      assert_equal "_", result.code
+    end
   end
 end
