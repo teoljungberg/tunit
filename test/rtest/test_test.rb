@@ -4,7 +4,7 @@ module Rtest
   class TestTest < TestCase
     def test_runnable_methods
       assert_equal Test::PREFIX, /^test_/
-      assert_includes PassingTest.runnable_methods, "test_even_eh"
+      assert_includes PassingTest.runnable_methods, "test_pass"
     end
 
     def test_run_all_runs_all_tests_in_a_new_scope
@@ -16,14 +16,14 @@ module Rtest
 
 
     def test_run_handles_assertions
-      result = PassingTest.new(:test_even_eh).run
+      result = PassingTest.new(:test_pass).run
 
       assert result.passed?
       assert_equal 1, result.assertions
     end
 
     def test_run_handles_failures
-      result  = FailingTest.new(:test_fail_even_eh).run
+      result  = FailingTest.new(:test_fail).run
 
       exp_msg = "Failed assertion, no message given."
       failure = result.failures.first
@@ -69,23 +69,23 @@ module Rtest
     end
 
     def test_run_times_each_run
-      result = PassingTest.new(:test_even_eh).run
+      result = PassingTest.new(:test_pass).run
 
       assert_instance_of Float, result.time
     end
 
     def test_passed_eh
-      result = PassingTest.new(:test_even_eh).run
+      result = PassingTest.new(:test_pass).run
       assert result.passed?
     end
 
     def test_passed_eh_is_only_true_if_not_a_failure
-      result = FailingTest.new(:test_fail_even_eh).run
+      result = FailingTest.new(:test_fail).run
       refute result.passed?
     end
 
     def test_failure
-      result = FailingTest.new(:test_fail_even_eh).run
+      result = FailingTest.new(:test_fail).run
 
       assert_instance_of ::Rtest::Assertion, result.failure
     end
@@ -98,13 +98,13 @@ module Rtest
     end
 
     def test_code_for_success
-      result = PassingTest.new(:test_even_eh).run
+      result = PassingTest.new(:test_pass).run
 
       assert_equal ".", result.code
     end
 
     def test_code_for_failure
-      result = FailingTest.new(:test_fail_even_eh).run
+      result = FailingTest.new(:test_fail).run
 
       assert_equal "F", result.code
     end

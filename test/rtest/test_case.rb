@@ -4,18 +4,18 @@ require 'rtest/test'
 module Rtest
   class TestCase < Minitest::Test
     class PassingTest < Test
-      def test_even_eh
+      def test_pass
         assert 2.even?
       end
 
-      def test_includes_eh
+      def test_pass_one_more
         assert [1, 2].include?(2)
       end
     end
 
     class FailingTest < Test
-      def test_fail_even_eh
-        refute 2.even?
+      def test_fail
+        assert false
       end
 
       def test_empty
