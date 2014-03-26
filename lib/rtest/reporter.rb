@@ -1,12 +1,13 @@
 module Rtest
   class Reporter
-    def initialize options = {}
-      self.options    = {}
+    def initialize io = $stdout, options = {}
+      self.io         = io
+      self.options    = options
       self.assertions = 0
       self.count      = 0
       self.results    = []
     end
-    attr_accessor :options, :assertions, :count, :results
+    attr_accessor :io, :options, :assertions, :count, :results
     attr_accessor :start_time, :total_time
     attr_accessor :failures, :skips, :errors
 
