@@ -1,9 +1,9 @@
-require 'minitest/autorun'
+require_relative 'test_case'
 require 'rtest/assertions'
 require 'rtest/test'
 
 module Rtest
-  class AssertionErrorTest < Minitest::Test
+  class AssertionErrorTest < TestCase
     def setup
       self.assertion = Assertion.new
     end
@@ -22,7 +22,7 @@ module Rtest
     end
   end
 
-  class EmptyTest < Minitest::Test
+  class EmptyTest < AssertionErrorTest
     def setup
       self.assertion = Empty.new
     end
@@ -41,7 +41,7 @@ module Rtest
     end
   end
 
-  class SkipTest < Minitest::Test
+  class SkipTest < AssertionErrorTest
     def setup
       self.assertion = Skip.new
     end
@@ -60,7 +60,7 @@ module Rtest
     end
   end
 
-  class AssertionsTest < Minitest::Test
+  class AssertionsTest < TestCase
     def setup
       self.tc = Class.new(Test).new
       self.assertion_count = 0
