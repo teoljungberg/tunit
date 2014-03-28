@@ -13,6 +13,14 @@ module Rtest
       assert_instance_of Assertion, assertion.error
     end
 
+    def test_location
+      result       = FailingTest.new.run
+      assertion    = result.failure
+      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+
+      assert_match exp_location, assertion.location
+    end
+
     def test_result_code
       assert_equal "F", assertion.result_code
     end

@@ -4,6 +4,15 @@ module Rtest
       self
     end
 
+    def location
+      last_before_assertion = ""
+      self.backtrace.reverse_each do |line|
+        break if line =~ /in .(assert|refute|pass|raise)/
+        last_before_assertion = line
+      end
+      last_before_assertion.sub(/:in .*$/, "")
+    end
+
     def result_code
       result_label[0, 1]
     end
