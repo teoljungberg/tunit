@@ -44,6 +44,19 @@ module Rtest
       failure && failure.result_code || "."
     end
 
+    def location
+      loc = " [#{self.failure.location}]" unless passed?
+      "#{self.class}##{self.name}#{loc}"
+    end
+
+    def to_s
+      return location if passed? && !skipped?
+
+      failures.map { |failure|
+        "#{failure.result_label}:\n#{self.location}:\n#{failure.message}\n"
+      }.join "\n"
+    end
+
     private
 
     def time_it

@@ -43,5 +43,11 @@ module Rtest
         skip "implement me when IQ > 80"
       end
     end
+
+    private
+
+    def truncate_absolut_path str
+      str.gsub(%r{\[.*(test/rtest/test_case.rb.*)\]}, '[\1]')
+    end
   end
 end

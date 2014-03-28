@@ -119,5 +119,31 @@ module Rtest
 
       assert_equal "_", result.code
     end
+
+    def test_location_of_a_failing_test
+      result       = FailingTest.new(:test_fail).run
+      exp_location = %r(Rtest::TestCase::FailingTest#test_fail \[.*/rtest/test/rtest/test_case.rb:\d{1,}\])
+
+      assert_match exp_location, result.location
+    end
+
+    def test_to_s_returns_the_klass_and_test
+      result = PassingTest.new(:test_pass).run
+      exp_klass_and_test = "Rtest::TestCase::PassingTest#test_pass"
+
+      assert_equal exp_klass_and_test, result.to_s
+      assert_equal result.to_s, result.location
+    end
+
+    def test_to_s_returns_the_failing_test
+      result    = FailingTest.new(:test_fail).run
+      exp_error = <<-EOS
+Failure:
+Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:26]:
+Failed assertion, no message given.
+EOS
+
+      assert_equal exp_error, truncate_absolut_path(result.to_s)
+    end
   end
 end
