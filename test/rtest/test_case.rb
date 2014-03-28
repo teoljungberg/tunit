@@ -4,6 +4,10 @@ require 'rtest/test'
 module Rtest
   class TestCase < Minitest::Test
     class PassingTest < Test
+      def initialize name = :test_pass
+        super
+      end
+
       def test_pass
         assert 2.even?
       end
@@ -14,6 +18,10 @@ module Rtest
     end
 
     class FailingTest < Test
+      def initialize name = :test_fail
+        super
+      end
+
       def test_fail
         assert false
       end
@@ -23,6 +31,10 @@ module Rtest
     end
 
     class SkippedTest < Test
+      def initialize test = :test_skip
+        super
+      end
+
       def test_skip
         skip
       end

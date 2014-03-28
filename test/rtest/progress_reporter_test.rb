@@ -11,19 +11,19 @@ module Rtest
     attr_accessor :io, :reporter
 
     def test_record_passing_tests
-      reporter.record PassingTest.new(:test_pass).run
+      reporter.record PassingTest.new.run
 
       assert_equal ".", io.string
     end
 
     def test_record_skipping_tests
-      reporter.record SkippedTest.new(:test_skip).run
+      reporter.record SkippedTest.new.run
 
       assert_equal "S", io.string
     end
 
     def test_record_failing_tests
-      reporter.record FailingTest.new(:test_fail).run
+      reporter.record FailingTest.new.run
 
       assert_equal "F", io.string
     end

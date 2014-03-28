@@ -14,16 +14,15 @@ module Rtest
       assert_equal 2, assertions
     end
 
-
     def test_run_handles_assertions
-      result = PassingTest.new(:test_pass).run
+      result = PassingTest.new.run
 
       assert result.passed?
       assert_equal 1, result.assertions
     end
 
     def test_run_handles_failures
-      result  = FailingTest.new(:test_fail).run
+      result  = FailingTest.new.run
 
       exp_msg = "Failed assertion, no message given."
       failure = result.failures.first
@@ -43,7 +42,7 @@ module Rtest
     end
 
     def test_run_handles_skipped_tests
-      result  = SkippedTest.new(:test_skip).run
+      result  = SkippedTest.new.run
 
       exp_msg = "Skipped 'test_skip'"
       failure = result.failures.first
@@ -64,53 +63,53 @@ module Rtest
 
     def test_run_passes_through_errors
       assert_raises NoMethodError do
-        PassingTest.new(:test_odd_eh).run
+        PassingTest.new(:non_existing_method).run
       end
     end
 
     def test_run_times_each_run
-      result = PassingTest.new(:test_pass).run
+      result = PassingTest.new.run
 
       assert_instance_of Float, result.time
     end
 
     def test_passed_eh
-      result = PassingTest.new(:test_pass).run
+      result = PassingTest.new.run
       assert result.passed?
     end
 
     def test_passed_eh_is_only_true_if_not_a_failure
-      result = FailingTest.new(:test_fail).run
+      result = FailingTest.new.run
       refute result.passed?
     end
 
     def test_failure
-      result = FailingTest.new(:test_fail).run
+      result = FailingTest.new.run
 
       assert_instance_of ::Rtest::Assertion, result.failure
     end
 
     def test_skipped_eh
-      result = SkippedTest.new(:test_skip).run
+      result = SkippedTest.new.run
 
       assert_instance_of ::Rtest::Skip, result.failure
       assert result.skipped?
     end
 
     def test_code_for_success
-      result = PassingTest.new(:test_pass).run
+      result = PassingTest.new.run
 
       assert_equal ".", result.code
     end
 
     def test_code_for_failure
-      result = FailingTest.new(:test_fail).run
+      result = FailingTest.new.run
 
       assert_equal "F", result.code
     end
 
     def test_code_for_skipped
-      result = SkippedTest.new(:test_skip).run
+      result = SkippedTest.new.run
 
       assert_equal "S", result.code
     end
