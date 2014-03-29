@@ -7,13 +7,6 @@ module Rtest
       assert_includes PassingTest.runnable_methods, "test_pass"
     end
 
-    def test_run_all_runs_all_tests_in_a_new_scope
-      result     = PassingTest.run_all
-      assertions = result.map(&:assertions).inject(:+)
-
-      assert_equal 2, assertions
-    end
-
     def test_run_handles_assertions
       result = PassingTest.new.run
 

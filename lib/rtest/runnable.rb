@@ -13,6 +13,12 @@ module Rtest
       super
     end
 
+    def self.run reporter, options = {}
+      self.runnable_methods.each { |test|
+        reporter.record self.new(test).run
+      }
+    end
+
     def initialize name = nil
       self.name       = name
       self.assertions = 0

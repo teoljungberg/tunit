@@ -10,12 +10,6 @@ module Rtest
       methods_matching PREFIX
     end
 
-    def self.run_all
-      runnable_methods.map { |test|
-        new(test).run
-      }
-    end
-
     def run
       capture_exceptions do
         time_it do
