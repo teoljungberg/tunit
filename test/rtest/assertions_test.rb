@@ -30,7 +30,7 @@ module Rtest
     end
   end
 
-  class EmptyTest < AssertionErrorTest
+  class EmptyTest < TestCase
     def setup
       self.assertion = Empty.new
     end
@@ -38,6 +38,14 @@ module Rtest
 
     def test_error
       assert_instance_of Empty, assertion.error
+    end
+
+    def test_location
+      result       = FailingTest.new(:test_empty).run
+      assertion    = result.failure
+      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+
+      assert_match exp_location, assertion.location
     end
 
     def test_result_code
@@ -49,7 +57,7 @@ module Rtest
     end
   end
 
-  class SkipTest < AssertionErrorTest
+  class SkipTest < TestCase
     def setup
       self.assertion = Skip.new
     end
@@ -57,6 +65,14 @@ module Rtest
 
     def test_error
       assert_instance_of Skip, assertion.error
+    end
+
+    def test_location
+      result       = SkippedTest.new.run
+      assertion    = result.failure
+      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+
+      assert_match exp_location, assertion.location
     end
 
     def test_result_code

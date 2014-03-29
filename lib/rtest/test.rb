@@ -15,7 +15,7 @@ module Rtest
         time_it do
           send name
           if self.assertions.zero?
-            raise ::Rtest::Empty, "Empty test, '#{name}'"
+            raise ::Rtest::Empty, "Empty test, '#{self.to_s}'"
           end
         end
       end

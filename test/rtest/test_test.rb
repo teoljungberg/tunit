@@ -27,7 +27,7 @@ module Rtest
     def test_run_handles_empty_tests
       result  = FailingTest.new(:test_empty).run
 
-      exp_msg = "Empty test, 'test_empty'"
+      exp_msg = "Empty test, 'Rtest::TestCase::FailingTest#test_empty'"
       failure = result.failures.first
 
       assert_instance_of Rtest::Empty, failure
