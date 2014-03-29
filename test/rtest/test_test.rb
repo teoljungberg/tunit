@@ -18,7 +18,7 @@ module Rtest
       result  = FailingTest.new.run
 
       exp_msg = "Failed assertion, no message given."
-      failure = result.failures.first
+      failure = result.failure
 
       assert_instance_of Rtest::Assertion, failure
       assert_equal exp_msg, failure.message
@@ -28,7 +28,7 @@ module Rtest
       result  = FailingTest.new(:test_empty).run
 
       exp_msg = "Empty test, 'Rtest::TestCase::FailingTest#test_empty'"
-      failure = result.failures.first
+      failure = result.failure
 
       assert_instance_of Rtest::Empty, failure
       assert_equal exp_msg, failure.message
@@ -38,7 +38,7 @@ module Rtest
       result  = SkippedTest.new.run
 
       exp_msg = "Skipped 'test_skip'"
-      failure = result.failures.first
+      failure = result.failure
 
       assert result.skipped?
       assert_instance_of Rtest::Skip, failure
@@ -49,7 +49,7 @@ module Rtest
       result  = SkippedTest.new(:test_skip_with_msg).run
 
       exp_msg = "implement me when IQ > 80"
-      failure = result.failures.first
+      failure = result.failure
 
       assert_equal exp_msg, failure.message
     end
