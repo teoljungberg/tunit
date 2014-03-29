@@ -130,13 +130,9 @@ module Rtest
 
     def test_to_s_returns_the_failing_test
       result    = FailingTest.new(:test_fail).run
-      exp_error = <<-EOS
-Failure:
-Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:26]:
-Failed assertion, no message given.
-EOS
+      exp_match = %r(Rtest::TestCase::FailingTest#test_fail \[test/rtest/test_case.rb:\d{1,}\])
 
-      assert_equal exp_error, truncate_absolut_path(result.to_s)
+      assert_match exp_match, truncate_absolut_path(result.to_s)
     end
   end
 end

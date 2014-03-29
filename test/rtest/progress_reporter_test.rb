@@ -1,6 +1,5 @@
 require_relative 'test_case'
 require 'rtest/progress_reporter'
-require 'stringio'
 
 module Rtest
   class ProgressReporterTest < TestCase

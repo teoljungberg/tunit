@@ -1,6 +1,5 @@
 require_relative 'test_case'
 require 'rtest/summary_reporter'
-require 'stringio'
 
 module Rtest
   class SummaryReporterTest < TestCase
@@ -25,7 +24,7 @@ module Rtest
       stats     = reporter.send :statistics
       exp_stats = %r(Finished in 0{1,}.0{1,}s, 0{1,}.0{1,} runs/s, 0{1,}.0{1,} assertions/s.)
 
-      assert_match exp_stats, remove_numbers(stats)
+      assert_match exp_stats, zeroify_time(stats)
     end
 
     def test_report_returns_errors
@@ -37,11 +36,13 @@ module Rtest
       exp_aggregated_results = <<-EOS
 
   1) Failure:
-Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:26]:
+Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:LINE]:
 Failed assertion, no message given.
       EOS
 
-      assert_equal exp_aggregated_results, truncate_absolut_path(aggregated_results)
+      assert_equal exp_aggregated_results, remove_line_numbers(
+        truncate_absolut_path(aggregated_results)
+      )
     end
 
     def test_report_returns_summary
@@ -57,7 +58,11 @@ Failed assertion, no message given.
 
     private
 
-    def remove_numbers str
+    def remove_line_numbers str
+      str.gsub(/:\d{1,}/, ':LINE')
+    end
+
+    def zeroify_time str
       str.gsub(/\d/, '0')
     end
   end

@@ -1,8 +1,19 @@
-require 'minitest/autorun'
-require 'rtest/test'
+require "minitest/autorun"
+require "rtest/test"
+require "stringio"
 
 module Rtest
   class TestCase < Minitest::Test
+    def io
+      StringIO.new ""
+    end
+
+    private
+
+    def truncate_absolut_path str
+      str.gsub(%r{\[.*(test/rtest/test_case.rb.*)\]}, '[\1]')
+    end
+
     class PassingTest < Test
       def initialize name = :test_pass
         super
@@ -42,12 +53,6 @@ module Rtest
       def test_skip_with_msg
         skip "implement me when IQ > 80"
       end
-    end
-
-    private
-
-    def truncate_absolut_path str
-      str.gsub(%r{\[.*(test/rtest/test_case.rb.*)\]}, '[\1]')
     end
   end
 end
