@@ -1,8 +1,8 @@
-require 'minitest/autorun'
+require_relative 'test_case'
 require 'rtest/runnable'
 
 module Rtest
-  class RunnableTest < Minitest::Test
+  class RunnableTest < TestCase
     def test_runnable_methods_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do
         Runnable.runnable_methods
@@ -10,6 +10,10 @@ module Rtest
 
       exp = "subclass responsibility"
       assert_equal exp, e.message
+    end
+
+    def test_runnables_list_all_runnables_that_inherit_from_runnable
+      refute_empty Runnable.runnables
     end
 
     def test_runnable_methods_can_be_customized_to_find_your_tests
