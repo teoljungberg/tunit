@@ -16,6 +16,16 @@ module Rtest
       assert_includes Runnable.runnables, PassingTest
     end
 
+    def test_runnables_can_be_overridden
+      prev_runnables = Runnable.runnables
+
+      Runnable.runnables = "omg"
+      assert_includes Runnable.runnables, "omg"
+
+      # reset Runnable.runnables to avoid misshaps, teardown didn't pull through
+      Runnable.runnables = prev_runnables
+    end
+
     def test_run_runs_all_tests_with_a_given_reporter
       dummy_reporter = Class.new {
         def start(*)   ; end

@@ -8,6 +8,10 @@ module Rtest
       @@runnables ||= []
     end
 
+    def self.runnables= runnable
+      @@runnables = [runnable].flatten
+    end
+
     def self.inherited klass
       self.runnables << klass
       super
