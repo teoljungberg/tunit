@@ -11,7 +11,7 @@ module Rtest
 
     def test_start_returns_run_msg
       reporter.start
-      exp_msg = "# Running:\n"
+      exp_msg = "# Running:\n\n"
 
       assert_equal exp_msg, io.string
     end
