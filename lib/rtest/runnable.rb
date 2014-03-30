@@ -32,7 +32,7 @@ module Rtest
 
 
     def run
-      raise NotImplementedError, "subclass responsibility"
+      fail NotImplementedError, "subclass responsibility"
     end
 
     private

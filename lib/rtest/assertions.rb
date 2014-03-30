@@ -46,7 +46,7 @@ module Rtest
     def skip msg = nil, bt = caller
       method_responsible = bt[0][/`.*'/][1..-2]
       msg ||= "Skipped '#{method_responsible}'"
-      raise ::Rtest::Skip, msg, bt
+      fail ::Rtest::Skip, msg, bt
     end
 
     def assert test, msg = nil
@@ -54,7 +54,7 @@ module Rtest
       self.assertions += 1
       unless test
         msg = msg.call if Proc === msg
-        raise ::Rtest::Assertion, msg
+        fail ::Rtest::Assertion, msg
       end
       true
     end

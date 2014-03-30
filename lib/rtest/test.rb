@@ -15,7 +15,7 @@ module Rtest
         time_it do
           send name
           if self.assertions.zero?
-            raise ::Rtest::Empty, "Empty test, '#{self.to_s}'"
+            fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
           end
         end
       end
@@ -63,8 +63,6 @@ module Rtest
     def capture_exceptions
       yield
     rescue Assertion => e
-      self.failures << e
-    rescue Empty, Skip => e
       self.failures << e
     end
   end
