@@ -7,6 +7,10 @@ module Rtest
       assert_includes PassingTest.runnable_methods, "test_pass"
     end
 
+    def test_runnable_methods_shuffles_the_tests
+      assert_equal :random, PassingTest.test_order
+    end
+
     def test_run_handles_assertions
       result = PassingTest.new.run
 

@@ -7,7 +7,21 @@ module Rtest
     PREFIX = /^test_/
 
     def self.runnable_methods
-      methods_matching PREFIX
+      methods = methods_matching PREFIX
+      case self.test_order
+      when :random
+        max = methods.size
+        methods.sort.sort_by { rand max }
+      else
+        raise "Unknown test_order: #{self.test_order.inspect}"
+      end
+    end
+
+    # Randomize tests by default
+    def self.test_order
+      :random
+    end
+
     end
 
     def run
