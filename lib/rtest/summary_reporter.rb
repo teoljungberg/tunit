@@ -5,6 +5,8 @@ module Rtest
     def start
       super
 
+      io.puts "Run options: #{options.inspect}"
+      io.puts
       io.puts "# Running:"
       io.puts
     end
