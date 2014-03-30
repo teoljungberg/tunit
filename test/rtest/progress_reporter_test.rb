@@ -15,7 +15,7 @@ module Rtest
       assert_equal ".", io.string
     end
 
-    def test_record_skipping_tests
+    def test_record_skipped_tests
       reporter.record SkippedTest.new.run
 
       assert_equal "S", io.string
