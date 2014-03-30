@@ -8,8 +8,13 @@ module Rtest
   meta_klass = (class << self; self; end)
   meta_klass.send :attr_accessor, :reporter
   meta_klass.send :attr_accessor, :options
-  meta_klass.send :attr_accessor, :installed_at_exit
 
+  # Let io be override-able in tests
+  meta_klass.send :attr_accessor, :io
+  self.io = $stdout
+
+  # Make sure that autorun is loaded after each test class has been loaded
+  meta_klass.send :attr_accessor, :installed_at_exit
   self.installed_at_exit ||= false
 
   def self.autorun
