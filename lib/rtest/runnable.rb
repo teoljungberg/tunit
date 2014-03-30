@@ -18,7 +18,14 @@ module Rtest
     end
 
     def self.run reporter, options = {}
-      self.runnable_methods.each { |test|
+      filter = options.fetch(:filter) { '/./' }
+      filter = Regexp.new $1 if filter =~ /\/(.*)\//
+
+      filtered_methods = self.runnable_methods.select { |m|
+        filter === m || filter === "#{self}##{m}"
+      }
+
+      filtered_methods.each { |test|
         reporter.record self.new(test).run
       }
     end

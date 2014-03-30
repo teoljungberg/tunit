@@ -8,6 +8,20 @@ module Rtest
       StringIO.new ""
     end
 
+    def dummy_reporter
+      @dummy_reporter ||= Class.new {
+        def record(*)
+          @tests ||= 0
+          @tests += 1
+        end
+
+        def report(*)
+          @tests ||= 0
+          @tests
+        end
+      }.new
+    end
+
     private
 
     def truncate_absolut_path str

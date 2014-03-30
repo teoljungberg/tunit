@@ -4,10 +4,11 @@ require "rtest/progress_reporter"
 require "rtest/test"
 require "rtest/version"
 
+require 'optparse'
+
 module Rtest
   meta_klass = (class << self; self; end)
   meta_klass.send :attr_accessor, :reporter
-  meta_klass.send :attr_accessor, :options
 
   # Let io be override-able in tests
   meta_klass.send :attr_accessor, :io
@@ -27,21 +28,20 @@ module Rtest
         exit exit_code || false
       }
 
-      exit_code = Rtest.run
+      exit_code = Rtest.run ARGV
     } unless self.installed_at_exit
     self.installed_at_exit = true
   end
 
-  def self.run options = {}
-    self.options = options
-    process_options!
+  def self.run args = []
+    options = process_args! args
 
     self.reporter = CompoundReporter.new
-    reporter << SummaryReporter.new(self.options[:io], self.options)
-    reporter << ProgressReporter.new(self.options[:io], self.options)
+    reporter << SummaryReporter.new(options[:io], options)
+    reporter << ProgressReporter.new(options[:io], options)
 
     reporter.start
-    dispatch! reporter
+    dispatch! reporter, options
     reporter.report
 
     reporter.passed?
@@ -49,14 +49,31 @@ module Rtest
 
   private
 
-  def self.dispatch! reporter
+  def self.dispatch! reporter, options
     Runnable.runnables.each do |runnable|
-      runnable.runnable_methods.map { |test| reporter.record runnable.new(test).run }
+      runnable.run reporter, options
     end
   end
 
-  def self.process_options!
-    io           = options.fetch(:io) { $stdout }
-    self.options = { :io => io }
+  def self.process_args! args = []
+    options = { io: io }
+
+    OptionParser.new do |opts|
+      opts.banner  = "Rtest options:"
+      opts.version = Rtest::VERSION
+
+      opts.on "-h", "--help", "Display this help." do
+        puts opts
+        exit
+      end
+
+      opts.on "-n", "--name PATTERN","Filter run on /pattern/ or string." do |pattern|
+        options[:filter] = pattern
+      end
+
+      opts.parse! args
+    end
+
+    options
   end
 end

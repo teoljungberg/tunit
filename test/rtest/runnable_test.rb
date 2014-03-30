@@ -28,23 +28,18 @@ module Rtest
     end
 
     def test_run_runs_all_tests_with_a_given_reporter
-      dummy_reporter = Class.new {
-        def start(*)   ; end
-        def passed?(*) ; end
-
-        def record(*)
-          @tests ||= 0
-          @tests += 1
-        end
-
-        def report(*)
-          @tests
-        end
-      }.new
-      io = StringIO.new ""
       PassingTest.run dummy_reporter, io: io
 
       assert_equal dummy_reporter.report, PassingTest.runnable_methods.size
+    end
+
+    def test_run_runs_all_tests_with_matching_pattern
+      filter          = "test_pass_one_more"
+      matched_methods = PassingTest.runnable_methods.grep(/#{filter}/).size
+
+      PassingTest.run dummy_reporter, io: io, filter: filter
+
+      assert_equal dummy_reporter.report, matched_methods
     end
 
     def test_runnable_methods_can_be_customized_to_find_your_tests
