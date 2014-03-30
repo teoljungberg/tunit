@@ -12,6 +12,8 @@ module Rtest
       when :random
         max = methods.size
         methods.sort.sort_by { rand max }
+      when :alpha
+        methods.sort
       else
         raise "Unknown test_order: #{self.test_order.inspect}"
       end
@@ -22,6 +24,11 @@ module Rtest
       :random
     end
 
+    def self.order!
+      class << self
+        undef_method :test_order if method_defined?(:test_order)
+        define_method(:test_order) { :alpha }
+      end
     end
 
     def run

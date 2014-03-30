@@ -11,6 +11,13 @@ module Rtest
       assert_equal :random, PassingTest.test_order
     end
 
+    def test_order_bang_orders_your_tests
+      sucky_test = Class.new(PassingTest) {
+        order!
+      }
+      assert_equal :alpha, sucky_test.test_order
+    end
+
     def test_run_handles_assertions
       result = PassingTest.new.run
 
