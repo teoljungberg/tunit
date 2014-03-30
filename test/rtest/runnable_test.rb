@@ -49,16 +49,16 @@ module Rtest
     def test_runnable_methods_can_be_customized_to_find_your_tests
       super_klass = Class.new(Runnable) {
         def self.runnable_methods
-          methods_matching(/^test_/)
+          methods_matching(/^spec_/)
         end
       }
 
       klass = Class.new(super_klass) {
-        def test_foo; end
+        def spec_foo; end
         def foo_test; end
       }
 
-      assert_includes klass.runnable_methods, "test_foo"
+      assert_includes klass.runnable_methods, "spec_foo"
     end
 
     def test_run_is_a_subclass_responsibility
