@@ -22,7 +22,8 @@ module Rtest
       Runnable.runnables = "omg"
       assert_includes Runnable.runnables, "omg"
 
-      # reset Runnable.runnables to avoid misshaps, teardown didn't pull through
+      # reset Runnable.runnables to avoid mishaps, teardown didn't pull through
+    ensure
       Runnable.runnables = prev_runnables
     end
 
