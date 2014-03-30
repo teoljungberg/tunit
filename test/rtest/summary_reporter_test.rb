@@ -56,6 +56,17 @@ Failed assertion, no message given.
       assert_equal exp_summary, summary
     end
 
+    def test_report_considers_empty_test_failures
+      reporter.start
+      reporter.record FailingTest.new(:test_empty).run
+      reporter.report
+
+      summary     = reporter.send :summary
+      exp_summary = "1 runs, 0 assertions, 1 failures, 0 skips"
+
+      assert_equal exp_summary, summary
+    end
+
     private
 
     def remove_line_numbers str

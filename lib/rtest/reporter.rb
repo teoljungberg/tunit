@@ -30,9 +30,10 @@ module Rtest
       total           = results.group_by {|r| r.failure.class }
       total.default   = []
 
-      self.total_time = Time.now - start_time
-      self.failures   = total[Assertion].size
-      self.skips      = total[Skip].size
+      self.total_time   = Time.now - start_time
+      self.failures     = total[Assertion].size
+      self.failures    += total[Empty].size
+      self.skips        = total[Skip].size
     end
   end
 end
