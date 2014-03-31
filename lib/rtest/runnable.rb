@@ -30,7 +30,7 @@ module Rtest
       }
     end
 
-    def initialize name = nil
+    def initialize name
       self.name       = name
       self.assertions = 0
       self.failures   = []

@@ -16,7 +16,7 @@ module Rtest
       assert_includes Runnable.runnables, PassingTest
     end
 
-    def test_runnables_can_be_overridden
+    def test_runnables_custom
       prev_runnables = Runnable.runnables
 
       Runnable.runnables = "omg"
@@ -59,7 +59,7 @@ module Rtest
 
     def test_run_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do
-        Runnable.new.run
+        Runnable.new("name").run
       end
 
       exp = "subclass responsibility"

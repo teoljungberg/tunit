@@ -5,7 +5,7 @@ require 'rtest/test'
 module Rtest
   class AssertionsTest < TestCase
     def setup
-      self.tc = Class.new(Test).new
+      self.tc = Class.new(Test).new "name"
       self.assertion_count = 0
     end
     attr_accessor :tc, :assertion_count
