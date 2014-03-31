@@ -67,8 +67,12 @@ module Rtest
         exit
       end
 
-      opts.on "-n", "--name PATTERN","Filter run on /pattern/ or string." do |pattern|
+      opts.on "-n", "--name PATTERN", "Filter run on /pattern/ or string." do |pattern|
         options[:filter] = pattern
+      end
+
+      opts.on "-v", "--verbose", "Verbose. Show progress processing files." do
+        options[:verbose] = true
       end
 
       opts.parse! args
