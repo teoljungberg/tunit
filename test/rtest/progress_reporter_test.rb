@@ -4,10 +4,9 @@ require 'rtest/progress_reporter'
 module Rtest
   class ProgressReporterTest < TestCase
     def setup
-      self.io       = StringIO.new ""
       self.reporter = ProgressReporter.new io
     end
-    attr_accessor :io, :reporter
+    attr_accessor :reporter
 
     def test_record_passing_tests
       reporter.record PassingTest.new.run

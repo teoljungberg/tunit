@@ -4,10 +4,9 @@ require 'rtest/summary_reporter'
 module Rtest
   class SummaryReporterTest < TestCase
     def setup
-      self.io       = StringIO.new ""
       self.reporter = SummaryReporter.new io
     end
-    attr_accessor :io, :reporter
+    attr_accessor :reporter
 
     def test_start_returns_run_msg
       reporter.start

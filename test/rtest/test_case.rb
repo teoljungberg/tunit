@@ -5,7 +5,7 @@ require "stringio"
 module Rtest
   class TestCase < Minitest::Test
     def io
-      StringIO.new ""
+      @io ||= StringIO.new ""
     end
 
     def dummy_reporter
