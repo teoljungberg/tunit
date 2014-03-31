@@ -2,6 +2,8 @@ require 'rtest/reporter'
 
 module Rtest
   class SummaryReporter < Reporter
+    SKIP_MSG = "\n\nYou have skipped tests. Run with --verbose for details."
+
     def start
       super
 
@@ -14,7 +16,7 @@ module Rtest
     def report
       super
 
-      io.puts
+      io.puts unless options[:verbose]
       io.puts
       io.puts statistics
       io.puts aggregated_results
@@ -31,15 +33,19 @@ module Rtest
 
     def aggregated_results
       filtered_results = results.dup
+      filtered_results.reject!(&:skipped?) unless options[:verbose]
 
       filtered_results.each_with_index.map do |result, index|
-        "\n%3d) %s" % [index+1, result]
+        "\n%3d) %s" % [index + 1, result]
       end.join
     end
 
     def summary
-      "%d runs, %d assertions, %d failures, %d skips" %
-        [count, assertions, failures, skips]
+      extra = ""
+      extra << SKIP_MSG if results.any?(&:skipped?) && !options[:verbose]
+
+      "%d runs, %d assertions, %d failures, %d skips%s" %
+        [count, assertions, failures, skips, extra]
     end
   end
 end

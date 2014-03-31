@@ -71,6 +71,37 @@ Failed assertion, no message given.
       assert_equal exp_summary, summary
     end
 
+    def test_report_summay_does_not_show_skip_message_if_verbose
+      reporter = SummaryReporter.new io, verbose: true
+      reporter.start
+      reporter.record SkippedTest.new.run
+      reporter.report
+
+      summary          = reporter.send :summary
+      summary_skip_msg = /#{SummaryReporter::SKIP_MSG}/
+
+      refute_match summary_skip_msg, summary
+    end
+
+    def test_report_only_shows_skips_if_verbose
+      unverbose_reporter    = self.reporter
+      unverbose_reporter.io = StringIO.new ""
+      verbose_reporter      = SummaryReporter.new io, verbose: true
+
+      verbose_reporter.start
+      verbose_reporter.record SkippedTest.new(:test_skip).run
+      verbose_reporter.report
+
+      reporter.start
+      reporter.record SkippedTest.new(:test_skip).run
+      reporter.report
+
+      exp_report = /1\) Skipped:\nRtest::TestCase::SkippedTest#test_skip \[(.*)\]/
+
+      assert_match exp_report, io.string
+      refute_match exp_report, reporter.io.string
+    end
+
     private
 
     def remove_line_numbers str
