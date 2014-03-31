@@ -31,5 +31,15 @@ module Rtest
 
       assert_equal "_", io.string
     end
+
+    def test_record_is_very_verbose
+      reporter = ProgressReporter.new io, verbose: true
+      reporter.record PassingTest.new(:test_pass).run
+      exp_verbosity = <<-EOS
+. = Rtest::TestCase::PassingTest#test_pass (0.00 s)
+      EOS
+
+      assert_equal exp_verbosity, io.string
+    end
   end
 end
