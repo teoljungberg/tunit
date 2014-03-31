@@ -77,6 +77,38 @@ module Rtest
       assert_instance_of Float, result.time
     end
 
+    def test_run_execs_setup_before_each_run
+      PassingTest.send(:define_method, :setup) {
+        fail NotImplementedError, "setup dispatch"
+      }
+
+      e = assert_raises NotImplementedError do
+        PassingTest.new.run
+      end
+
+      assert_equal "setup dispatch", e.message
+
+    ensure
+      PassingTest.send :undef_method, :setup
+      PassingTest.send(:define_method, :setup) { }
+    end
+
+    def test_run_execs_teardown_after_each_run
+      PassingTest.send(:define_method, :teardown) {
+        fail NotImplementedError, "teardown dispatch"
+      }
+
+      e = assert_raises NotImplementedError do
+        PassingTest.new.run
+      end
+
+      assert_equal "teardown dispatch", e.message
+
+    ensure
+      PassingTest.send :undef_method, :teardown
+      PassingTest.send(:define_method, :teardown) { }
+    end
+
     def test_passed_eh
       result = PassingTest.new.run
       assert result.passed?

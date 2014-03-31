@@ -1,9 +1,11 @@
 require 'rtest/runnable'
 require 'rtest/assertions'
+require 'rtest/hooks'
 
 module Rtest
   class Test < Runnable
     include Assertions
+    include Hooks
     PREFIX = /^test_/
 
     def self.runnable_methods
@@ -34,11 +36,17 @@ module Rtest
     def run
       capture_exceptions do
         time_it do
+          setup
           send name
-          if self.assertions.zero?
-            fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
-          end
         end
+
+        if self.assertions.zero?
+          fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
+        end
+      end
+
+      capture_exceptions do
+        teardown
       end
       self
     end
