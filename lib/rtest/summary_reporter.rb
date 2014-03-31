@@ -20,7 +20,6 @@ module Rtest
       io.puts
       io.puts statistics
       io.puts aggregated_results
-      io.puts
       io.puts summary
     end
 
@@ -37,7 +36,7 @@ module Rtest
 
       filtered_results.each_with_index.map do |result, index|
         "\n%3d) %s" % [index + 1, result]
-      end.join
+      end.join + "\n"
     end
 
     def summary

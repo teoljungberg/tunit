@@ -42,6 +42,7 @@ Run options: {}
   1) Failure:
 Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:LINE]:
 Failed assertion, no message given.
+
       EOS
 
       assert_equal exp_aggregated_results, remove_line_numbers(
