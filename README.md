@@ -15,6 +15,7 @@ I wanted to see how much code and effort are needed to build a testing
 framework of my own, while looking at the learnings of minitest.
 
 ## Usage
+### Unit
 
 I personally _love_ TDD frameworks like minitest, so I tried to mimic their
 behaviour and patterns as close as I possibly could. As with minitest, this is
@@ -60,6 +61,48 @@ class EmptyTest < Rtest::Test
   end
 end
 ```
+
+### Spec
+There is also a small Spec DSL that follows along with rtest
+
+```ruby
+require 'rtest/autorun'
+
+Example = Class.new
+
+describe Example do
+  describe 'passing tests' do
+    it 'even' do
+      assert 2.even?
+    end
+
+    it 'passed once more' do
+      assert_includes [1, 2], 2
+    end
+  end
+
+  describe 'failing tests' do
+    it 'fails on empty tests' do
+    end
+
+    it 'fails hard' do
+      refute 2.even?
+    end
+  end
+
+  describe 'skipps' do
+    it 'skippedy skip' do
+      skip
+    end
+
+    it 'skips with a message' do
+      skip 'here!'
+    end
+  end
+end
+```
+
+That's it, no magic let's or subjects. Just `it` and `describe` blocks
 
 ## Contributing
 
