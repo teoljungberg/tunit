@@ -31,8 +31,12 @@ module Rtest
       method_obj.source_location.join(":")
     end
 
+    def result_code
+      "_"
+    end
+
     def result_label
-      "_Empty"
+      "Empty"
     end
   end
 

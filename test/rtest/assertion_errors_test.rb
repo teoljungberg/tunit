@@ -64,7 +64,7 @@ module Rtest
     end
 
     def test_result_label
-      assert_equal "_Empty", assertion.result_label
+      assert_equal "Empty", assertion.result_label
     end
   end
 
