@@ -1,6 +1,6 @@
-# Rtest
+# Tunit
 
-`rtest` is my take on building a testing framework, it's heavily influenced by
+`tunit` is my take on building a testing framework, it's heavily influenced by
 [minitest](https://github.com/seattlerb/minitest).
 
 
@@ -22,7 +22,7 @@ behaviour and patterns as close as I possibly could. As with minitest, this is
 just plain ruby.
 
 ```ruby
-class BlahTest < Rtest::Test
+class BlahTest < Tunit::Test
   def setup
     self.blah = Blah.new
   end
@@ -49,10 +49,10 @@ definition away.
 
 I'm a strong believer in that you should only mock and stub things so you can
 assert on something else. That's why a `test`-method must have assertions in
-`rtest`
+`tunit`
 
 ```ruby
-class EmptyTest < Rtest::Test
+class EmptyTest < Tunit::Test
   def test_im_going_to_fail
   end
 
@@ -63,10 +63,10 @@ end
 ```
 
 ### Spec
-There is also a small Spec DSL that follows along with rtest
+There is also a small Spec DSL that follows along with tunit
 
 ```ruby
-require 'rtest/autorun'
+require 'tunit/autorun'
 
 Example = Class.new
 
@@ -106,7 +106,7 @@ That's it, no magic let's or subjects. Just `it` and `describe` blocks
 
 ## Contributing
 
-1. Fork it ( http://github.com/teoljungberg/rtest/fork )
+1. Fork it ( http://github.com/teoljungberg/tunit/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

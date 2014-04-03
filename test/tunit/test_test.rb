@@ -1,6 +1,6 @@
 require_relative './test_case'
 
-module Rtest
+module Tunit
   class TestTest < TestCase
     def test_runnable_methods
       assert_equal Test::PREFIX, /^test_/
@@ -31,17 +31,17 @@ module Rtest
       exp_msg = "Failed assertion, no message given."
       failure = result.failure
 
-      assert_instance_of Rtest::Assertion, failure
+      assert_instance_of Tunit::Assertion, failure
       assert_equal exp_msg, failure.message
     end
 
     def test_run_handles_empty_tests
       result  = FailingTest.new(:test_empty).run
 
-      exp_msg = "Empty test, 'Rtest::TestCase::FailingTest#test_empty'"
+      exp_msg = "Empty test, 'Tunit::TestCase::FailingTest#test_empty'"
       failure = result.failure
 
-      assert_instance_of Rtest::Empty, failure
+      assert_instance_of Tunit::Empty, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -52,7 +52,7 @@ module Rtest
       failure = result.failure
 
       assert result.skipped?
-      assert_instance_of Rtest::Skip, failure
+      assert_instance_of Tunit::Skip, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -122,13 +122,13 @@ module Rtest
     def test_failure
       result = FailingTest.new.run
 
-      assert_instance_of ::Rtest::Assertion, result.failure
+      assert_instance_of ::Tunit::Assertion, result.failure
     end
 
     def test_skipped_eh
       result = SkippedTest.new.run
 
-      assert_instance_of ::Rtest::Skip, result.failure
+      assert_instance_of ::Tunit::Skip, result.failure
       assert result.skipped?
     end
 
@@ -158,14 +158,14 @@ module Rtest
 
     def test_location_of_a_failing_test
       result       = FailingTest.new(:test_fail).run
-      exp_location = %r(Rtest::TestCase::FailingTest#test_fail \[.*/rtest/test/rtest/test_case.rb:\d{1,}\])
+      exp_location = %r(Tunit::TestCase::FailingTest#test_fail \[.*/tunit/test/tunit/test_case.rb:\d{1,}\])
 
       assert_match exp_location, result.location
     end
 
     def test_to_s_returns_the_klass_and_test
       result = PassingTest.new(:test_pass).run
-      exp_klass_and_test = "Rtest::TestCase::PassingTest#test_pass"
+      exp_klass_and_test = "Tunit::TestCase::PassingTest#test_pass"
 
       assert_equal exp_klass_and_test, result.to_s
       assert_equal result.to_s, result.location
@@ -173,7 +173,7 @@ module Rtest
 
     def test_to_s_returns_the_failing_test
       result    = FailingTest.new(:test_fail).run
-      exp_match = %r(Rtest::TestCase::FailingTest#test_fail \[test/rtest/test_case.rb:\d{1,}\])
+      exp_match = %r(Tunit::TestCase::FailingTest#test_fail \[test/tunit/test_case.rb:\d{1,}\])
 
       assert_match exp_match, truncate_absolut_path(result.to_s)
     end

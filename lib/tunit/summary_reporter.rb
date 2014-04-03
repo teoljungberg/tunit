@@ -1,6 +1,6 @@
-require 'rtest/reporter'
+require 'tunit/reporter'
 
-module Rtest
+module Tunit
   class SummaryReporter < Reporter
     SKIP_MSG = "\n\nYou have skipped tests. Run with --verbose for details."
 

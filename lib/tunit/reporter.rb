@@ -1,4 +1,4 @@
-module Rtest
+module Tunit
   class Reporter
     def initialize io = $stdout, options = {}
       self.io         = io

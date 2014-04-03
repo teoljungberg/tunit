@@ -1,4 +1,4 @@
-module Rtest
+module Tunit
   class Assertion < Exception
     def error
       self

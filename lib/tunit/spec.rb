@@ -1,4 +1,4 @@
-require 'rtest/test'
+require 'tunit/test'
 
 module Kernel
   # Override describe to avoid warnings and collisions with minitest/spec
@@ -6,10 +6,10 @@ module Kernel
   def describe desc, &blk
     _old_describe desc, &blk if defined? Minitest
 
-    super_klass = if Class === self && is_a?(Rtest::Spec::DSL)
+    super_klass = if Class === self && is_a?(Tunit::Spec::DSL)
                     self
                   else
-                    Rtest::Spec
+                    Tunit::Spec
                   end
 
     klass = super_klass.create desc
@@ -18,7 +18,7 @@ module Kernel
   end
 end
 
-module Rtest
+module Tunit
   class Spec < Test
     module DSL
       attr_reader :name

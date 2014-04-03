@@ -1,7 +1,7 @@
 require_relative 'test_case'
-require 'rtest/summary_reporter'
+require 'tunit/summary_reporter'
 
-module Rtest
+module Tunit
   class SummaryReporterTest < TestCase
     def setup
       self.reporter = SummaryReporter.new io
@@ -40,7 +40,7 @@ Run options: {}
       exp_aggregated_results = <<-EOS
 
   1) Failure:
-Rtest::TestCase::FailingTest#test_fail [test/rtest/test_case.rb:LINE]:
+Tunit::TestCase::FailingTest#test_fail [test/tunit/test_case.rb:LINE]:
 Failed assertion, no message given.
 
       EOS
@@ -97,7 +97,7 @@ Failed assertion, no message given.
       reporter.record SkippedTest.new(:test_skip).run
       reporter.report
 
-      exp_report = /1\) Skipped:\nRtest::TestCase::SkippedTest#test_skip \[(.*)\]/
+      exp_report = /1\) Skipped:\nTunit::TestCase::SkippedTest#test_skip \[(.*)\]/
 
       assert_match exp_report, io.string
       refute_match exp_report, reporter.io.string

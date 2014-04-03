@@ -1,11 +1,11 @@
-require 'rtest/assertion_errors'
+require 'tunit/assertion_errors'
 
-module Rtest
+module Tunit
   module Assertions
     def skip msg = nil, bt = caller
       method_responsible = bt[0][/`.*'/][1..-2]
       msg ||= "Skipped '#{method_responsible}'"
-      fail ::Rtest::Skip, msg, bt
+      fail ::Tunit::Skip, msg, bt
     end
 
     def assert test, msg = nil
@@ -13,7 +13,7 @@ module Rtest
       self.assertions += 1
       unless test
         msg = msg.call if Proc === msg
-        fail ::Rtest::Assertion, msg
+        fail ::Tunit::Assertion, msg
       end
       true
     end

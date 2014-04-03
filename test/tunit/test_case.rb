@@ -1,8 +1,8 @@
 require "minitest/autorun"
-require "rtest/test"
+require "tunit/test"
 require "stringio"
 
-module Rtest
+module Tunit
   class TestCase < Minitest::Test
     def io
       @io ||= StringIO.new ""
@@ -25,7 +25,7 @@ module Rtest
     private
 
     def truncate_absolut_path str
-      str.gsub(%r{\[.*(test/rtest/test_case.rb.*)\]}, '[\1]')
+      str.gsub(%r{\[.*(test/tunit/test_case.rb.*)\]}, '[\1]')
     end
 
     class PassingTest < Test

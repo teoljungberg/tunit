@@ -1,12 +1,12 @@
-require "rtest/compound_reporter"
-require "rtest/summary_reporter"
-require "rtest/progress_reporter"
-require "rtest/test"
-require "rtest/version"
+require "tunit/compound_reporter"
+require "tunit/summary_reporter"
+require "tunit/progress_reporter"
+require "tunit/test"
+require "tunit/version"
 
 require 'optparse'
 
-module Rtest
+module Tunit
   meta_klass = (class << self; self; end)
   meta_klass.send :attr_accessor, :reporter
 
@@ -28,7 +28,7 @@ module Rtest
         exit exit_code || false
       }
 
-      exit_code = Rtest.run ARGV
+      exit_code = Tunit.run ARGV
     } unless self.installed_at_exit
     self.installed_at_exit = true
   end
@@ -59,8 +59,8 @@ module Rtest
     options = { io: io }
 
     OptionParser.new do |opts|
-      opts.banner  = "Rtest options:"
-      opts.version = Rtest::VERSION
+      opts.banner  = "Tunit options:"
+      opts.version = Tunit::VERSION
 
       opts.on "-h", "--help", "Display this help." do
         puts opts

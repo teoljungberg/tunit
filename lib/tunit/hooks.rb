@@ -1,4 +1,4 @@
-module Rtest
+module Tunit
   module Hooks
     # Runs before each test
     def setup

@@ -1,5 +1,5 @@
 $:<< File.join(File.dirname(__FILE__), 'lib')
-require 'rtest/autorun'
+require 'tunit/autorun'
 
 Example = Class.new
 

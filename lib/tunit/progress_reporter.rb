@@ -1,6 +1,6 @@
-require 'rtest/reporter'
+require 'tunit/reporter'
 
-module Rtest
+module Tunit
   class ProgressReporter < Reporter
     def record result
       io.print result.code

@@ -1,13 +1,13 @@
 require_relative 'test_case'
-require 'rtest/spec'
+require 'tunit/spec'
 
 MyThing       = Class.new
 MySecondThing = Class.new
 
-module Rtest
+module Tunit
   class SpecTest < TestCase
     def test_it_blocks_are_converted_to_test_methods
-      klass = Class.new(::Rtest::Spec) {
+      klass = Class.new(::Tunit::Spec) {
         it "does the thing" do end
       }
 
@@ -17,7 +17,7 @@ module Rtest
     end
 
     def test_before_is_converted_to_setup
-      klass = Class.new(::Rtest::Spec)
+      klass = Class.new(::Tunit::Spec)
       klass.before { "here!" }
 
       assert_respond_to klass.new(:test), :setup
@@ -25,7 +25,7 @@ module Rtest
     end
 
     def test_after_is_converted_to_teardown
-      klass = Class.new(::Rtest::Spec)
+      klass = Class.new(::Tunit::Spec)
       klass.after { "there!" }
 
       assert_respond_to klass.new(:test), :teardown
@@ -37,7 +37,7 @@ module Rtest
         it 'dances all night long' do end
       end
 
-      assert_includes my_thing.ancestors, ::Rtest::Test
+      assert_includes my_thing.ancestors, ::Tunit::Test
       assert_includes my_thing.runnable_methods, "test_0001_dances_all_night_long"
     end
 

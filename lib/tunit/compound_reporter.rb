@@ -1,6 +1,6 @@
-require 'rtest/reporter'
+require 'tunit/reporter'
 
-module Rtest
+module Tunit
   class CompoundReporter < Reporter
     def initialize *reporters
       super()

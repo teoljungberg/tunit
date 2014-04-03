@@ -1,7 +1,7 @@
 require_relative 'test_case'
-require 'rtest/runnable'
+require 'tunit/runnable'
 
-module Rtest
+module Tunit
   class RunnableTest < TestCase
     def test_runnable_methods_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do

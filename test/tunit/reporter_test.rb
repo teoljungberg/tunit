@@ -1,7 +1,7 @@
 require_relative './test_case'
-require 'rtest/reporter'
+require 'tunit/reporter'
 
-module Rtest
+module Tunit
   class ReporterTest < TestCase
     def setup
       self.reporter = Reporter.new

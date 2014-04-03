@@ -1,7 +1,7 @@
 $:<< File.join(File.dirname(__FILE__), 'lib')
-require 'rtest/autorun'
+require 'tunit/autorun'
 
-class ExampleTest < Rtest::Test
+class ExampleTest < Tunit::Test
   def test_pass
     assert 2.even?
   end

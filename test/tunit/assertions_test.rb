@@ -1,8 +1,8 @@
 require_relative 'test_case'
-require 'rtest/assertions'
-require 'rtest/test'
+require 'tunit/assertions'
+require 'tunit/test'
 
-module Rtest
+module Tunit
   class AssertionsTest < TestCase
     def setup
       self.tc = Class.new(Test).new "name"

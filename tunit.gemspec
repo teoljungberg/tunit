@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rtest/version'
+require 'tunit/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "rtest"
-  spec.version       = Rtest::VERSION
+  spec.name          = "tunit"
+  spec.version       = Tunit::VERSION
   spec.authors       = ["Teo Ljungberg"]
   spec.email         = ["teo.ljungberg@gmail.com"]
   spec.summary       = %q{My take on a TDD testing framework}

@@ -1,7 +1,7 @@
 require_relative 'test_case'
-require 'rtest/progress_reporter'
+require 'tunit/progress_reporter'
 
-module Rtest
+module Tunit
   class ProgressReporterTest < TestCase
     def setup
       self.reporter = ProgressReporter.new io
@@ -36,7 +36,7 @@ module Rtest
       reporter = ProgressReporter.new io, verbose: true
       reporter.record PassingTest.new(:test_pass).run
       exp_verbosity = <<-EOS
-. = Rtest::TestCase::PassingTest#test_pass (0.00 s)
+. = Tunit::TestCase::PassingTest#test_pass (0.00 s)
       EOS
 
       assert_equal exp_verbosity, io.string

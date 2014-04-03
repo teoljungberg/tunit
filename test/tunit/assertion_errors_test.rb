@@ -1,9 +1,9 @@
 require_relative 'test_case'
-require 'rtest/assertion_errors'
-require 'rtest/test'
+require 'tunit/assertion_errors'
+require 'tunit/test'
 
-module Rtest
-  class AssertionErrorTest < TestCase
+module Tunit
+  class AssertionErrotunit < TestCase
     def setup
       self.assertion = Assertion.new
     end
@@ -16,7 +16,7 @@ module Rtest
     def test_location
       result       = FailingTest.new.run
       assertion    = result.failure
-      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end
@@ -43,7 +43,7 @@ module Rtest
     def test_location
       result       = FailingTest.new(:test_empty).run
       assertion    = result.failure
-      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end
@@ -79,7 +79,7 @@ module Rtest
     def test_location
       result       = SkippedTest.new.run
       assertion    = result.failure
-      exp_location = %r(.*/rtest/test/rtest/test_case.rb:\d{1,})
+      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end

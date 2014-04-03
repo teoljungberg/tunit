@@ -1,8 +1,8 @@
-require 'rtest/runnable'
-require 'rtest/assertions'
-require 'rtest/hooks'
+require 'tunit/runnable'
+require 'tunit/assertions'
+require 'tunit/hooks'
 
-module Rtest
+module Tunit
   class Test < Runnable
     include Assertions
     include Hooks
@@ -42,8 +42,8 @@ module Rtest
 
         if self.assertions.zero?
           begin
-            fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
-          rescue ::Rtest::Empty => e
+            fail ::Tunit::Empty, "Empty test, '#{self.to_s}'"
+          rescue ::Tunit::Empty => e
             method_obj = self.method(name)
             e.location = method_obj.source_location.join(":")
             raise e

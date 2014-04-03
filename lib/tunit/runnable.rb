@@ -1,4 +1,4 @@
-module Rtest
+module Tunit
   class Runnable
     def self.runnable_methods
       raise NotImplementedError, "subclass responsibility"
