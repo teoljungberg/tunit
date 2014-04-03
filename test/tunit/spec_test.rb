@@ -54,5 +54,26 @@ module Tunit
       assert_equal "#dance!", child.name
       assert_includes child.runnable_methods, "test_0001_busts_the_moves"
     end
+
+    def test_let_defines_accessors
+      my_thing = describe MyThing do
+        let(:lazy) { "here ma" }
+      end
+
+      my = my_thing.new(:bogus)
+      assert_respond_to my, :lazy
+    end
+
+    def test_let_is_lazy
+      my_thing = describe MyThing do
+        let(:lazy) { "here ma" }
+      end
+
+      my            = my_thing.new(:bogus)
+      first_obj_id  = my.lazy
+      second_obj_id = my.lazy
+
+      assert_equal first_obj_id, second_obj_id
+    end
   end
 end

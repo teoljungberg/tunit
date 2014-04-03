@@ -71,9 +71,15 @@ require 'tunit/autorun'
 Example = Class.new
 
 describe Example do
+  let(:awesome) { "bacon" }
+
   describe 'passing tests' do
-    it 'even' do
+    it 'is very much even' do
       assert 2.even?
+    end
+
+    it 'approves of this' do
+      assert_equal "bacon", awesome
     end
 
     it 'passed once more' do
@@ -102,7 +108,8 @@ describe Example do
 end
 ```
 
-That's it, no magic let's or subjects. Just `it` and `describe` blocks
+That's it, just `it` and `describe` blocks. I sprinkled some `let`'s for a
+nicer format
 
 ## Contributing
 
