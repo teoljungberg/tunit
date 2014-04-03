@@ -48,6 +48,17 @@ module Rtest
       assert_match exp_location, assertion.location
     end
 
+    def test_location_handles_unnamed_classes
+      skip "I'm broken and need to be fixed"
+
+      result = Class.new(Test) {
+        def test_empty
+        end
+      }.new(:test_empty).run
+
+      assert result.failure.location
+    end
+
     def test_result_code
       assert_equal "_", assertion.result_code
     end
