@@ -42,14 +42,15 @@ module Tunit
     end
 
     def test_describe_can_be_nested
-      my_second_thing = describe MySecondThing do
+      my_thing = describe MyThing do
         describe '#dance!' do
           it 'busts the moves' do end
         end
       end
 
-      child = my_second_thing.children.pop
+      child = my_thing.children.first
 
+      assert_equal 1, my_thing.children.size
       assert_equal "#dance!", child.name
       assert_includes child.runnable_methods, "test_0001_busts_the_moves"
     end
