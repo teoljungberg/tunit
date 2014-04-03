@@ -49,14 +49,12 @@ module Rtest
     end
 
     def test_location_handles_unnamed_classes
-      skip "I'm broken and need to be fixed"
-
       result = Class.new(Test) {
         def test_empty
         end
       }.new(:test_empty).run
 
-      assert result.failure.location
+      refute_equal :not_set, result.failure.location
     end
 
     def test_result_code

@@ -24,12 +24,7 @@ module Rtest
 
   class Empty < Assertion
     # Where was the empty test
-    def location
-      obj = message.match(/'(.*)'/)[1]
-      klass, meth = obj.split("#")
-      method_obj = eval(klass).new.method meth
-      method_obj.source_location.join(":")
-    end
+    attr_accessor :location
 
     def result_code
       "_"

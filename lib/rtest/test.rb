@@ -41,7 +41,13 @@ module Rtest
         end
 
         if self.assertions.zero?
-          fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
+          begin
+            fail ::Rtest::Empty, "Empty test, '#{self.to_s}'"
+          rescue ::Rtest::Empty => e
+            method_obj = self.method(name)
+            e.location = method_obj.source_location.join(":")
+            raise e
+          end
         end
       end
 
