@@ -15,6 +15,7 @@ module Tunit
       sucky_test = Class.new(PassingTest) {
         order!
       }
+
       assert_equal :alpha, sucky_test.test_order
     end
 
