@@ -63,5 +63,15 @@ module Tunit
       self.assertion_count = 1
       tc.refute_instance_of String, 1
     end
+
+    def test_assert_match
+      self.assertion_count = 2
+      tc.assert_match(/oo/, "foo")
+    end
+
+    def test_refute_match
+      self.assertion_count = 2
+      tc.refute_match(/foo/, "bar")
+    end
   end
 end
