@@ -27,6 +27,12 @@ module Tunit
       assert_equal 1, reporter.results.size
     end
 
+    def test_record_skipped_test
+      reporter.record SkippedTest.new.run
+
+      assert_equal 1, reporter.results.size
+    end
+
     def test_passed_eh
       reporter.record PassingTest.new.run
 
