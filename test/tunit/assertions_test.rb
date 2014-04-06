@@ -5,14 +5,14 @@ require 'tunit/test'
 module Tunit
   class AssertionsTest < TestCase
     def setup
-      self.tc = Class.new(Test).new "name"
+      self.tc = Class.new(Test).new "custom_test"
       self.assertion_count = 0
     end
     attr_accessor :tc, :assertion_count
 
     def teardown
       assert_equal assertion_count, tc.assertions,
-        "Expected #{assertion_count} assertions to have been made to #{tc.inspect}, but was #{tc.assertions}"
+        "Expected #{assertion_count} assertions to have been made to #{tc}, but was #{tc.assertions}"
     end
 
     def test_assert
