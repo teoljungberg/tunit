@@ -1,5 +1,4 @@
 require_relative 'test_case'
-require 'tunit/assertions'
 require 'tunit/test'
 
 module Tunit
