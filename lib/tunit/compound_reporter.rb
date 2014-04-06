@@ -1,4 +1,6 @@
 require 'tunit/reporter'
+require 'tunit/summary_reporter'
+require 'tunit/progress_reporter'
 
 module Tunit
   class CompoundReporter < Reporter
