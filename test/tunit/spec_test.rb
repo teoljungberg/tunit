@@ -61,6 +61,7 @@ module Tunit
 
       my = my_thing.new(:bogus)
       assert_respond_to my, :lazy
+      assert_equal "here ma", my.lazy
     end
 
     def test_let_is_lazy
