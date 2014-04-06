@@ -16,7 +16,7 @@ module Tunit
     def test_location
       result       = FailingTest.new.run
       assertion    = result.failure
-      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
+      exp_location = %r(test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end
@@ -43,7 +43,7 @@ module Tunit
     def test_location
       result       = FailingTest.new(:test_empty).run
       assertion    = result.failure
-      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
+      exp_location = %r(/test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end
@@ -54,7 +54,10 @@ module Tunit
         end
       }.new(:test_empty).run
 
-      refute_equal :not_set, result.failure.location
+      assertion    = result.failure
+      exp_location = %r(/test/tunit/assertion_errors_test.rb:\d{1,})
+
+      assert_match exp_location, assertion.location
     end
 
     def test_result_code
@@ -79,7 +82,7 @@ module Tunit
     def test_location
       result       = SkippedTest.new.run
       assertion    = result.failure
-      exp_location = %r(.*/tunit/test/tunit/test_case.rb:\d{1,})
+      exp_location = %r(test/tunit/test_case.rb:\d{1,})
 
       assert_match exp_location, assertion.location
     end
