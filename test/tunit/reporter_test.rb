@@ -37,11 +37,21 @@ module Tunit
       reporter.record PassingTest.new.run
 
       assert reporter.passed?
+      assert_empty reporter.results
     end
 
-    def test_passed_eh_is_only_for_passing_tests
-      reporter.record FailingTest.new.run
+    def test_passed_eh_accepts_skipped_tests
+      reporter.record SkippedTest.new.run
+      assert reporter.passed?
+    end
 
+    def test_passed_eh_rejects_failing_tests
+      reporter.record FailingTest.new.run
+      refute reporter.passed?
+    end
+
+    def test_passed_eh_rejects_skipped_tests
+      reporter.record FailingTest.new(:test_empty).run
       refute reporter.passed?
     end
 
