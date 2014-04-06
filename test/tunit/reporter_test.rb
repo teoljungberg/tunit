@@ -71,6 +71,14 @@ module Tunit
       assert_equal 1, reporter.failures
     end
 
+    def test_report_considers_empty_tests_a_failures
+      reporter.start
+      reporter.record FailingTest.new(:test_empty).run
+      reporter.report
+
+      assert_equal 1, reporter.failures
+    end
+
     def test_report_collects_skips
       reporter.start
       reporter.record SkippedTest.new.run
