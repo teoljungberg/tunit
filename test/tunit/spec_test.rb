@@ -1,8 +1,7 @@
 require_relative 'test_case'
 require 'tunit/spec'
 
-MyThing       = Class.new
-MySecondThing = Class.new
+MyThing = Class.new
 
 module Tunit
   class SpecTest < TestCase

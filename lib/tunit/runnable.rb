@@ -37,7 +37,6 @@ module Tunit
     end
     attr_accessor :name, :assertions, :failures, :time
 
-
     def run
       fail NotImplementedError, "subclass responsibility"
     end
