@@ -28,6 +28,14 @@ module Tunit
       str.gsub(%r{\[.*(test/tunit/test_case.rb.*)\]}, '[\1]')
     end
 
+    def remove_line_numbers str
+      str.gsub(/:\d{1,}/, ':LINE')
+    end
+
+    def zeroify_time str
+      str.gsub(/\d/, '0')
+    end
+
     class PassingTest < Test
       def initialize name = :test_pass
         super

@@ -102,15 +102,5 @@ Failed assertion, no message given.
       assert_match exp_report, io.string
       refute_match exp_report, reporter.io.string
     end
-
-    private
-
-    def remove_line_numbers str
-      str.gsub(/:\d{1,}/, ':LINE')
-    end
-
-    def zeroify_time str
-      str.gsub(/\d/, '0')
-    end
   end
 end
