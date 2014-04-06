@@ -32,9 +32,10 @@ module Tunit
       assert_equal "_", io.string
     end
 
-    def test_record_is_very_verbose
+    def test_record_can_be_very_verbose
       reporter = ProgressReporter.new io, verbose: true
       reporter.record PassingTest.new(:test_pass).run
+
       exp_verbosity = <<-EOS
 . = Tunit::TestCase::PassingTest#test_pass (0.00 s)
       EOS
