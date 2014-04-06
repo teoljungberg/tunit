@@ -3,7 +3,7 @@ require 'tunit/assertion_errors'
 require 'tunit/test'
 
 module Tunit
-  class AssertionErrotunit < TestCase
+  class AssertionErrorTest < TestCase
     def setup
       self.assertion = Assertion.new
     end
@@ -30,7 +30,7 @@ module Tunit
     end
   end
 
-  class EmptyTest < TestCase
+  class EmptyErrorTest < TestCase
     def setup
       self.assertion = Empty.new
     end
@@ -66,7 +66,7 @@ module Tunit
     end
   end
 
-  class SkipTest < TestCase
+  class SkipErrorTest < TestCase
     def setup
       self.assertion = Skip.new
     end
