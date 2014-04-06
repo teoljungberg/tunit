@@ -13,7 +13,10 @@ module Tunit
     end
 
     def test_runnables_list_all_runnables_that_inherit_from_runnable
-      assert_includes Runnable.runnables, PassingTest
+      Runnable.runnables.clear
+      new_subklass = Class.new(Runnable)
+
+      assert_includes Runnable.runnables, new_subklass
     end
 
     def test_runnables_custom
