@@ -6,7 +6,7 @@ MyThing = Class.new
 module Tunit
   class SpecTest < TestCase
     def test_it_blocks_are_converted_to_test_methods
-      klass = Class.new(::Tunit::Spec) {
+      klass = Class.new(Spec) {
         it "does the thing" do end
       }
 
@@ -16,7 +16,7 @@ module Tunit
     end
 
     def test_before_is_converted_to_setup
-      klass = Class.new(::Tunit::Spec)
+      klass = Class.new(Spec)
       klass.before { "here!" }
 
       assert_respond_to klass.new(:test), :setup
@@ -24,7 +24,7 @@ module Tunit
     end
 
     def test_after_is_converted_to_teardown
-      klass = Class.new(::Tunit::Spec)
+      klass = Class.new(Spec)
       klass.after { "there!" }
 
       assert_respond_to klass.new(:test), :teardown
