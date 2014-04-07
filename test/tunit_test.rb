@@ -3,12 +3,21 @@ require 'tunit'
 
 class TunitTest < Tunit::TestCase
   def setup
-    Tunit.io = io
     Tunit::Runnable.runnables = [PassingTest]
+    Tunit.io                  = io
+  end
+
+  def test_run_processes_arguments
+    self.class.send :const_set, :ARGV,  ["--verbose", "-n", "test_pass"]
+    Tunit.run ARGV
+
+    assert Tunit.reporter.reporters.first.options[:verbose]
+    assert_equal "test_pass", Tunit.reporter.reporters.first.options[:filter]
   end
 
   def test_run_gathers_reporters_under_compound_reporter
     Tunit.run
+
     assert_instance_of Tunit::CompoundReporter, Tunit.reporter
   end
 
