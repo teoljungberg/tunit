@@ -41,7 +41,7 @@ module Tunit
         end
 
         if self.assertions.zero?
-          e = ::Tunit::Empty.new "Empty test, '#{self.to_s}'"
+          e = ::Tunit::Empty.new "Empty test, <#{self.to_s}>"
           method_obj = self.method(name)
           e.location = method_obj.source_location.join(":")
           fail e

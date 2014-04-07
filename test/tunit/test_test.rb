@@ -39,7 +39,7 @@ module Tunit
     def test_run_handles_empty_tests
       result  = FailingTest.new(:test_empty).run
 
-      exp_msg = "Empty test, 'Tunit::TestCase::FailingTest#test_empty'"
+      exp_msg = "Empty test, <Tunit::TestCase::FailingTest#test_empty>"
       failure = result.failure
 
       assert_instance_of Tunit::Empty, failure
