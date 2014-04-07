@@ -28,8 +28,19 @@ class TunitTest < Tunit::TestCase
     assert_instance_of Tunit::CompoundReporter, Tunit.reporter
   end
 
-  def test_run_dispatches_the_reporters_to_run
-    Tunit.run
-    assert Tunit.reporter.passed?
+  def test_run_is_happy_with_passes
+    assert Tunit.run
+  end
+
+  def test_run_is_sad_with_failures
+    Tunit::Runnable.runnables = [FailingTest]
+
+    refute Tunit.run
+  end
+
+  def test_run_is_meh_with_skipps
+    Tunit::Runnable.runnables = [SkippedTest]
+
+    assert Tunit.run
   end
 end
