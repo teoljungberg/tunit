@@ -7,6 +7,13 @@ class TunitTest < Tunit::TestCase
     Tunit.io                  = io
   end
 
+  def test_autorun_sets_installed_at_exit
+    refute Tunit.installed_at_exit
+    Tunit.autorun
+
+    assert Tunit.installed_at_exit
+  end
+
   def test_run_processes_arguments
     self.class.send :const_set, :ARGV,  ["--verbose", "-n", "test_pass"]
     Tunit.run ARGV
