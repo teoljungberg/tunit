@@ -23,9 +23,6 @@ module Tunit
   end
 
   class Empty < Assertion
-    # Where was the empty test
-    attr_accessor :location
-
     def result_code
       "_"
     end

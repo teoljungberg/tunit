@@ -43,7 +43,11 @@ module Tunit
         if self.assertions.zero?
           e = ::Tunit::Empty.new "Empty test, <#{self.to_s}>"
           method_obj = self.method(name)
-          e.location = method_obj.source_location.join(":")
+
+          redefine_method e.class, :location do
+            -> { method_obj.source_location.join(":") }
+          end
+
           fail e
         end
       end
@@ -96,6 +100,15 @@ module Tunit
       yield
     rescue Assertion => e
       self.failures << e
+    end
+
+    def redefine_method klass, method
+      return unless block_given?
+
+      if klass.send :method_defined?, method
+        klass.send :undef_method, method if klass.send :method_defined?, method
+      end
+      klass.send :define_method, method, yield
     end
   end
 end

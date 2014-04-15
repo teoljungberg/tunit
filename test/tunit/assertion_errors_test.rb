@@ -60,15 +60,6 @@ module Tunit
       assert_match exp_location, assertion.location
     end
 
-    def test_location_custom
-      result             = FailingTest.new(:test_empty).run
-      assertion          = result.failure
-      prior_location     = assertion.location
-      assertion.location = :custom
-
-      refute_equal assertion.location, prior_location
-    end
-
     def test_result_code
       assert_equal "_", assertion.result_code
     end
