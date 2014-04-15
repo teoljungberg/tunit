@@ -54,6 +54,30 @@ module Tunit
       assert_includes child.runnable_methods, "test_0001_busts_the_moves"
     end
 
+    def test_describe_is_a_runnable_with_runnable_methods
+      my_thing = describe MyThing do
+        describe '#dance!' do
+          it 'busts the moves' do end
+          it 'busts the moves during a full moon' do end
+        end
+
+        describe '#stop?' do
+          it 'loves hammer time' do end
+        end
+      end
+
+      dance_bang, stop_eh = my_thing.children
+
+      assert_includes my_thing.ancestors, Runnable
+
+      assert_equal [
+        "test_0001_busts_the_moves",
+        "test_0002_busts_the_moves_during_a_full_moon"
+      ], dance_bang.runnable_methods.sort
+
+      assert_equal ["test_0001_loves_hammer_time"], stop_eh.runnable_methods.sort
+    end
+
     def test_let_defines_accessors
       my_thing = describe MyThing do
         let(:lazy) { "here ma" }
