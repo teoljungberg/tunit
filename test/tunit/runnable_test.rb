@@ -33,7 +33,7 @@ module Tunit
     def test_run_runs_all_tests_with_a_given_reporter
       PassingTest.run dummy_reporter, io: io
 
-      assert_equal dummy_reporter.report, PassingTest.runnable_methods.size
+      assert_equal dummy_reporter.assertions, PassingTest.runnable_methods.size
     end
 
     def test_run_runs_all_tests_with_matching_pattern
@@ -42,7 +42,7 @@ module Tunit
 
       PassingTest.run dummy_reporter, io: io, filter: filter
 
-      assert_equal dummy_reporter.report, matched_methods
+      assert_equal dummy_reporter.assertions, matched_methods
     end
 
     def test_runnable_methods_can_be_customized_to_find_your_tests

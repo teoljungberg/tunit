@@ -10,14 +10,13 @@ module Tunit
 
     def dummy_reporter
       @dummy_reporter ||= Class.new {
-        def record(*)
-          @tests ||= 0
-          @tests += 1
+        def initialize
+          self.assertions = 0
         end
+        attr_accessor :assertions
 
-        def report(*)
-          @tests ||= 0
-          @tests
+        def record(*)
+          self.assertions += 1
         end
       }.new
     end
