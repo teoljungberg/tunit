@@ -7,7 +7,19 @@ module Tunit
       tc = self
 
       Class.new(Spec) {
-        tc.assert_instance_of Spec::Expect, expect(2)
+        it 'passes' do
+          tc.assert_instance_of Spec::Expect, expect(2)
+        end
+      }
+    end
+
+    def test_expect_must_be_inside_an_it_block
+      tc = self
+
+      Class.new(Spec) {
+        tc.assert_raises NoMethodError do
+          expect(2).to eq 1
+        end
       }
     end
   end
@@ -26,7 +38,9 @@ module Tunit
       tc = self
 
       Class.new(Spec) {
-        tc.assert expect(/oo/).to(match("foo"))
+        it 'passes' do
+          tc.assert expect(/oo/).to(match("foo"))
+        end
       }
     end
 
@@ -34,8 +48,10 @@ module Tunit
       tc = self
 
       Class.new(Spec) {
-        tc.assert_raises NotAnAssertion do
-          expect(/oo/).to(die("foo"))
+        it 'passes' do
+          tc.assert_raises NotAnAssertion do
+            expect(/oo/).to(die("foo"))
+          end
         end
       }
     end

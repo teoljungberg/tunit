@@ -3,7 +3,7 @@ require 'abbrev'
 
 module Tunit
   class Spec < Test
-    def self.expect value
+    def expect value
       Expect.new value
     end
 
@@ -17,9 +17,7 @@ module Tunit
       def to matcher
         self.send matcher.shift, value.call, matcher.shift
       end
-    end
 
-    module Expectations
       def method_missing method, *args, &block
         assertion = if method.match(/^not_(.*)/)
                       assertions["refute_#{$1}"]
@@ -40,7 +38,5 @@ module Tunit
         Tunit::Assertions.public_instance_methods(false).map(&:to_s).abbrev
       end
     end
-
-    extend Expectations
   end
 end
