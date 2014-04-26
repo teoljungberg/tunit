@@ -21,5 +21,13 @@ module Tunit
     def test_initialize_sets_the_value_as_a_proc
       assert_instance_of Proc, expect.value
     end
+
+    def test_to_shows_value_to_the_world
+      assert_equal 2, expect.to
+    end
+
+    def test_not_to_inverts_the_value_of_to
+      assert_equal false, expect.not_to
+    end
   end
 end
