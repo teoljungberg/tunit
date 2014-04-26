@@ -1,4 +1,5 @@
 require 'tunit/test'
+require 'abbrev'
 
 module Tunit
   class Spec < Test
@@ -19,12 +20,24 @@ module Tunit
     end
 
     module Expectations
-      def eq exp = nil
-        [:assert_equal, exp]
+      def method_missing method, *args, &block
+        assertion = if method.match(/^not_(.*)/)
+                      assertions["refute_#{$1}"]
+                    else
+                      assertions["assert_#{method}"]
+                    end
+
+        if assertion
+          [assertion, args.shift]
+        else
+          fail NotAnAssertion
+        end
       end
 
-      def not_eq exp = nil
-        [:refute_equal, exp]
+      private
+
+      def assertions
+        Tunit::Assertions.public_instance_methods(false).map(&:to_s).abbrev
       end
     end
 

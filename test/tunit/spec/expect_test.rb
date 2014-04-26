@@ -22,19 +22,21 @@ module Tunit
       assert_instance_of Proc, expect.value
     end
 
-    def test_eq_asserts_equality
+    def test_methods_missing_defines_matchers_depending_on_the_assertions
       tc = self
 
       Class.new(Spec) {
-        tc.assert expect(2).to(eq(2))
+        tc.assert expect(/oo/).to(match("foo"))
       }
     end
 
-    def test_not_eq_refutes_equality
+    def test_methods_missing_fails_if_no_matcher_is_found
       tc = self
 
       Class.new(Spec) {
-        tc.refute expect(2).to(not_eq(4))
+        tc.assert_raises NotAnAssertion do
+          expect(/oo/).to(die("foo"))
+        end
       }
     end
   end
