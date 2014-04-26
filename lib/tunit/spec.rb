@@ -1,8 +1,10 @@
 require 'tunit/spec/dsl'
+require 'tunit/spec/expect'
 
 module Kernel
   # Override describe to avoid warnings and collisions with minitest/spec
   alias_method :_old_describe, :describe if defined? Minitest
+
   def describe desc, &block
     _old_describe desc, &block if defined? Minitest
 
