@@ -79,5 +79,15 @@ module Tunit
         skip "implement me when IQ > 80"
       end
     end
+
+    class ErrorTest < Test
+      def initialize test = :test_error
+        super
+      end
+
+      def test_error
+        raise NotAnAssertion
+      end
+    end
   end
 end
