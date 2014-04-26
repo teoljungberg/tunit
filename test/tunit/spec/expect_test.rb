@@ -22,12 +22,20 @@ module Tunit
       assert_instance_of Proc, expect.value
     end
 
-    def test_to_shows_value_to_the_world
-      assert_equal 2, expect.to
+    def test_eq_asserts_equality
+      tc = self
+
+      Class.new(Spec) {
+        tc.assert expect(2).to(eq(2))
+      }
     end
 
-    def test_not_to_inverts_the_value_of_to
-      assert_equal false, expect.not_to
+    def test_not_eq_refutes_equality
+      tc = self
+
+      Class.new(Spec) {
+        tc.refute expect(2).to(not_eq(4))
+      }
     end
   end
 end
