@@ -11,4 +11,15 @@ module Tunit
       }
     end
   end
+
+  class ExpectTest < TestCase
+    def setup
+      self.expect = Spec::Expect.new 2
+    end
+    attr_accessor :expect
+
+    def test_initialize_sets_the_value_as_a_proc
+      assert_instance_of Proc, expect.value
+    end
+  end
 end

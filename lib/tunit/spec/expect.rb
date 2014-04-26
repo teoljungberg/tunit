@@ -8,7 +8,7 @@ module Tunit
 
     class Expect
       def initialize value
-        self.value = value
+        self.value = -> { value }
       end
       attr_accessor :value
     end
