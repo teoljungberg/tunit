@@ -23,5 +23,6 @@ end
 module Tunit
   class Spec < Test
     extend DSL
+    include Expect::Expectations
   end
 end

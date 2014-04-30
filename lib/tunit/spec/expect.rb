@@ -18,24 +18,35 @@ module Tunit
         self.send matcher.shift, value.call, matcher.shift
       end
 
-      def method_missing method, *args, &block
-        assertion = if method.match(/^not_(.*)/)
-                      assertions["refute_#{$1}"]
-                    else
-                      assertions["assert_#{method}"]
-                    end
+      module Expectations
+        def method_missing method, *args, &block
+          assertion = fetch_assertion method
 
-        if assertion
-          [assertion, args.shift]
-        else
-          fail NotAnAssertion
+          if assertion
+            [assertion, args.shift]
+          else
+            fail NotAnAssertion
+          end
         end
-      end
 
-      private
+        def respond_to_missing? method, include_private = false
+          fetch_assertion(method) || super
+        end
 
-      def assertions
-        Tunit::Assertions.public_instance_methods(false).map(&:to_s).abbrev
+        private
+
+        def assertions_mapper
+          Tunit::Assertions.public_instance_methods(false).map(&:to_s).
+            grep(/(assert|refute)/).abbrev
+        end
+
+        def fetch_assertion method
+          if method.match(/^not_(.*)/)
+            assertions_mapper["refute_#{$1}"]
+          else
+            assertions_mapper["assert_#{method}"]
+          end
+        end
       end
     end
   end
