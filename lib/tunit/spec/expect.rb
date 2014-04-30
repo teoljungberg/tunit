@@ -4,18 +4,18 @@ require 'abbrev'
 module Tunit
   class Spec < Test
     def expect value
-      Expect.new value
+      Expect.new value, self
     end
 
-    class Expect < Spec
-      def initialize value
-        super
+    class Expect
+      def initialize value, klass
         self.value = -> { value }
+        self.klass = klass
       end
-      attr_accessor :value
+      attr_accessor :value, :klass
 
       def to matcher
-        self.send matcher.shift, value.call, matcher.shift
+        klass.send matcher.shift, value.call, matcher.shift
       end
 
       module Expectations

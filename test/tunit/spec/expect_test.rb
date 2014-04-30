@@ -27,13 +27,13 @@ module Tunit
 
   class ExpectTest < TestCase
     def test_initialize_sets_the_value_as_a_proc
-      expect = Spec::Expect.new 2
+      expect = Spec::Expect.new 2, self
 
       assert_instance_of Proc, expect.value
       assert_equal 2, expect.value.call
     end
 
-    def test_methods_missing_defines_matchers_depending_on_the_assertions
+    def test_method_missing_defines_matchers_depending_on_the_assertions
       tc = self
 
       klass = Class.new(Spec) {
@@ -55,7 +55,7 @@ module Tunit
       refute_respond_to k, :jikes
     end
 
-    def test_methods_missing_fails_if_no_matcher_is_found
+    def test_method_missing_fails_if_no_matcher_is_found
       klass = Class.new(Spec) {
         it 'passes' do
           expect(/oo/).to die "foo"
@@ -66,6 +66,19 @@ module Tunit
       k.run
 
       assert_instance_of Tunit::NotAnAssertion, k.failure
+    end
+
+    def test_method_missing_fires_assertions_from_the_caller_klass
+      klass = Class.new(Spec) {
+        it 'passes' do
+          expect(/oo/).to match "foo"
+        end
+      }
+
+      k = klass.new "test_0001_passes"
+      k.run
+
+      assert_equal 2, k.assertions
     end
   end
 end
