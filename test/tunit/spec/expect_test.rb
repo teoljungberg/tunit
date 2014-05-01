@@ -39,6 +39,7 @@ module Tunit
       klass = Class.new(Spec) {
         it 'passes' do
           tc.assert_equal "assert_match", match.first
+          self.assertions = tc.assertions
         end
       }
 
@@ -65,10 +66,10 @@ module Tunit
       k = klass.new "test_0001_passes"
       k.run
 
-      assert_instance_of Tunit::NotAnAssertion, k.failure
+      assert_instance_of NotAnAssertion, k.failure
     end
 
-    def test_method_missing_fires_assertions_from_the_caller_klass
+    def test_method_missing_executes_assertions_from_the_caller_class
       klass = Class.new(Spec) {
         it 'passes' do
           expect(/oo/).to match "foo"
