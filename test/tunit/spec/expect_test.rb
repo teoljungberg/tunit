@@ -52,6 +52,17 @@ module Tunit
 
       assert_respond_to k, :eq
       assert_equal "assert_equal", k.eq.first
+    end
+
+    def test_respond_to_missing_maps_expectation_matchers_to_refutions
+      k = Class.new(Spec).new :name
+
+      assert_respond_to k, :not_match
+      assert_equal "refute_match", k.not_match.first
+    end
+
+    def test_respond_to_missing_only_maps_to_assertions_and_refutions
+      k = Class.new(Spec).new :name
 
       refute_respond_to k, :jikes
     end
