@@ -105,9 +105,7 @@ module Tunit
     def redefine_method klass, method
       return unless block_given?
 
-      if klass.send :method_defined?, method
-        klass.send :undef_method, method if klass.send :method_defined?, method
-      end
+      klass.send :alias_method, "old_#{method}", method
       klass.send :define_method, method, yield
     end
   end
