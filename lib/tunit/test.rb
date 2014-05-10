@@ -107,6 +107,8 @@ module Tunit
 
       klass.send :alias_method, "old_#{method}", method
       klass.send :define_method, method, yield
+    ensure
+      klass.send :remove_method, "old_#{method}"
     end
   end
 end
