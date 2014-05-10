@@ -1,3 +1,7 @@
+if RUBY_VERSION == "1.9.3"
+  gem "minitest"
+end
+
 require "minitest/autorun"
 require "tunit/test"
 require "stringio"
