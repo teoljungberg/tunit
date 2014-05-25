@@ -41,7 +41,7 @@ module Tunit
         end
 
         if self.assertions.zero?
-          e = ::Tunit::Empty.new "Empty test, <#{self.to_s}>"
+          e = ::Tunit::Empty.new "Empty test, <#{self}>"
           method_obj = self.method(name)
 
           redefine_method e.class, :location do
