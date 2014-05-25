@@ -1,10 +1,10 @@
-require_relative 'test_case'
+require_relative '../test_case'
 require 'tunit/spec'
 
 MyThing = Class.new
 
 module Tunit
-  class SpecTest < TestCase
+  class SpecDSLTest < TestCase
     def test_it_blocks_are_converted_to_test_methods
       klass = Class.new(Spec) {
         it "does the thing" do end

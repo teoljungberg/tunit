@@ -4,13 +4,15 @@ require 'tunit/autorun'
 Example = Class.new
 
 describe Example do
+  let(:number) { 2 }
+
   describe 'passing tests' do
     it 'even' do
-      assert 2.even?
+      assert number.even?
     end
 
     it 'passed once more' do
-      assert_includes [1, 2], 2
+      assert_includes [1, 2], number
     end
   end
 
@@ -19,7 +21,7 @@ describe Example do
     end
 
     it 'fails hard' do
-      refute 2.even?
+      refute number.even?
     end
   end
 

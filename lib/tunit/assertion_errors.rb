@@ -37,4 +37,13 @@ module Tunit
       "Skipped"
     end
   end
+
+  class Error < Assertion
+    def result_label
+      "Error"
+    end
+  end
+
+  class NotAnAssertion < Error
+  end
 end
