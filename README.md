@@ -111,6 +111,7 @@ end
 That's it, just `it` and `describe` blocks. I sprinkled some `let`'s for a
 nicer format
 
+<<<<<<< HEAD
 ## Expecations, and not only assertions
 The expectations maps 1-to-1 with the assertions
 
