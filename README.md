@@ -111,6 +111,43 @@ end
 That's it, just `it` and `describe` blocks. I sprinkled some `let`'s for a
 nicer format
 
+## Expecations, and not only assertions
+The expectations maps 1-to-1 with the assertions
+
+### Assertions
+```ruby
+expect(2).to eq 2
+```
+
+```ruby
+expect([1,2]).to include 1
+```
+
+```ruby
+expect(Class).to respond_to :new
+```
+
+```ruby
+expect("foo").to match /oo/
+```
+
+### Refutions
+```ruby
+expect(2).to not_eq 1
+```
+
+```ruby
+expect([1,2]).to not_include 3
+```
+
+```ruby
+expect(Class).to not_respond_to :omg
+```
+
+```ruby
+expect("foo").to not_match /bar/
+```
+
 ## Contributing
 
 1. Fork it ( http://github.com/teoljungberg/tunit/fork )
