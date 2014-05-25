@@ -7,13 +7,13 @@ module Tunit
 
       def before &block
         define_method :setup do
-          self.instance_eval(&block)
+          instance_eval(&block)
         end
       end
 
       def after &block
         define_method :teardown do
-          self.instance_eval(&block)
+          instance_eval(&block)
         end
       end
 
@@ -55,8 +55,8 @@ module Tunit
       end
 
       def remove_test_methods!
-        self.runnable_methods.map { |test|
-          self.send :undef_method, test
+        runnable_methods.map { |test|
+          send :undef_method, test
         }
       end
     end

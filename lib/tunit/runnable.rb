@@ -13,7 +13,7 @@ module Tunit
     end
 
     def self.inherited klass
-      self.runnables << klass
+      runnables << klass
       super
     end
 
@@ -21,7 +21,7 @@ module Tunit
       filter = options.fetch(:filter) { '/./' }
       filter = Regexp.new $1 if filter =~ /\/(.*)\//
 
-      filtered_methods = self.runnable_methods.select { |m|
+      filtered_methods = runnable_methods.select { |m|
         filter === m || filter === "#{self}##{m}"
       }
 

@@ -10,14 +10,14 @@ module Tunit
 
     def self.runnable_methods
       methods = methods_matching PREFIX
-      case self.test_order
+      case test_order
       when :random
         max = methods.size
         methods.sort.sort_by { rand max }
       when :alpha
         methods.sort
       else
-        raise "Unknown test_order: #{self.test_order.inspect}"
+        raise "Unknown test_order: #{test_order.inspect}"
       end
     end
 
@@ -40,9 +40,9 @@ module Tunit
           send name
         end
 
-        if self.assertions.zero?
+        if assertions.zero?
           e = ::Tunit::Empty.new "Empty test, <#{self}>"
-          method_obj = self.method(name)
+          method_obj = method(name)
 
           redefine_method e.class, :location do
             -> { method_obj.source_location.join(":") }
@@ -75,15 +75,15 @@ module Tunit
     end
 
     def location
-      loc = " [#{self.failure.location}]" unless passed?
-      "#{self.class}##{self.name}#{loc}"
+      loc = " [#{failure.location}]" unless passed?
+      "#{self.class}##{name}#{loc}"
     end
 
     def to_s
       return location if passed? && !skipped?
 
       failures.map { |failure|
-        "#{failure.result_label}:\n#{self.location}:\n#{failure.message}\n"
+        "#{failure.result_label}:\n#{location}:\n#{failure.message}\n"
       }.join "\n"
     end
 
