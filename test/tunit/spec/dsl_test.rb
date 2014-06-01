@@ -38,7 +38,8 @@ module Tunit
         it 'dances all night long' do end
       end
 
-      assert_includes my_thing.ancestors, ::Tunit::Test
+      assert_includes my_thing.ancestors, Tunit::Test
+      assert_includes my_thing.ancestors, Tunit::Runnable
       assert_includes my_thing.runnable_methods, "test_0001_dances_all_night_long"
     end
 
