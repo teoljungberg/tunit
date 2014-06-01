@@ -47,7 +47,7 @@ module Tunit
   private
 
   def self.dispatch! reporter, options
-    Runnable.runnables.each do |runnable|
+    Runnable.runnables.shuffle.each do |runnable|
       runnable.run reporter, options
     end
   end
