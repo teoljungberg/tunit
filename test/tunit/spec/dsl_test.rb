@@ -10,8 +10,6 @@ module Tunit
         it "does the thing" do end
       }
 
-      klass.new "blah"
-
       assert_includes klass.runnable_methods, "test_0001_does_the_thing"
     end
 
@@ -19,16 +17,20 @@ module Tunit
       klass = Class.new(Spec)
       klass.before { "here!" }
 
-      assert_respond_to klass.new(:test), :setup
-      assert_equal "here!", klass.new(:test).setup
+      k = klass.new :test
+
+      assert_respond_to k, :setup
+      assert_equal "here!", k.setup
     end
 
     def test_after_is_converted_to_teardown
       klass = Class.new(Spec)
       klass.after { "there!" }
 
-      assert_respond_to klass.new(:test), :teardown
-      assert_equal "there!", klass.new(:test).teardown
+      k = klass.new :test
+
+      assert_respond_to k, :teardown
+      assert_equal "there!", k.teardown
     end
 
     def test_describe_is_converted_to_a_test_klass_with_test_methods
@@ -78,24 +80,25 @@ module Tunit
       assert_equal ["test_0001_loves_hammer_time"], stop_eh.runnable_methods.sort
     end
 
-    def test_let_defines_accessors
-      my_thing = describe MyThing do
+    def test_let_creates_attr_accessors
+      thing = describe MyThing do
         let(:lazy) { "here ma" }
       end
 
-      my = my_thing.new(:bogus)
-      assert_respond_to my, :lazy
-      assert_equal "here ma", my.lazy
+      my_thing = thing.new(:test)
+
+      assert_respond_to my_thing, :lazy
+      assert_equal "here ma", my_thing.lazy
     end
 
     def test_let_is_lazy
-      my_thing = describe MyThing do
+      thing = describe MyThing do
         let(:lazy) { "here ma" }
       end
 
-      my            = my_thing.new(:bogus)
-      first_obj_id  = my.lazy
-      second_obj_id = my.lazy
+      my_thing      = thing.new(:test)
+      first_obj_id  = my_thing.lazy
+      second_obj_id = my_thing.lazy
 
       assert_equal first_obj_id, second_obj_id
     end
