@@ -17,7 +17,7 @@ module Tunit
     end
 
     def test_expect_to_equal
-      self.expectation_count += 1
+     self.expectation_count += 1
       tc.expect(2).to eq 2
     end
 

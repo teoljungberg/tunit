@@ -75,15 +75,15 @@ describe Example do
 
   describe 'passing tests' do
     it 'is very much even' do
-      assert 2.even?
+      expect(2.even?).to eq true
     end
 
     it 'approves of this' do
-      assert_equal "bacon", awesome
+      expect(awesome).to eq "bacon"
     end
 
     it 'passed once more' do
-      assert_includes [1, 2], 2
+      expect([1,2]).to include 2
     end
   end
 
@@ -92,7 +92,7 @@ describe Example do
     end
 
     it 'fails hard' do
-      refute 2.even?
+      expect(1.even?).to eq false
     end
   end
 
@@ -117,35 +117,51 @@ The expectations maps 1-to-1 with the assertions
 ### Assertions
 ```ruby
 expect(2).to eq 2
+# =>
+assert_equal 2, 2
 ```
 
 ```ruby
 expect([1,2]).to include 1
+# =>
+assert_includes [1, 2], 1
 ```
 
 ```ruby
 expect(Class).to respond_to :new
+# =>
+assert_responds_to Class, :new
 ```
 
 ```ruby
 expect("foo").to match /oo/
+# =>
+assert_match /oo/, "foo"
 ```
 
 ### Refutions
 ```ruby
-expect(2).to not_eq 1
+expect(2).to not_eq 2
+# =>
+refute_equal 2, 2
 ```
 
 ```ruby
-expect([1,2]).to not_include 3
+expect([1,2]).to not_include 1
+# =>
+refute_includes [1, 2], 1
 ```
 
 ```ruby
-expect(Class).to not_respond_to :omg
+expect(Class).to not_respond_to :new
+# =>
+refute_responds_to Class, :new
 ```
 
 ```ruby
-expect("foo").to not_match /bar/
+expect("foo").to not_match /oo/
+# =>
+refute_match /oo/, "foo"
 ```
 
 ## Contributing
