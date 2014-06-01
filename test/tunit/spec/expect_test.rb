@@ -78,6 +78,7 @@ module Tunit
       k.run
 
       assert_instance_of NotAnAssertion, k.failure
+      assert_equal "`die` is not a valid expecations", k.failure.message
     end
 
     def test_method_missing_executes_assertions_from_the_caller_class
