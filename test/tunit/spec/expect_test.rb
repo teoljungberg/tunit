@@ -48,21 +48,21 @@ module Tunit
     end
 
     def test_respond_to_missing_maps_expectation_matchers_to_assertions
-      k = Class.new(Spec).new :name
+      k = Class.new(Spec).new :test
 
       assert_respond_to k, :eq
       assert_equal ["assert_equal", 42], k.eq(42)
     end
 
     def test_respond_to_missing_maps_expectation_matchers_to_refutions
-      k = Class.new(Spec).new :name
+      k = Class.new(Spec).new :test
 
       assert_respond_to k, :not_match
       assert_equal ["refute_match", 42], k.not_match(42)
     end
 
     def test_respond_to_missing_only_maps_to_assertions_and_refutions
-      k = Class.new(Spec).new :name
+      k = Class.new(Spec).new :test
 
       refute_respond_to k, :jikes
     end
