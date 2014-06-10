@@ -53,7 +53,7 @@ assert on something else. That's why a `test`-method must have assertions in
 
 ```ruby
 class EmptyTest < Tunit::Test
-  def test_im_going_to_fail
+  def test_im_going_to_be_skipped
   end
 
   def test_so_will_i
@@ -88,9 +88,6 @@ describe Example do
   end
 
   describe 'failing tests' do
-    it 'fails on empty tests' do
-    end
-
     it 'fails hard' do
       expect(1.even?).to eq false
     end
@@ -99,6 +96,9 @@ describe Example do
   describe 'skipps' do
     it 'skippedy skip' do
       skip
+    end
+
+    it 'skips empty tests' do
     end
 
     it 'skips with a message' do
