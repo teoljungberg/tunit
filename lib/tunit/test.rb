@@ -39,16 +39,7 @@ module Tunit
           send name
         end
 
-        if assertions.zero?
-          e = ::Tunit::Empty.new "Empty test, <#{self}>"
-          method_obj = method(name)
-
-          redefine_method e.class, :location do
-            -> { method_obj.source_location.join(":") }
-          end
-
-          fail e
-        end
+        skip "Empty test, <#{self}>" if assertions.zero?
       end
 
       capture_exceptions do
@@ -97,6 +88,14 @@ module Tunit
 
     def capture_exceptions
       yield
+    rescue Skip => e
+      location = method(name).source_location.join(":")
+
+      redefine_method e.class, :location do
+        -> { location }
+      end
+
+      self.failures << e
     rescue Assertion => e
       self.failures << e
     end

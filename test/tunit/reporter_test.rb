@@ -47,11 +47,7 @@ module Tunit
 
     def test_passed_eh_rejects_failing_tests
       reporter.record FailingTest.new.run
-      refute reporter.passed?
-    end
 
-    def test_passed_eh_rejects_skipped_tests
-      reporter.record FailingTest.new(:test_empty).run
       refute reporter.passed?
     end
 
@@ -76,7 +72,7 @@ module Tunit
       reporter.record FailingTest.new(:test_empty).run
       reporter.report
 
-      assert_equal 1, reporter.failures
+      assert_equal 1, reporter.skips
     end
 
     def test_report_collects_skips

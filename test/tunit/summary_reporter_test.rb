@@ -67,9 +67,9 @@ Failed assertion, no message given.
       reporter.report
 
       summary     = reporter.send :summary
-      exp_summary = "1 runs, 0 assertions, 1 failures, 0 skips"
+      exp_summary = /1 runs, 0 assertions, 0 failures, 1 skips/
 
-      assert_equal exp_summary, summary
+      assert_match exp_summary, summary
     end
 
     def test_report_summay_does_not_show_skip_message_if_verbose

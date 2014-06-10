@@ -35,13 +35,13 @@ module Tunit
       assert_equal exp_msg, failure.message
     end
 
-    def test_run_handles_empty_tests
+    def test_run_handles_empty_tests_as_skips
       result  = FailingTest.new(:test_empty).run
 
       exp_msg = "Empty test, <Tunit::TestCase::FailingTest#test_empty>"
       failure = result.failure
 
-      assert_instance_of Tunit::Empty, failure
+      assert_instance_of Tunit::Skip, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -153,7 +153,7 @@ module Tunit
     def test_code_for_empty_test
       result = FailingTest.new(:test_empty).run
 
-      assert_equal "_", result.code
+      assert_equal "S", result.code
     end
 
     def test_location_of_a_failing_test

@@ -22,16 +22,6 @@ module Tunit
     end
   end
 
-  class Empty < Assertion
-    def result_code
-      "_"
-    end
-
-    def result_label
-      "Empty"
-    end
-  end
-
   class Skip < Assertion
     def result_label
       "Skipped"

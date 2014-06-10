@@ -32,7 +32,6 @@ module Tunit
 
       self.total_time   = Time.now - start_time
       self.failures     = total[Assertion].size
-      self.failures    += total[Empty].size
       self.skips        = total[Skip].size
     end
   end

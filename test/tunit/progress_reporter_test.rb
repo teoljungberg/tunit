@@ -29,7 +29,7 @@ module Tunit
     def test_record_empty_tests
       reporter.record FailingTest.new(:test_empty).run
 
-      assert_equal "_", io.string
+      assert_equal "S", io.string
     end
 
     def test_record_can_be_very_verbose
