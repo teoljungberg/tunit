@@ -5,7 +5,7 @@ require 'tunit/progress_reporter'
 module Tunit
   class CompoundReporter < Reporter
     def initialize *reporters
-      super()
+      super
       self.reporters = reporters
     end
     attr_accessor :reporters
