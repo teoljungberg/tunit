@@ -7,7 +7,7 @@ module Tunit
     def location
       last_before_assertion = ""
       backtrace.reverse_each do |line|
-        break if line =~ /in .(assert|refute|skip|raise)/
+        break if line =~ /in .(assert|refute|skip|raise|fail)/
         last_before_assertion = line
       end
       last_before_assertion.sub(/:in .*$/, "")
