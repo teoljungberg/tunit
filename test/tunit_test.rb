@@ -22,10 +22,10 @@ class TunitTest < Tunit::TestCase
     assert_equal "test_pass", Tunit.reporter.reporters.first.options[:filter]
   end
 
-  def test_run_gathers_reporters_under_compound_reporter
+  def test_run_gathers_reporters_under_the_god_reporter
     Tunit.run
 
-    assert_instance_of Tunit::CompoundReporter, Tunit.reporter
+    assert_instance_of Tunit::GodReporter, Tunit.reporter
   end
 
   def test_run_is_happy_with_passes

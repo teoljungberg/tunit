@@ -3,7 +3,7 @@ require 'tunit/summary_reporter'
 require 'tunit/progress_reporter'
 
 module Tunit
-  class CompoundReporter < Reporter
+  class GodReporter < Reporter
     def initialize *reporters
       super
       self.reporters = reporters

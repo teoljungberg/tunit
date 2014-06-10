@@ -1,4 +1,4 @@
-require "tunit/compound_reporter"
+require "tunit/god_reporter"
 require "tunit/version"
 
 require 'optparse'
@@ -33,7 +33,7 @@ module Tunit
   def self.run args = []
     options = process_args! args
 
-    self.reporter = CompoundReporter.new
+    self.reporter = GodReporter.new
     reporter << SummaryReporter.new(options[:io], options)
     reporter << ProgressReporter.new(options[:io], options)
 

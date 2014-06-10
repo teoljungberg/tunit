@@ -1,17 +1,17 @@
 require_relative 'test_case'
-require 'tunit/compound_reporter'
+require 'tunit/god_reporter'
 
 module Tunit
-  class CompoundReporterTest < TestCase
+  class GodReporterTest < TestCase
     def setup
-      self.reporter = CompoundReporter.new
+      self.reporter = GodReporter.new
       self.reporter << SummaryReporter.new(io)
       self.reporter << ProgressReporter.new(io)
     end
     attr_accessor :reporter
 
     def test_shuffle
-      reporter = CompoundReporter.new
+      reporter = GodReporter.new
       assert_empty reporter.reporters
 
       reporter << dummy_reporter
