@@ -1,7 +1,7 @@
 module Tunit
   class Runnable
     def self.runnable_methods
-      raise NotImplementedError, "subclass responsibility"
+      fail NotImplementedError, "subclass responsibility"
     end
 
     def self.runnables

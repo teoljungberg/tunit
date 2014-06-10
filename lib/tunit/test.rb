@@ -16,7 +16,7 @@ module Tunit
       when :alpha
         methods.sort
       else
-        raise "Unknown test_order: #{test_order.inspect}"
+        fail "Unknown test_order: #{test_order.inspect}"
       end
     end
 

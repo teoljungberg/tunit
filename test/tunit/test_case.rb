@@ -86,7 +86,7 @@ module Tunit
       end
 
       def test_error
-        raise NotAnAssertion
+        fail NotAnAssertion
       end
     end
   end
