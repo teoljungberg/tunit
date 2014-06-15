@@ -27,8 +27,6 @@ module Tunit
         name      = "test_%04d_%s" % [ @specs, test_name ]
 
         define_method name, &block
-
-        name
       end
 
       def let name, &block
