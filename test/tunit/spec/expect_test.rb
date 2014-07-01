@@ -70,7 +70,7 @@ module Tunit
     def test_method_missing_fails_if_no_matcher_is_found
       klass = Class.new(Spec) {
         it 'passes' do
-          expect(/oo/).to die "foo"
+          expect(/oo/).to slay "foo"
         end
       }
 
@@ -78,7 +78,7 @@ module Tunit
       k.run
 
       assert_instance_of NotAnAssertion, k.failure
-      assert_equal "`die` is not a valid expecations", k.failure.message
+      assert_equal "`slay` is not a valid expecations", k.failure.message
     end
 
     def test_method_missing_executes_assertions_from_the_caller_class
