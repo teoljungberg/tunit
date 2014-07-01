@@ -75,8 +75,8 @@ module Tunit
       end
 
       my_thing      = thing.new(:test)
-      first_obj_id  = my_thing.lazy
-      second_obj_id = my_thing.lazy
+      first_obj_id  = my_thing.lazy.object_id
+      second_obj_id = my_thing.lazy.object_id
 
       assert_equal first_obj_id, second_obj_id
     end
