@@ -3,7 +3,9 @@ require_relative './test_case'
 module Tunit
   class TestTest < TestCase
     def test_PREFIX
-      assert_equal /^test_/, Test::PREFIX
+      exp_prefix = /^test_/
+
+      assert_equal exp_prefix, Test::PREFIX
     end
 
     def test_runnable_methods
