@@ -2,6 +2,14 @@ require 'tunit/test'
 
 module Tunit
   class Spec < Test
+
+    PREFIX = /^spec_/
+
+    def self.runnable_methods
+      spec_methods = methods_matching PREFIX
+      set_test_order spec_methods
+    end
+
     module DSL
       attr_reader :name
 
@@ -24,7 +32,7 @@ module Tunit
         @specs += 1
 
         test_name = desc.gsub " ", "_"
-        name      = "test_%04d_%s" % [ @specs, test_name ]
+        name      = "#{prefix}_%04d_%s" % [ @specs, test_name ]
 
         define_method name, &block
       end
@@ -56,6 +64,12 @@ module Tunit
         runnable_methods.map { |test|
           send :undef_method, test
         }
+      end
+
+      private
+
+      def prefix
+        PREFIX.source.match(/\^(.*?)_/)[1]
       end
     end
   end

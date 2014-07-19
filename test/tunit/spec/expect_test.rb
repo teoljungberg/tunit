@@ -10,7 +10,7 @@ module Tunit
         end
       }
 
-      k = klass.new "test_0001_passes"
+      k = klass.new "spec_0001_passes"
       k.run
 
       assert_equal 1, k.assertions
@@ -43,7 +43,7 @@ module Tunit
         end
       }
 
-      k = klass.new "test_0001_passes"
+      k = klass.new "spec_0001_passes"
       k.run
     end
 
@@ -74,7 +74,7 @@ module Tunit
         end
       }
 
-      k = klass.new "test_0001_passes"
+      k = klass.new "spec_0001_passes"
       k.run
 
       assert_instance_of NotAnAssertion, k.failure
@@ -88,7 +88,7 @@ module Tunit
         end
       }
 
-      k = klass.new "test_0001_passes"
+      k = klass.new "spec_0001_passes"
       k.run
 
       assert_equal 2, k.assertions
