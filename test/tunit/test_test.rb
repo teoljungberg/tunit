@@ -2,6 +2,10 @@ require_relative './test_case'
 
 module Tunit
   class TestTest < TestCase
+    def test_PREFIX
+      assert_equal /^test_/, Test::PREFIX
+    end
+
     def test_runnable_methods
       assert_includes PassingTest.runnable_methods, "test_pass"
     end

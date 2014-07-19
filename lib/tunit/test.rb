@@ -7,8 +7,10 @@ module Tunit
     include Assertions
     include Hooks
 
+    PREFIX = /^test_/
+
     def self.runnable_methods
-      methods = methods_matching(/^test_/)
+      methods = methods_matching(PREFIX)
       case test_order
       when :random
         max = methods.size
