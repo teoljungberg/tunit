@@ -2,14 +2,6 @@ require 'tunit/test'
 
 module Tunit
   class Spec < Test
-
-    PREFIX = /^spec_/
-
-    def self.runnable_methods
-      spec_methods = methods_matching PREFIX
-      set_test_order spec_methods
-    end
-
     module DSL
       attr_reader :name
 
