@@ -3,6 +3,10 @@ require 'tunit/runnable'
 
 module Tunit
   class RunnableTest < TestCase
+    def setup
+      Runnable.runnables = PassingTest
+    end
+
     def test_runnable_methods_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do
         Runnable.runnable_methods
@@ -20,14 +24,9 @@ module Tunit
     end
 
     def test_runnables_custom
-      prev_runnables = Runnable.runnables
-
       Runnable.runnables = "omg"
-      assert_includes Runnable.runnables, "omg"
 
-      # reset Runnable.runnables to avoid mishaps, teardown didn't pull through
-    ensure
-      Runnable.runnables = prev_runnables
+      assert_includes Runnable.runnables, "omg"
     end
 
     def test_run_runs_all_tests_with_a_given_reporter
