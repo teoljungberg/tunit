@@ -73,5 +73,25 @@ module Tunit
       self.assertion_count = 2
       tc.refute_match(/foo/, "bar")
     end
+
+    def test_assert_raises
+      self.assertion_count = 1
+
+      tc.assert_raises NoMethodError do
+        tc.unexisting_method
+      end
+    end
+
+    def test_assert_raises_returns_the_message
+      self.assertion_count = 1
+
+      e = tc.assert_raises NoMethodError do
+        tc.unexisting_method
+      end
+
+      exp_msg = /undefined method `unexisting_method'/
+
+      assert_match exp_msg, e.message
+    end
   end
 end

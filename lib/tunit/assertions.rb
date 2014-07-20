@@ -76,5 +76,15 @@ module Tunit
       assert_respond_to string, :=~
       refute string =~ regexp
     end
+
+    def assert_raises *exceptions
+      msg = exceptions.pop if String === exceptions.last
+
+      yield
+    rescue Exception => e
+      expected = exceptions.any? {|ex| ex === e }
+      assert expected, msg
+      e
+    end
   end
 end
