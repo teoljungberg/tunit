@@ -40,7 +40,7 @@ module Tunit
         @children ||= []
       end
 
-      def create name
+      def create_sub_klass name
         klass = Class.new(self) {
           @name = name
 
