@@ -61,7 +61,8 @@ module Tunit
       private
 
       def prefix
-        PREFIX.source.match(/\^(.*?)_/)[1]
+        prefix_without_regexp = /\^(.*?)_/
+        PREFIX.source.match(prefix_without_regexp)[1]
       end
     end
   end
