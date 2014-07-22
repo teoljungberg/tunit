@@ -79,10 +79,10 @@ module Tunit
 
     def test_run_execs_setup_before_each_run
       PassingTest.send(:define_method, :setup) {
-        fail NotImplementedError, "setup dispatch"
+        fail Exception, "setup dispatch"
       }
 
-      e = assert_raises NotImplementedError do
+      e = assert_raises Exception do
         PassingTest.new.run
       end
 
@@ -95,10 +95,10 @@ module Tunit
 
     def test_run_execs_teardown_after_each_run
       PassingTest.send(:define_method, :teardown) {
-        fail NotImplementedError, "teardown dispatch"
+        fail Exception, "teardown dispatch"
       }
 
-      e = assert_raises NotImplementedError do
+      e = assert_raises Exception do
         PassingTest.new.run
       end
 
