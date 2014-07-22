@@ -7,6 +7,19 @@ module Tunit
       Runnable.runnables = PassingTest
     end
 
+    def dummy_reporter
+      @dummy_reporter ||= Class.new {
+        def initialize
+          self.assertions = 0
+        end
+        attr_accessor :assertions
+
+        def record(*)
+          self.assertions += 1
+        end
+      }.new
+    end
+
     def test_runnable_methods_is_a_subclass_responsibility
       e = assert_raises NotImplementedError do
         Runnable.runnable_methods

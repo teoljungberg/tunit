@@ -10,11 +10,11 @@ module Tunit
     end
     attr_accessor :reporter
 
-    def test_shuffle
+    def test_shuffle_operator
       reporter = GodReporter.new
       assert_empty reporter.reporters
 
-      reporter << dummy_reporter
+      reporter << :some_reporter
       refute_empty reporter.reporters
     ensure
       reporter.reporters.clear

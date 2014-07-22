@@ -12,19 +12,6 @@ module Tunit
       @io ||= StringIO.new ""
     end
 
-    def dummy_reporter
-      @dummy_reporter ||= Class.new {
-        def initialize
-          self.assertions = 0
-        end
-        attr_accessor :assertions
-
-        def record(*)
-          self.assertions += 1
-        end
-      }.new
-    end
-
     private
 
     def truncate_absolut_path str
