@@ -12,6 +12,10 @@ module Tunit
       @io ||= StringIO.new ""
     end
 
+    def teardown
+      Runnable.runnables.clear
+    end
+
     private
 
     def truncate_absolut_path str

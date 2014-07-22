@@ -10,6 +10,7 @@ module Tunit
     attr_accessor :tc, :assertion_count
 
     def teardown
+      super
       assert_equal assertion_count, tc.assertions,
         "Expected #{assertion_count} assertions to have been made to #{tc}, but was #{tc.assertions}"
     end
