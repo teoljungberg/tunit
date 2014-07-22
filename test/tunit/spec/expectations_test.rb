@@ -19,41 +19,49 @@ module Tunit
 
     def test_expect_to_equal
       self.expectation_count = 1
+
       tc.expect(2).to eq 2
     end
 
     def test_expect_to_not_equal
       self.expectation_count = 1
+
       tc.expect(1).to not_eq 2
     end
 
     def test_expect_to_match
       self.expectation_count = 2
+
       tc.expect("foo").to match(/oo/)
     end
 
     def test_expect_to_not_match
       self.expectation_count = 2
+
       tc.expect("foo").to not_match(/bar/)
     end
 
     def test_expect_to_include
       self.expectation_count = 2
+
       tc.expect([1,2]).to include 1
     end
 
     def test_expect_to_not_include
       self.expectation_count = 2
+
       tc.expect([1]).to not_include 2
     end
 
     def test_expect_to_respond_to
       self.expectation_count = 1
+
       tc.expect(String).to respond_to :=~
     end
 
     def test_expect_to_not_respond_to
       self.expectation_count = 1
+
       tc.expect(String).to not_respond_to :omg
     end
   end
