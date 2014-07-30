@@ -93,6 +93,29 @@ module Tunit
       PassingTest.send(:define_method, :setup) { }
     end
 
+    def test_run_execs_before_and_after_setup
+      setup_order = []
+
+      tc = Class.new PassingTest do
+        define_method :setup do
+          setup_order << :setup
+        end
+
+        define_method :before_setup do
+          setup_order << :before_setup
+        end
+
+        define_method :after_setup do
+          setup_order << :after_setup
+        end
+      end
+
+      tc.new(:test_pass).run
+      exp_order = [:before_setup, :setup, :after_setup]
+
+      assert_equal exp_order, setup_order
+    end
+
     def test_run_execs_teardown_after_each_run
       PassingTest.send(:define_method, :teardown) {
         fail Exception, "teardown dispatch"
@@ -107,6 +130,52 @@ module Tunit
     ensure
       PassingTest.send :undef_method, :teardown
       PassingTest.send(:define_method, :teardown) { }
+    end
+
+    def test_run_execs_before_and_after_teardown
+      teardown_order = []
+
+      tc = Class.new PassingTest do
+        define_method :teardown do
+          teardown_order << :teardown
+        end
+
+        define_method :before_teardown do
+          teardown_order << :before_teardown
+        end
+
+        define_method :after_teardown do
+          teardown_order << :after_teardown
+        end
+      end
+
+      tc.new(:test_pass).run
+      exp_order = [:before_teardown, :teardown, :after_teardown]
+
+      assert_equal exp_order, teardown_order
+    end
+
+    def test_run_captures_any_errors_and_skips_the_hook_that_raised_the_error
+      teardown_order = []
+
+      tc = Class.new PassingTest do
+        define_method :teardown do
+          teardown_order << :teardown
+        end
+
+        define_method :before_teardown do
+          raise Skip
+        end
+
+        define_method :after_teardown do
+          teardown_order << :after_teardown
+        end
+      end
+
+      tc.new(:test_pass).run
+      exp_order = [:teardown, :after_teardown]
+
+      assert_equal exp_order, teardown_order
     end
 
     def test_passed_eh

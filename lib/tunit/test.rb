@@ -35,15 +35,17 @@ module Tunit
     def run
       capture_exceptions do
         time_it do
-          setup
+          before_setup; setup; after_setup
           send name
         end
 
         skip "Empty test, <#{self}>" if assertions.zero?
       end
 
-      capture_exceptions do
-        teardown
+      %w(before_teardown teardown after_teardown).each do |hook|
+        capture_exceptions do
+          send hook
+        end
       end
       self
     end
