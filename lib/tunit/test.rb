@@ -7,17 +7,11 @@ module Tunit
     include Assertions
     include Hooks
 
+    PREFIX = /^test_/
+
     def self.runnable_methods
-      methods = methods_matching(/^test_/)
-      case test_order
-      when :random
-        max = methods.size
-        methods.sort.sort_by { rand max }
-      when :alpha
-        methods.sort
-      else
-        fail "Unknown test_order: #{test_order.inspect}"
-      end
+      test_methods = methods_matching PREFIX
+      set_test_order test_methods
     end
 
     # Randomize tests by default
@@ -100,6 +94,18 @@ module Tunit
       self.failures << e
     rescue Assertion => e
       self.failures << e
+    end
+
+    def self.set_test_order test_methods
+      case test_order
+      when :random
+        max = test_methods.size
+        test_methods.sort.sort_by { rand max }
+      when :alpha
+        test_methods.sort
+      else
+        fail "Unknown test_order: #{test_order.inspect}"
+      end
     end
 
     def redefine_method klass, method

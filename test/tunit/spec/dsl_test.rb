@@ -10,7 +10,7 @@ module Tunit
         it "does the thing" do end
       }
 
-      assert_includes klass.runnable_methods, "test_0001_does_the_thing"
+      assert_includes klass.runnable_methods, "spec_0001_does_the_thing"
     end
 
     def test_before_is_converted_to_setup
@@ -40,7 +40,7 @@ module Tunit
 
       assert          my_thing < Tunit::Test
       assert          my_thing < Tunit::Runnable
-      assert_includes my_thing.runnable_methods, "test_0001_dances_all_night_long"
+      assert_includes my_thing.runnable_methods, "spec_0001_dances_all_night_long"
     end
 
     def test_describe_can_be_nested
@@ -55,7 +55,7 @@ module Tunit
       child = my_thing.children.first
 
       assert_equal "#dance!", child.name
-      assert_includes child.runnable_methods, "test_0001_busts_the_moves"
+      assert_includes child.runnable_methods, "spec_0001_busts_the_moves"
     end
 
     def test_let_creates_attr_accessors

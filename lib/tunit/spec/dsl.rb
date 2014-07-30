@@ -24,7 +24,7 @@ module Tunit
         @specs += 1
 
         test_name = desc.gsub " ", "_"
-        name      = "test_%04d_%s" % [ @specs, test_name ]
+        name      = "#{prefix}_%04d_%s" % [ @specs, test_name ]
 
         define_method name, &block
       end
@@ -40,7 +40,7 @@ module Tunit
         @children ||= []
       end
 
-      def create name
+      def create_sub_klass name
         klass = Class.new(self) {
           @name = name
 
@@ -56,6 +56,13 @@ module Tunit
         runnable_methods.map { |test|
           send :undef_method, test
         }
+      end
+
+      private
+
+      def prefix
+        prefix_without_regexp = /\^(.*?)_/
+        PREFIX.source.match(prefix_without_regexp)[1]
       end
     end
   end
