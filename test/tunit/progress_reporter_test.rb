@@ -4,9 +4,9 @@ require 'tunit/progress_reporter'
 module Tunit
   class ProgressReporterTest < TestCase
     def setup
-      self.reporter = ProgressReporter.new io
+     @reporter = ProgressReporter.new io
     end
-    attr_accessor :reporter
+    attr_reader :reporter
 
     def test_record_passing_tests
       reporter.record PassingTest.new.run

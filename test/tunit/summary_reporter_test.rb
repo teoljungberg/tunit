@@ -4,9 +4,9 @@ require 'tunit/summary_reporter'
 module Tunit
   class SummaryReporterTest < TestCase
     def setup
-      self.reporter = SummaryReporter.new io
+      @reporter = SummaryReporter.new io
     end
-    attr_accessor :reporter
+    attr_reader :reporter
 
     def test_start_returns_run_msg
       reporter.start

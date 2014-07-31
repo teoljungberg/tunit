@@ -4,9 +4,9 @@ require 'tunit/reporter'
 module Tunit
   class ReporterTest < TestCase
     def setup
-      self.reporter = Reporter.new
+      @reporter = Reporter.new
     end
-    attr_accessor :reporter
+    attr_reader :reporter
 
     def test_start_time
       reporter.start

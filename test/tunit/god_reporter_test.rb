@@ -4,11 +4,11 @@ require 'tunit/god_reporter'
 module Tunit
   class GodReporterTest < TestCase
     def setup
-      self.reporter = GodReporter.new
-      self.reporter << SummaryReporter.new(io)
-      self.reporter << ProgressReporter.new(io)
+      @reporter = GodReporter.new
+      @reporter << SummaryReporter.new(io)
+      @reporter << ProgressReporter.new(io)
     end
-    attr_accessor :reporter
+    attr_reader :reporter
 
     def test_shuffle_operator
       reporter = GodReporter.new
@@ -29,14 +29,6 @@ module Tunit
 
     def test_reporters
       refute_empty reporter.reporters
-    end
-
-    def test_reporters_equals
-      prev_reporters = reporter.reporters
-      reporter.reporters = :omg
-      assert_equal :omg, reporter.reporters
-    ensure
-      reporter.reporters = prev_reporters
     end
 
     def test_passed_eh

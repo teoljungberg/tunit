@@ -6,30 +6,30 @@ module Tunit
   class GodReporter < Reporter
     def initialize *reporters
       super
-      self.reporters = reporters
+      @reporters = reporters
     end
-    attr_accessor :reporters
+    attr_reader :reporters
 
     def << reporter
-      self.reporters << reporter
+      reporters << reporter
     end
 
     def passed?
-      self.reporters.all?(&:passed?)
+      reporters.all?(&:passed?)
     end
 
     def start
-      self.reporters.each(&:start)
+      reporters.each(&:start)
     end
 
     def record result
-      self.reporters.each do |reporter|
+      reporters.each do |reporter|
         reporter.record result
       end
     end
 
     def report
-      self.reporters.each(&:report)
+      reporters.each(&:report)
     end
   end
 end

@@ -5,9 +5,9 @@ require 'tunit/test'
 module Tunit
   class AssertionErrorTest < TestCase
     def setup
-      self.assertion_error = Assertion.new
+      @assertion_error = Assertion.new
     end
-    attr_accessor :assertion_error
+    attr_reader :assertion_error
 
     def test_error
       assert_instance_of Assertion, assertion_error.error
@@ -32,9 +32,9 @@ module Tunit
 
   class SkipErrorTest < TestCase
     def setup
-      self.assertion_error = Skip.new
+      @assertion_error = Skip.new
     end
-    attr_accessor :assertion_error
+    attr_reader :assertion_error
 
     def test_error
       assert_instance_of Skip, assertion_error.error
@@ -59,9 +59,9 @@ module Tunit
 
   class ErrorErrorTest < TestCase
     def setup
-      self.assertion_error = Error.new
+      @assertion_error = Error.new
     end
-    attr_accessor :assertion_error
+    attr_reader :assertion_error
 
     def test_error
       assert_instance_of Error, assertion_error.error
