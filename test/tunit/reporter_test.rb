@@ -82,5 +82,13 @@ module Tunit
 
       assert_equal 1, reporter.skips
     end
+
+    def test_reporter_collects_exceptions_as_errors
+      reporter.start
+      reporter.record ErrorTest.new(:test_exception).run
+      reporter.report
+
+      assert_equal 1, reporter.errors
+    end
   end
 end

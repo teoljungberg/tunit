@@ -43,8 +43,8 @@ module Tunit
       extra = ""
       extra << SKIP_MSG if results.any?(&:skipped?) && !options[:verbose]
 
-      "%d runs, %d assertions, %d failures, %d skips%s" %
-        [count, assertions, failures, skips, extra]
+      "%d runs, %d assertions, %d failures, %d errors, %d skips%s" %
+        [count, assertions, failures, errors, skips, extra]
     end
   end
 end

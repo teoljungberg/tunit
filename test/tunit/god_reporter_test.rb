@@ -61,7 +61,7 @@ Run options: {}
 
 Finished in 0.000000s, 00000.0000 runs/s, 00000.0000 assertions/s.
 
-0 runs, 0 assertions, 0 failures, 0 skips
+0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
 EOS
 
       assert_equal exp_report, zeroify_time(io.string)

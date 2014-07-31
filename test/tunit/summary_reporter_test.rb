@@ -31,7 +31,7 @@ Run options: {}
       assert_match exp_stats, zeroify_time(stats)
     end
 
-    def test_report_returns_errors
+    def test_report_returns_failed_assertions
       reporter.start
       reporter.record FailingTest.new.run
       reporter.report
@@ -56,7 +56,7 @@ Failed assertion, no message given.
       reporter.report
 
       summary     = reporter.send :summary
-      exp_summary = "1 runs, 1 assertions, 0 failures, 0 skips"
+      exp_summary = "1 runs, 1 assertions, 0 failures, 0 errors, 0 skips"
 
       assert_equal exp_summary, summary
     end
@@ -67,7 +67,18 @@ Failed assertion, no message given.
       reporter.report
 
       summary     = reporter.send :summary
-      exp_summary = /1 runs, 0 assertions, 0 failures, 1 skips/
+      exp_summary = /1 runs, 0 assertions, 0 failures, 0 errors, 1 skips/
+
+      assert_match exp_summary, summary
+    end
+
+    def test_report_returns_errors_and_exceptions
+      reporter.start
+      reporter.record ErrorTest.new(:test_exception).run
+      reporter.report
+
+      summary     = reporter.send :summary
+      exp_summary = /1 runs, 0 assertions, 0 failures, 1 errors, 0 skips/
 
       assert_match exp_summary, summary
     end
