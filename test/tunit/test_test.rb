@@ -71,10 +71,10 @@ module Tunit
       assert_equal exp_msg, failure.message
     end
 
-    def test_run_passes_through_errors
-      assert_raises NoMethodError do
-        PassingTest.new(:non_existing_method).run
-      end
+    def test_run_saves_exceptions_as_failures
+      result = PassingTest.new(:non_existing_method).run
+
+      assert_kind_of NoMethodError, result.failure
     end
 
     def test_run_times_each_run
@@ -84,19 +84,17 @@ module Tunit
     end
 
     def test_run_execs_setup_before_each_run
-      PassingTest.send(:define_method, :setup) {
-        fail Exception, "setup dispatch"
-      }
+      exp_calls = []
 
-      e = assert_raises Exception do
-        PassingTest.new.run
+      tc = Class.new PassingTest do
+        define_method :setup do
+          exp_calls << :setup
+        end
       end
 
-      assert_equal "setup dispatch", e.message
+      tc.new.run
 
-    ensure
-      PassingTest.send :undef_method, :setup
-      PassingTest.send(:define_method, :setup) { }
+      assert_equal [:setup], exp_calls
     end
 
     def test_run_execs_before_and_after_setup
@@ -123,19 +121,17 @@ module Tunit
     end
 
     def test_run_execs_teardown_after_each_run
-      PassingTest.send(:define_method, :teardown) {
-        fail Exception, "teardown dispatch"
-      }
+      exp_calls = []
 
-      e = assert_raises Exception do
-        PassingTest.new.run
+      tc = Class.new PassingTest do
+        define_method :teardown do
+          exp_calls << :teardown
+        end
       end
 
-      assert_equal "teardown dispatch", e.message
+      tc.new.run
 
-    ensure
-      PassingTest.send :undef_method, :teardown
-      PassingTest.send(:define_method, :teardown) { }
+      assert_equal [:teardown], exp_calls
     end
 
     def test_run_execs_before_and_after_teardown
@@ -170,7 +166,7 @@ module Tunit
         end
 
         define_method :before_teardown do
-          raise Skip
+          raise "hell"
         end
 
         define_method :after_teardown do
