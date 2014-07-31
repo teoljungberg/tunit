@@ -1,4 +1,4 @@
-require 'tunit/test_case'
+require 'test_helper'
 require 'tunit/spec'
 
 module Tunit

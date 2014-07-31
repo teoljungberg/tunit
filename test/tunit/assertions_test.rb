@@ -1,5 +1,4 @@
-require_relative 'test_case'
-require 'tunit/test'
+require 'test_helper'
 
 module Tunit
   class AssertionsTest < TestCase

@@ -1,4 +1,4 @@
-require_relative 'tunit/test_case'
+require 'test_helper'
 require 'tunit'
 
 class TunitTest < Tunit::TestCase

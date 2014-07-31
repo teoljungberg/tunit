@@ -19,7 +19,7 @@ module Tunit
     private
 
     def truncate_absolut_path str
-      str.gsub(%r{\[.*(test/tunit/test_case.rb.*)\]}, '[\1]')
+      str.gsub(%r{\[.*(test/test_helper.rb.*)\]}, '[\1]')
     end
 
     def remove_line_numbers str

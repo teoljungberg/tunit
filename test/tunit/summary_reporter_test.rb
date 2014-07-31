@@ -1,4 +1,4 @@
-require_relative 'test_case'
+require 'test_helper'
 require 'tunit/summary_reporter'
 
 module Tunit
@@ -40,7 +40,7 @@ Run options: {}
       exp_aggregated_results = <<-EOS
 
   1) Failure:
-Tunit::TestCase::FailingTest#test_fail [test/tunit/test_case.rb:LINE]:
+Tunit::TestCase::FailingTest#test_fail [test/test_helper.rb:LINE]:
 Failed assertion, no message given.
 
       EOS

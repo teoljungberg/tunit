@@ -1,4 +1,4 @@
-require_relative '../test_case'
+require 'test_helper'
 require 'tunit/spec'
 
 MyThing = Class.new

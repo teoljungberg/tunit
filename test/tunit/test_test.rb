@@ -1,4 +1,4 @@
-require_relative './test_case'
+require_relative '../test_helper'
 
 module Tunit
   class TestTest < TestCase
@@ -233,7 +233,7 @@ module Tunit
 
     def test_location_of_a_failing_test
       result       = FailingTest.new(:test_fail).run
-      exp_location = %r(Tunit::TestCase::FailingTest#test_fail \[test/tunit/test_case.rb:\d{1,}\])
+      exp_location = %r(Tunit::TestCase::FailingTest#test_fail \[test/test_helper.rb:\d{1,}\])
 
       assert_match exp_location, truncate_absolut_path(result.location)
     end
@@ -248,7 +248,7 @@ module Tunit
 
     def test_to_s_returns_the_failing_test
       result    = FailingTest.new(:test_fail).run
-      exp_match = %r(Tunit::TestCase::FailingTest#test_fail \[test/tunit/test_case.rb:\d{1,}\])
+      exp_match = %r(Tunit::TestCase::FailingTest#test_fail \[test/test_helper.rb:\d{1,}\])
 
       assert_match exp_match, truncate_absolut_path(result.to_s)
     end
