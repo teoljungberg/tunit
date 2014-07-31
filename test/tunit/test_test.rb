@@ -74,7 +74,8 @@ module Tunit
     def test_run_saves_exceptions_as_failures
       result = PassingTest.new(:non_existing_method).run
 
-      assert_kind_of NoMethodError, result.failure
+      assert_kind_of UnexpectedError, result.failure
+      assert_kind_of NoMethodError, result.failure.exception
     end
 
     def test_run_times_each_run
