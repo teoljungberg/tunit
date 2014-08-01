@@ -94,6 +94,8 @@ module Tunit
       self.failures << e
     rescue Assertion => e
       self.failures << e
+    rescue Exception => e
+      self.failures << UnexpectedError.new(e)
     end
 
     def self.set_test_order test_methods

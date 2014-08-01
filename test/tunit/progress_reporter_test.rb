@@ -32,6 +32,18 @@ module Tunit
       assert_equal "S", io.string
     end
 
+    def test_record_errors
+      reporter.record ErrorTest.new(:test_error).run
+
+      assert_equal "E", io.string
+    end
+
+    def test_record_exceptions_as_errors
+      reporter.record ErrorTest.new(:test_exception).run
+
+      assert_equal "E", io.string
+    end
+
     def test_record_can_be_very_verbose
       reporter = ProgressReporter.new io, verbose: true
       reporter.record PassingTest.new(:test_pass).run

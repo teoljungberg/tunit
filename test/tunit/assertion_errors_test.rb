@@ -84,4 +84,42 @@ module Tunit
       assert_equal "Error", assertion_error.result_label
     end
   end
+
+  class UnexpectedErrorTest < TestCase
+    def raised_error
+      raise "hell"
+    rescue => e
+      e
+    end
+
+    def setup
+      @assertion_error = UnexpectedError.new raised_error
+    end
+    attr_reader :assertion_error
+
+    def test_exception
+      assert_instance_of RuntimeError, assertion_error.exception
+    end
+
+    def test_error
+      assert_instance_of UnexpectedError, assertion_error.error
+    end
+
+    def test_location
+      result          = ErrorTest.new(:test_exception).run
+      assertion_error = result.failure
+      exp_location    = %r(test/test_helper.rb:\d{1,})
+
+      assert_instance_of UnexpectedError, result.failure
+      assert_match exp_location, assertion_error.location
+    end
+
+    def test_result_code
+      assert_equal "E", assertion_error.result_code
+    end
+
+    def test_result_label
+      assert_equal "Error", assertion_error.result_label
+    end
+  end
 end
