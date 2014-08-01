@@ -18,7 +18,7 @@ module Tunit
 
     private
 
-    def truncate_absolut_path str
+    def truncate_absolute_path str
       str.gsub(%r{\[.*(test/test_helper.rb.*)\]}, '[\1]')
     end
 

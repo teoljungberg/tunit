@@ -46,7 +46,7 @@ Failed assertion, no message given.
       EOS
 
       assert_equal exp_aggregated_results, remove_line_numbers(
-        truncate_absolut_path(aggregated_results)
+        truncate_absolute_path(aggregated_results)
       )
     end
 
