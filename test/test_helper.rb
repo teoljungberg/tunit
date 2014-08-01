@@ -79,6 +79,10 @@ module Tunit
       def test_error
         fail NotAnAssertion
       end
+
+      def test_exception
+        raise "hell"
+      end
     end
   end
 end
