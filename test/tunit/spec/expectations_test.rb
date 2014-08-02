@@ -64,5 +64,14 @@ module Tunit
 
       tc.expect(String).to not_respond_to :omg
     end
+
+    def test_expect_to_raise
+      skip "Implement me"
+      self.expectation_count = 1
+
+      tc.expect {
+        tc.i_dont_exist
+      }.to_raise NoMethodError
+    end
   end
 end
