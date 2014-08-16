@@ -15,8 +15,8 @@ class TunitTest < Tunit::TestCase
   end
 
   def test_run_processes_arguments
-    self.class.send :const_set, :ARGV,  ["--verbose", "-n", "test_pass"]
-    Tunit.run ARGV
+    options = ["--verbose", "-n", "test_pass"]
+    Tunit.run options
 
     assert Tunit.reporter.reporters.first.options[:verbose]
     assert_equal "test_pass", Tunit.reporter.reporters.first.options[:filter]
