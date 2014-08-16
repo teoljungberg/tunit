@@ -2,7 +2,7 @@ require 'tunit/test'
 require 'abbrev'
 
 module Tunit
-  class Spec < Test
+  class Spec
     def expect value
       Expect.new value, self
     end
