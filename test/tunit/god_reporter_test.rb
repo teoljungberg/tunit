@@ -16,8 +16,6 @@ module Tunit
 
       reporter << :some_reporter
       refute_empty reporter.reporters
-    ensure
-      reporter.reporters.clear
     end
 
     def test_start
