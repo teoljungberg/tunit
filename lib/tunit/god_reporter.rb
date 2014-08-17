@@ -4,9 +4,9 @@ require 'tunit/progress_reporter'
 
 module Tunit
   class GodReporter < Reporter
-    def initialize *reporters
+    def initialize *args
       super
-      @reporters = reporters
+      @reporters = []
     end
     attr_reader :reporters
 

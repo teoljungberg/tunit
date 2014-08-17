@@ -33,7 +33,7 @@ module Tunit
   def self.run args = []
     options = process_args! args
 
-    self.reporter = GodReporter.new
+    self.reporter = GodReporter.new(options[:io], options)
     reporter << SummaryReporter.new(options[:io], options)
     reporter << ProgressReporter.new(options[:io], options)
 

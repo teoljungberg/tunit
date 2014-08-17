@@ -17,9 +17,10 @@ class TunitTest < Tunit::TestCase
   def test_run_processes_arguments
     options = ["--verbose", "-n", "test_pass"]
     Tunit.run options
+    reporter = Tunit.reporter
 
-    assert Tunit.reporter.reporters.first.options[:verbose]
-    assert_equal "test_pass", Tunit.reporter.reporters.first.options[:filter]
+    assert reporter.options[:verbose]
+    assert_equal "test_pass", reporter.options[:filter]
   end
 
   def test_run_gathers_reporters_under_the_god_reporter
