@@ -9,7 +9,7 @@ module Tunit
     end
 
     def self.runnables= runnable
-      @@runnables = [runnable].flatten
+      @@runnables = Array(runnable)
     end
 
     def self.inherited klass

@@ -39,7 +39,7 @@ module Tunit
     def test_runnables_custom
       Runnable.runnables = "omg"
 
-      assert_includes Runnable.runnables, "omg"
+      assert_equal ["omg"], Runnable.runnables
     end
 
     def test_run_runs_all_tests_with_a_given_reporter
