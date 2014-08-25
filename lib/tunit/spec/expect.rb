@@ -25,7 +25,7 @@ module Tunit
           if assertion
             [assertion, args.shift]
           else
-            fail NotAnAssertion, "`#{method}` is not a valid expecations"
+            fail NotAnAssertion, "`#{method}` is not a valid expectation"
           end
         end
 
