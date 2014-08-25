@@ -1,3 +1,4 @@
+require 'tunit/test'
 require 'tunit/spec/dsl'
 require 'tunit/spec/expect'
 

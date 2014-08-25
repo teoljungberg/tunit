@@ -1,5 +1,3 @@
-require 'tunit/test'
-
 module Kernel
   # Override describe to avoid warnings and collisions with minitest/spec
   alias_method :_old_describe, :describe if defined? Minitest

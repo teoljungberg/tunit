@@ -1,4 +1,3 @@
-require 'tunit/test'
 require 'abbrev'
 
 module Tunit
