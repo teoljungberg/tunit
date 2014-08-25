@@ -15,7 +15,10 @@ module Tunit
       attr_accessor :value, :klass
 
       def to matcher
-        klass.send matcher.shift, value.call, matcher.shift
+        assertion, real_value = matcher
+        exp_value             = value.call
+
+        klass.send assertion, exp_value, real_value
       end
 
       module Expectations
