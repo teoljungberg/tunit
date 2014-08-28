@@ -11,7 +11,7 @@ module Kernel
                     Tunit::Spec
                   end
 
-    klass = super_klass.create_sub_klass desc
+    klass = super_klass.send(:create_sub_klass, desc)
     klass.class_eval(&block)
     klass
   end
@@ -58,6 +58,8 @@ module Tunit
         @children ||= []
       end
 
+      private
+
       def create_sub_klass name
         klass = Class.new(self) {
           @name = name
@@ -75,8 +77,6 @@ module Tunit
           send :undef_method, test
         }
       end
-
-      private
 
       def prefix
         prefix_without_regexp = /\^(.*?)_/
