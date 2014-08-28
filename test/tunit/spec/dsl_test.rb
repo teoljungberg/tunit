@@ -13,6 +13,14 @@ module Tunit
       assert_includes klass.runnable_methods, "spec_0001_does_the_thing"
     end
 
+    def test_it_blocks_does_not_require_a_desc
+      klass = Class.new(Spec) {
+        it do end
+      }
+
+      assert_equal ["spec_0001_blank"], klass.runnable_methods
+    end
+
     def test_before_is_converted_to_setup
       klass = Class.new(Spec)
       klass.before { "here!" }

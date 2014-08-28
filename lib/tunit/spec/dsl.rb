@@ -35,7 +35,7 @@ module Tunit
         end
       end
 
-      def it desc, &block
+      def it desc = "blank", &block
         block ||= -> { skip "(no tests defined)" }
 
         @specs ||= 0
