@@ -8,6 +8,11 @@ module Tunit
       assert_equal exp_prefix, Test::PREFIX
     end
 
+    def test_TEARDOWN_HOOKS
+      assert_equal %w(before_teardown teardown after_teardown),
+        Test::TEARDOWN_HOOKS
+    end
+
     def test_runnable_methods
       assert_includes PassingTest.runnable_methods, "test_pass"
     end

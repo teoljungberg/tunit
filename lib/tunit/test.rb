@@ -36,7 +36,7 @@ module Tunit
         skip "Empty test, <#{self}>" if assertions.zero?
       end
 
-      %w(before_teardown teardown after_teardown).each do |hook|
+      TEARDOWN_HOOKS.each do |hook|
         capture_exceptions do
           send hook
         end

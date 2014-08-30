@@ -1,5 +1,7 @@
 module Tunit
   module Hooks
+    TEARDOWN_HOOKS = %w(before_teardown teardown after_teardown)
+
     # Runs before each test
     def setup
     end
