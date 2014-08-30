@@ -88,5 +88,24 @@ module Tunit
 
       assert_equal first_obj_id, second_obj_id
     end
+
+    def test_name
+      thing = describe MyThing do
+        let(:lazy) { "here ma" }
+      end
+
+      my_thing = thing.new(:test)
+
+      assert_equal MyThing, thing.name
+      assert_equal :test,   my_thing.name
+    end
+
+    def test_to_s
+      thing = describe MyThing do
+        let(:lazy) { "here ma" }
+      end
+
+      assert_equal thing.name, thing.to_s
+    end
   end
 end

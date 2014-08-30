@@ -58,6 +58,10 @@ module Tunit
         @children ||= []
       end
 
+      def to_s
+        name
+      end
+
       private
 
       def create_sub_klass name
