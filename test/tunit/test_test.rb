@@ -44,7 +44,7 @@ module Tunit
     def test_run_handles_empty_tests_as_skips
       result  = FailingTest.new(:test_empty).run
 
-      exp_msg = "Empty test, <Tunit::TestCase::FailingTest#test_empty>"
+      exp_msg = "Empty test, <Tunit::FailingTest#test_empty>"
       failure = result.failure
 
       assert_instance_of Tunit::Skip, failure
@@ -230,14 +230,14 @@ module Tunit
 
     def test_location_of_a_failing_test
       result       = FailingTest.new(:test_fail).run
-      exp_location = %r(Tunit::TestCase::FailingTest#test_fail \[test/test_helper.rb:\d{1,}\])
+      exp_location = %r(Tunit::FailingTest#test_fail \[test/sample/tests.rb:\d{1,}\])
 
       assert_match exp_location, truncate_absolute_path(result.location)
     end
 
     def test_to_s_returns_the_klass_and_test
       result = PassingTest.new(:test_pass).run
-      exp_klass_and_test = "Tunit::TestCase::PassingTest#test_pass"
+      exp_klass_and_test = "Tunit::PassingTest#test_pass"
 
       assert_equal exp_klass_and_test, result.to_s
       assert_equal result.to_s, result.location
@@ -245,7 +245,7 @@ module Tunit
 
     def test_to_s_returns_the_failing_test
       result    = FailingTest.new(:test_fail).run
-      exp_match = %r(Tunit::TestCase::FailingTest#test_fail \[test/test_helper.rb:\d{1,}\])
+      exp_match = %r(Tunit::FailingTest#test_fail \[test/sample/tests.rb:\d{1,}\])
 
       assert_match exp_match, truncate_absolute_path(result.to_s)
     end

@@ -6,6 +6,8 @@ require "minitest/autorun"
 require "tunit/test"
 require "stringio"
 
+require "sample/tests"
+
 module Tunit
   class TestCase < Minitest::Test
     def io
@@ -19,7 +21,7 @@ module Tunit
     private
 
     def truncate_absolute_path str
-      str.gsub(%r{\[.*(test/test_helper.rb.*)\]}, '[\1]')
+      str.gsub(%r{\[.*(test/sample/.*.rb.*)\]}, '[\1]')
     end
 
     def remove_line_numbers str
@@ -28,61 +30,6 @@ module Tunit
 
     def zeroify_time str
       str.gsub(/\d/, '0')
-    end
-
-    class PassingTest < Test
-      def initialize name = :test_pass
-        super
-      end
-
-      def test_pass
-        assert 2.even?
-      end
-
-      def test_pass_one_more
-        assert [1, 2].include?(2)
-      end
-    end
-
-    class FailingTest < Test
-      def initialize name = :test_fail
-        super
-      end
-
-      def test_fail
-        assert false
-      end
-
-      def test_empty
-      end
-    end
-
-    class SkippedTest < Test
-      def initialize test = :test_skip
-        super
-      end
-
-      def test_skip
-        skip
-      end
-
-      def test_skip_with_msg
-        skip "implement me when IQ > 80"
-      end
-    end
-
-    class ErrorTest < Test
-      def initialize test = :test_error
-        super
-      end
-
-      def test_error
-        fail NotAnAssertion
-      end
-
-      def test_exception
-        raise "hell"
-      end
     end
   end
 end

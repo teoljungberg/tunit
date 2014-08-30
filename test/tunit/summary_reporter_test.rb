@@ -40,7 +40,7 @@ Run options: {}
       exp_aggregated_results = <<-EOS
 
   1) Failure:
-Tunit::TestCase::FailingTest#test_fail [test/test_helper.rb:LINE]:
+Tunit::FailingTest#test_fail [test/sample/tests.rb:LINE]:
 Failed assertion, no message given.
 
       EOS
@@ -108,7 +108,7 @@ Failed assertion, no message given.
       reporter.record SkippedTest.new(:test_skip).run
       reporter.report
 
-      exp_report = /1\) Skipped:\nTunit::TestCase::SkippedTest#test_skip \[(.*)\]/
+      exp_report = /1\) Skipped:\nTunit::SkippedTest#test_skip \[(.*)\]/
 
       assert_match exp_report, io.string
       refute_match exp_report, reporter.io.string

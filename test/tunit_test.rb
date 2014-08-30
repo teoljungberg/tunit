@@ -3,7 +3,7 @@ require 'tunit'
 
 class TunitTest < Tunit::TestCase
   def setup
-    Tunit::Runnable.runnables = [PassingTest]
+    Tunit::Runnable.runnables = [Tunit::PassingTest]
     Tunit.io                  = io
   end
 
@@ -34,13 +34,13 @@ class TunitTest < Tunit::TestCase
   end
 
   def test_run_is_sad_with_failures
-    Tunit::Runnable.runnables = [FailingTest]
+    Tunit::Runnable.runnables = [Tunit::FailingTest]
 
     refute Tunit.run
   end
 
   def test_run_is_meh_with_skipps
-    Tunit::Runnable.runnables = [SkippedTest]
+    Tunit::Runnable.runnables = [Tunit::SkippedTest]
 
     assert Tunit.run
   end
