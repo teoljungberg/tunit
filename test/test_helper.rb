@@ -7,6 +7,7 @@ require "tunit/test"
 require "stringio"
 
 require "sample/tests"
+require "sample/specs"
 
 module Tunit
   class TestCase < Minitest::Test
