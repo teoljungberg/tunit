@@ -17,11 +17,15 @@ module Tunit
     end
 
     def test_expect_must_be_inside_an_it_block
-      assert_raises NoMethodError do
+      e = assert_raises NoMethodError do
         Class.new(Spec) {
           expect(2).to eq 1
         }
       end
+
+      exp_match = /undefined method `expect'/
+
+      assert_match exp_match, e.message
     end
   end
 
