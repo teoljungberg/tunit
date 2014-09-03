@@ -82,11 +82,11 @@ module Tunit
         let(:lazy) { "here ma" }
       end
 
-      my_thing      = thing.new(:test)
-      first_obj_id  = my_thing.lazy.object_id
-      second_obj_id = my_thing.lazy.object_id
+      my_thing = thing.new(:test)
+      alpha    = my_thing.lazy
+      beta     = my_thing.lazy
 
-      assert_equal first_obj_id, second_obj_id
+      assert_same alpha, beta
     end
 
     def test_name
