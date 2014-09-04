@@ -11,10 +11,7 @@ module Tunit
     def assert test, msg = nil
       msg ||= "Failed assertion, no message given."
       self.assertions += 1
-      unless test
-        msg = msg.call if Proc === msg
-        fail ::Tunit::Assertion, msg
-      end
+      fail ::Tunit::Assertion, msg unless test
       true
     end
 
