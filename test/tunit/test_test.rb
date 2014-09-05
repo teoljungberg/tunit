@@ -13,6 +13,11 @@ module Tunit
         Test::TEARDOWN_HOOKS
     end
 
+    def test_SETUP_HOOKS
+      assert_equal %w(before_setup setup after_setup),
+        Test::SETUP_HOOKS
+    end
+
     def test_runnable_methods
       assert_includes PassingTest.runnable_methods, "test_pass"
     end

@@ -29,7 +29,7 @@ module Tunit
     def run
       capture_exceptions do
         time_it do
-          before_setup; setup; after_setup
+          SETUP_HOOKS.each {|hook| send hook }
           send name
         end
 
