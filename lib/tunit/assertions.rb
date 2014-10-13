@@ -36,6 +36,16 @@ module Tunit
       assert obj.instance_of?(klass), msg
     end
 
+    def assert_predicate obj, meth, msg = nil
+      msg ||= "Expected #{obj.inspect} to be #{meth.inspect}"
+      assert obj.__send__(meth)
+    end
+
+    def refute_predicate obj, meth, msg = nil
+      msg ||= "Expected #{obj.inspect} not to be #{meth.inspect}"
+      refute obj.__send__(meth)
+    end
+
     def refute test, msg = nil
       msg ||= "Failed assertion, no message given."
       ! assert !test, msg

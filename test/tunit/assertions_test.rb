@@ -105,5 +105,17 @@ module Tunit
 
       assert_match exp_msg, e.message
     end
+
+    def test_assert_predicate
+      self.assertion_count = 1
+
+      tc.assert_predicate 2, :even?
+    end
+
+    def test_refute_predicate
+      self.assertion_count = 1
+
+      tc.refute_predicate 2, :odd?
+    end
   end
 end
