@@ -36,19 +36,20 @@ module Tunit
     def test_passed_eh
       reporter.record PassingTest.new.run
 
-      assert reporter.passed?
+      assert_predicate reporter, :passed?
       assert_empty reporter.results
     end
 
     def test_passed_eh_accepts_skipped_tests
       reporter.record SkippedTest.new.run
-      assert reporter.passed?
+
+      assert_predicate reporter, :passed?
     end
 
     def test_passed_eh_rejects_failing_tests
       reporter.record FailingTest.new.run
 
-      refute reporter.passed?
+      refute_predicate reporter, :passed?
     end
 
     def test_report_collects_total_time

@@ -37,7 +37,7 @@ module Tunit
     def test_run_handles_assertions
       result = PassingTest.new.run
 
-      assert result.passed?
+      assert_predicate result, :passed?
       assert_equal 1, result.assertions
     end
 
@@ -67,7 +67,7 @@ module Tunit
       exp_msg = "Skipped 'test_skip'"
       failure = result.failure
 
-      assert result.skipped?
+      assert_predicate result, :skipped?
       assert_instance_of Tunit::Skip, failure
       assert_equal exp_msg, failure.message
     end
@@ -193,7 +193,7 @@ module Tunit
 
     def test_passed_eh
       result = PassingTest.new.run
-      assert result.passed?
+      assert_predicate result, :passed?
     end
 
     def test_passed_eh_is_only_true_if_not_a_failure
@@ -211,7 +211,7 @@ module Tunit
       result = SkippedTest.new.run
 
       assert_instance_of ::Tunit::Skip, result.failure
-      assert result.skipped?
+      assert_predicate result, :skipped?
     end
 
     def test_code_for_success

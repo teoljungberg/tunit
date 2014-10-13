@@ -31,7 +31,8 @@ module Tunit
 
     def test_passed_eh
       reporter.record PassingTest.new.run
-      assert reporter.passed?
+
+      assert_predicate reporter, :passed?
     end
 
     def test_passed_eh_fails_of_any_reporter_failed
