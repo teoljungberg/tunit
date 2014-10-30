@@ -90,9 +90,7 @@ module Tunit
     end
 
     def test_name
-      thing = describe MyThing do
-        let(:lazy) { "here ma" }
-      end
+      thing = describe MyThing do end
 
       my_thing = thing.new(:test)
 
@@ -101,9 +99,7 @@ module Tunit
     end
 
     def test_to_s
-      thing = describe MyThing do
-        let(:lazy) { "here ma" }
-      end
+      thing = describe MyThing do end
 
       assert_equal thing.name, thing.to_s
     end
