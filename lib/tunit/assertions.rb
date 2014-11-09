@@ -11,7 +11,11 @@ module Tunit
     def assert test, msg = nil
       msg ||= "Failed assertion, no message given."
       self.assertions += 1
-      fail ::Tunit::Assertion, msg unless test
+
+      unless test
+        fail FailedAssertion, msg
+      end
+
       true
     end
 

@@ -5,12 +5,12 @@ require 'tunit/test'
 module Tunit
   class AssertionErrorTest < TestCase
     def setup
-      @assertion_error = Assertion.new
+      @assertion_error = FailedAssertion.new
     end
     attr_reader :assertion_error
 
     def test_error
-      assert_instance_of Assertion, assertion_error.error
+      assert_instance_of FailedAssertion, assertion_error.error
     end
 
     def test_location

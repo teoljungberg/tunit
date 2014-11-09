@@ -92,7 +92,7 @@ module Tunit
       end
 
       self.failures << e
-    rescue Assertion => e
+    rescue FailedAssertion => e
       self.failures << e
     rescue Exception => e
       self.failures << UnexpectedError.new(e)

@@ -1,5 +1,5 @@
 module Tunit
-  class Assertion < Exception
+  class FailedAssertion < Exception
     def error
       self
     end
@@ -22,13 +22,13 @@ module Tunit
     end
   end
 
-  class Skip < Assertion
+  class Skip < FailedAssertion
     def result_label
       "Skipped"
     end
   end
 
-  class Error < Assertion
+  class Error < FailedAssertion
     def result_label
       "Error"
     end

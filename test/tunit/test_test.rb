@@ -47,7 +47,7 @@ module Tunit
       exp_msg = "Failed assertion, no message given."
       failure = result.failure
 
-      assert_instance_of Tunit::Assertion, failure
+      assert_instance_of Tunit::FailedAssertion, failure
       assert_equal exp_msg, failure.message
     end
 
@@ -204,7 +204,7 @@ module Tunit
     def test_failure
       result = FailingTest.new.run
 
-      assert_instance_of ::Tunit::Assertion, result.failure
+      assert_instance_of ::Tunit::FailedAssertion, result.failure
     end
 
     def test_skipped_eh
