@@ -16,6 +16,32 @@ module Tunit
       assert_equal 1, k.assertions
     end
 
+    def test_to_sends_assertions
+      klass = Class.new(Spec) {
+        it "passes" do
+          expect(2).to eq 2
+        end
+      }
+
+      k = klass.new "spec_0001_passes"
+      k.run
+
+      assert_equal 1, k.assertions
+    end
+
+    def test_not_to_sends_refutions
+      klass = Class.new(Spec) {
+        it "passes" do
+          expect(6).not_to eq 9
+        end
+      }
+
+      k = klass.new "spec_0001_passes"
+      k.run
+
+      assert_equal 1, k.assertions
+    end
+
     def test_expect_must_be_inside_an_it_block
       e = assert_raises NoMethodError do
         Class.new(Spec) {
