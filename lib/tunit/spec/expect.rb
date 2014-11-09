@@ -38,8 +38,11 @@ module Tunit
         private
 
         def assertions_mapper
-          Tunit::Assertions.public_instance_methods(false).map(&:to_s).
-            grep(/(assert|refute)/).abbrev
+          Tunit::Assertions
+            .public_instance_methods(false)
+            .map(&:to_s)
+            .grep(/(assert|refute)/)
+            .abbrev
         end
 
         def fetch_assertion method_name
