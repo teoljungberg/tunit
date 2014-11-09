@@ -14,16 +14,17 @@ module Tunit
       set_test_order test_methods
     end
 
+    class << self
+      attr_accessor :test_order
+    end
+
     # Randomize tests by default
     def self.test_order
-      :random
+      @test_order ||= :random
     end
 
     def self.order!
-      class << self
-        undef_method :test_order if method_defined?(:test_order)
-        define_method(:test_order) { :alpha }
-      end
+      self.test_order = :alpha
     end
 
     def run
