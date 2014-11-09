@@ -14,19 +14,6 @@ module Tunit
       set_test_order test_methods
     end
 
-    class << self
-      attr_accessor :test_order
-    end
-
-    # Randomize tests by default
-    def self.test_order
-      @test_order ||= :random
-    end
-
-    def self.order!
-      self.test_order = :alpha
-    end
-
     def run
       capture_exceptions do
         time_it do
@@ -108,14 +95,14 @@ module Tunit
     end
 
     def self.set_test_order test_methods
-      case test_order
+      case order
       when :random
         max = test_methods.size
         test_methods.sort.sort_by { rand max }
       when :alpha
         test_methods.sort
       else
-        fail "Unknown test_order: #{test_order.inspect}"
+        fail "Unknown order: #{order.inspect}"
       end
     end
 

@@ -17,6 +17,19 @@ module Tunit
       super
     end
 
+    class << self
+      attr_accessor :order
+    end
+
+    # Randomize tests by default
+    def self.order
+      @order ||= :random
+    end
+
+    def self.order!
+      self.order = :alpha
+    end
+
     def self.run reporter, options = {}
       filter = options.fetch(:filter) { '/./' }
       filter = Regexp.new $1 if filter =~ /\/(.*)\//
