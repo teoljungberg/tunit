@@ -17,13 +17,13 @@ module Tunit
       super
     end
 
-    class << self
-      attr_accessor :order
-    end
-
     # Randomize tests by default
     def self.order
       @order ||= :random
+    end
+
+    def self.order= new_order
+      @order = new_order
     end
 
     def self.order!
