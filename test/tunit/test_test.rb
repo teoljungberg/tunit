@@ -191,6 +191,30 @@ module Tunit
       assert_equal exp_order, teardown_order
     end
 
+    def test_skip
+      skipped_test = Class.new Tunit::Test do
+        def test_skip
+          skip
+        end
+      end
+
+      result = skipped_test.new(:test_skip).run
+
+      assert Skip === result.failure
+    end
+
+    def test_skip_message
+      skipped_test = Class.new Tunit::Test do
+        def test_skip
+          skip "my message"
+        end
+      end
+
+      result = skipped_test.new(:test_skip).run
+
+      assert_equal "my message", result.failure.message
+    end
+
     def test_passed_eh
       result = PassingTest.new.run
       assert_predicate result, :passed?

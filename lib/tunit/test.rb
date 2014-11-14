@@ -44,6 +44,14 @@ module Tunit
       self
     end
 
+    def skip msg = nil
+      method_in_backtrace_regexp = /`.*'/
+      method_responsible = caller[0][method_in_backtrace_regexp][1..-2]
+      msg ||= "Skipped '#{method_responsible}'"
+
+      fail Skip, msg
+    end
+
     def passed?
       !failure
     end

@@ -2,13 +2,6 @@ require 'tunit/assertion_errors'
 
 module Tunit
   module Assertions
-    def skip msg = nil, bt = caller
-      method_responsible = bt[0][/`.*'/][1..-2]
-      msg ||= "Skipped '#{method_responsible}'"
-
-      fail Skip, msg, bt
-    end
-
     def assert test, msg = nil
       msg ||= "Failed assertion, no message given."
       self.assertions += 1
