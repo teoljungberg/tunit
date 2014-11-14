@@ -49,7 +49,7 @@ module Tunit
     end
 
     def skipped?
-      failure && Skip === failure
+      Skip === failure
     end
 
     def failure

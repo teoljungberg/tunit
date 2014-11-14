@@ -6,7 +6,7 @@ module Tunit
       method_responsible = bt[0][/`.*'/][1..-2]
       msg ||= "Skipped '#{method_responsible}'"
 
-      fail ::Tunit::Skip, msg, bt
+      fail Skip, msg, bt
     end
 
     def assert test, msg = nil
