@@ -71,20 +71,6 @@ module Tunit
       refute_respond_to k, :jikes
     end
 
-    def test_method_missing_fails_if_no_matcher_is_found
-      klass = Class.new(Spec) {
-        it 'passes' do
-          expect(/oo/).to slay "foo"
-        end
-      }
-
-      k = klass.new "spec_0001_passes"
-      k.run
-
-      assert_instance_of NotAnAssertion, k.failure
-      assert_equal "`slay` is not a valid expectation", k.failure.message
-    end
-
     def test_method_missing_executes_assertions_from_the_caller_class
       klass = Class.new(Spec) {
         it 'passes' do
