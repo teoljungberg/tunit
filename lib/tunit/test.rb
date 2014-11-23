@@ -97,8 +97,7 @@ module Tunit
     def self.set_test_order test_methods
       case order
       when :random
-        max = test_methods.size
-        test_methods.sort.sort_by { rand max }
+        test_methods.shuffle
       when :alpha
         test_methods.sort
       else
