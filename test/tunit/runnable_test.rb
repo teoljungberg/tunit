@@ -42,6 +42,18 @@ module Tunit
       assert_equal ["omg"], Runnable.runnables
     end
 
+    def test_runnable_methods_shuffles_the_tests
+      assert_equal :random, PassingTest.order
+    end
+
+    def test_order_bang_orders_your_tests
+      sucky_test = Class.new(PassingTest) {
+        order!
+      }
+
+      assert_equal :alpha, sucky_test.order
+    end
+
     def test_run_runs_all_tests_with_a_given_reporter
       PassingTest.run dummy_reporter, io: io
 
@@ -50,11 +62,11 @@ module Tunit
 
     def test_run_runs_all_tests_with_matching_pattern
       filter          = "test_pass_one_more"
-      matched_methods = PassingTest.runnable_methods.grep(/#{filter}/).size
+      matched_methods = PassingTest.runnable_methods.grep(/#{filter}/)
 
       PassingTest.run dummy_reporter, io: io, filter: filter
 
-      assert_equal dummy_reporter.assertions, matched_methods
+      assert_equal dummy_reporter.assertions, matched_methods.size
     end
 
     def test_runnable_methods_can_be_customized_to_find_your_tests
