@@ -1,4 +1,4 @@
-require 'abbrev'
+require "abbrev"
 
 module Tunit
   class Spec
@@ -20,6 +20,23 @@ module Tunit
         klass.send assertion, exp_value, real_value
       end
 
+      def not_to matcher
+        assertion, real_value = matcher
+        exp_value             = value.call
+
+        klass.send negate(assertion), exp_value, real_value
+      end
+
+      private
+
+      def negate assertion
+        assertion.
+          gsub(/(assert|refute)/, { "assert" => "refute",
+                                    "refute" => "assert" })
+      end
+
+      public
+
       module Expectations
         def method_missing method_name, *args, &block
           assertion = fetch_assertion method_name
@@ -38,8 +55,11 @@ module Tunit
         private
 
         def assertions_mapper
-          Tunit::Assertions.public_instance_methods(false).map(&:to_s).
-            grep(/(assert|refute)/).abbrev
+          Tunit::Assertions
+            .public_instance_methods(false)
+            .map(&:to_s)
+            .grep(/(assert|refute)/)
+            .abbrev
         end
 
         def fetch_assertion method_name
