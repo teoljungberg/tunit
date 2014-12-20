@@ -21,10 +21,6 @@ module Tunit
 
     private
 
-    def truncate_absolute_path str
-      str.gsub(%r{\[.*(test/sample/.*.rb.*)\]}, '[\1]')
-    end
-
     def remove_line_numbers str
       str.gsub(/:\d{1,}/, ':LINE')
     end

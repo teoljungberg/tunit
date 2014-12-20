@@ -10,7 +10,9 @@ module Tunit
         break if line =~ /in .(assert|refute|skip|raise|fail)/
         last_before_assertion = line
       end
-      last_before_assertion.sub(/:in .*$/, "")
+      last_before_assertion
+        .sub(/:in .*$/, "")
+        .sub("#{Dir.pwd}/", "")
     end
 
     def result_code

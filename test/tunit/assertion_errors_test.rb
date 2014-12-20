@@ -21,6 +21,13 @@ module Tunit
       assert_match exp_location, assertion_error.location
     end
 
+    def test_location_relative_from_cwd
+      result          = FailingTest.new.run
+      assertion_error = result.failure
+
+      assert assertion_error.location.start_with? "test/sample/tests"
+    end
+
     def test_result_code
       assert_equal "F", assertion_error.result_code
     end

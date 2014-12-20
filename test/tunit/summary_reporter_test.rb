@@ -45,9 +45,7 @@ Failed assertion, no message given.
 
       EOS
 
-      assert_equal exp_aggregated_results, remove_line_numbers(
-        truncate_absolute_path(aggregated_results)
-      )
+      assert_equal exp_aggregated_results, remove_line_numbers(aggregated_results)
     end
 
     def test_report_returns_summary
