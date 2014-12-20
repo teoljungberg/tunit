@@ -58,7 +58,7 @@ module Tunit
           Tunit::Assertions
             .public_instance_methods(false)
             .map(&:to_s)
-            .grep(/(assert|refute)/)
+            .grep(/assert|refute/)
             .abbrev
         end
 
