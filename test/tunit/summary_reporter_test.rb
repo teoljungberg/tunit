@@ -25,10 +25,9 @@ Run options: {}
       reporter.record PassingTest.new.run
       reporter.report
 
-      stats     = reporter.send :statistics
-      exp_stats = %r(Finished in 0{1,}.0{1,}s, 0{1,}.0{1,} runs/s, 0{1,}.0{1,} assertions/s.)
+      stats = reporter.send :statistics
 
-      assert_match exp_stats, zeroify_time(stats)
+      assert_equal "Finished in 0.00", normalize_output(stats)
     end
 
     def test_report_returns_failed_assertions
@@ -40,12 +39,12 @@ Run options: {}
       exp_aggregated_results = <<-EOS
 
   1) Failure:
-Tunit::FailingTest#test_fail [test/sample/tests.rb:LINE]:
+Tunit::FailingTest#test_fail [FILE:LINE]:
 Failed assertion, no message given.
 
       EOS
 
-      assert_equal exp_aggregated_results, remove_line_numbers(aggregated_results)
+      assert_equal exp_aggregated_results, normalize_output(aggregated_results)
     end
 
     def test_report_returns_summary

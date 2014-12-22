@@ -21,12 +21,17 @@ module Tunit
 
     private
 
-    def remove_line_numbers str
-      str.gsub(/:\d{1,}/, ':LINE')
-    end
+    def normalize_output output
+      output.sub!(/Finished in .*/, "Finished in 0.00")
 
-    def zeroify_time str
-      str.gsub(/\d/, '0')
+      output.gsub!(/ = \d+.\d\d s = /, ' = 0.00 s = ')
+      output.gsub!(/0x[A-Fa-f0-9]+/, '0xXXX')
+      output.gsub!(/ +$/, '')
+
+      output.gsub!(/\[[^\]:]+:\d+\]/, '[FILE:LINE]')
+      output.gsub!(/^(\s+)[^:]+:\d+:in/, '\1FILE:LINE:in')
+
+      output
     end
   end
 end
