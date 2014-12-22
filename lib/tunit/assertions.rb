@@ -41,7 +41,7 @@ module Tunit
     def assert_predicate obj, meth, msg = nil
       msg ||= "Expected #{obj.inspect} to be #{meth.inspect}"
 
-      assert obj.__send__(meth)
+      assert obj.__send__(meth), msg
     end
 
     def refute_predicate obj, meth, msg = nil
