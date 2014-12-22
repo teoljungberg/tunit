@@ -85,14 +85,14 @@ module Tunit
       msg ||= "Expected #{regexp.inspect} to match '#{string}'"
 
       assert_respond_to string, :=~
-      assert string =~ regexp
+      assert string =~ regexp, msg
     end
 
     def refute_match regexp, string, msg = nil
       msg ||= "Expected #{regexp.inspect} not to match '#{string}'"
 
       assert_respond_to string, :=~
-      refute string =~ regexp
+      refute string =~ regexp, msg
     end
 
     def assert_raises *exceptions
