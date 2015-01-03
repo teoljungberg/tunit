@@ -142,25 +142,25 @@ assert_match /oo/, "foo"
 
 ### Refutions
 ```ruby
-expect(2).to not_eq 2
+expect(2).not_to eq 2
 # =>
 refute_equal 2, 2
 ```
 
 ```ruby
-expect([1,2]).to not_include 1
+expect([1,2]).not_to include 1
 # =>
 refute_includes [1, 2], 1
 ```
 
 ```ruby
-expect(Class).to not_respond_to :new
+expect(Class).not_to respond.not_to :new
 # =>
-refute_responds_to Class, :new
+refute_responds.not_to Class, :new
 ```
 
 ```ruby
-expect("foo").to not_match /oo/
+expect("foo").not_to match /oo/
 # =>
 refute_match /oo/, "foo"
 ```
