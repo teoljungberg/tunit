@@ -26,8 +26,11 @@ module Tunit
     private
 
     def statistics
-      "Finished in %.6fs, %.4f runs/s, %.4f assertions/s." %
-        [total_time, count / total_time, assertions / total_time]
+      "Finished in %.6fs, %.4f runs/s, %.4f assertions/s." % [
+        total_time,
+        count / total_time,
+        assertions / total_time,
+      ]
     end
 
     def aggregated_results
@@ -35,7 +38,10 @@ module Tunit
       filtered_results.reject!(&:skipped?) unless options[:verbose]
 
       filtered_results.each_with_index.map do |result, index|
-        "\n%3d) %s" % [index + 1, result]
+        "\n%{index}) %{result}" % {
+          index: index + 1,
+          result: result,
+        }
       end.join + "\n"
     end
 
@@ -43,8 +49,14 @@ module Tunit
       extra = ""
       extra << SKIP_MSG if results.any?(&:skipped?) && !options[:verbose]
 
-      "%d runs, %d assertions, %d failures, %d errors, %d skips%s" %
-        [count, assertions, failures, errors, skips, extra]
+      "%d runs, %d assertions, %d failures, %d errors, %d skips%s" % [
+        count,
+        assertions,
+        failures,
+        errors,
+        skips,
+        extra,
+      ]
     end
   end
 end

@@ -38,7 +38,7 @@ module Tunit
       aggregated_results     = reporter.send :aggregated_results
       exp_aggregated_results = <<-EOS.strip_heredoc
 
-          1) Failure:
+        1) Failure:
         Tunit::FailingTest#test_fail [FILE:LINE]:
         Failed assertion, no message given.
 
