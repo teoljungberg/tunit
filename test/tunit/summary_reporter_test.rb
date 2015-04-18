@@ -20,7 +20,7 @@ module Tunit
       assert_equal exp_msg, io.string
     end
 
-    def test_report_gives_test_run_statistics
+    def test_report_statistics
       reporter.start
       reporter.record PassingTest.new.run
       reporter.report
@@ -30,7 +30,7 @@ module Tunit
       assert_equal "Finished in 0.00", normalize_output(stats)
     end
 
-    def test_report_returns_failed_assertions
+    def test_report_statistics_returns_failed_assertions
       reporter.start
       reporter.record FailingTest.new.run
       reporter.report
@@ -47,7 +47,7 @@ module Tunit
       assert_equal exp_aggregated_results, normalize_output(aggregated_results)
     end
 
-    def test_report_returns_summary
+    def test_report_summary
       reporter.start
       reporter.record PassingTest.new.run
       reporter.report
@@ -58,7 +58,7 @@ module Tunit
       assert_equal exp_summary, summary
     end
 
-    def test_report_considers_empty_test_failures
+    def test_report_summary_considers_empty_test_failures
       reporter.start
       reporter.record FailingTest.new(:test_empty).run
       reporter.report
@@ -69,7 +69,7 @@ module Tunit
       assert_match exp_summary, summary
     end
 
-    def test_report_returns_errors_and_exceptions
+    def test_report_summary_returns_errors_and_exceptions
       reporter.start
       reporter.record ErrorTest.new(:test_exception).run
       reporter.report
