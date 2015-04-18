@@ -10,10 +10,10 @@ module Tunit
 
     def test_start_returns_run_msg
       reporter.start
-      exp_msg = <<-EOS
-Run options: {}
+      exp_msg = <<-EOS.strip_heredoc
+        Run options: {}
 
-# Running:
+        # Running:
 
       EOS
 
@@ -36,11 +36,11 @@ Run options: {}
       reporter.report
 
       aggregated_results     = reporter.send :aggregated_results
-      exp_aggregated_results = <<-EOS
+      exp_aggregated_results = <<-EOS.strip_heredoc
 
-  1) Failure:
-Tunit::FailingTest#test_fail [FILE:LINE]:
-Failed assertion, no message given.
+          1) Failure:
+        Tunit::FailingTest#test_fail [FILE:LINE]:
+        Failed assertion, no message given.
 
       EOS
 

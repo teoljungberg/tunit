@@ -48,8 +48,8 @@ module Tunit
       reporter = ProgressReporter.new io, verbose: true
       reporter.record PassingTest.new(:test_pass).run
 
-      exp_verbosity = <<-EOS
-. = Tunit::PassingTest#test_pass (0.00 s)
+      exp_verbosity = <<-EOS.strip_heredoc
+        . = Tunit::PassingTest#test_pass (0.00 s)
       EOS
 
       assert_equal exp_verbosity, io.string
@@ -59,8 +59,8 @@ module Tunit
       reporter = ProgressReporter.new io, verbose: true
       reporter.record PassingSpec.new(:spec_0001_pass).run
 
-      exp_verbosity = <<-EOS
-. = PassingSpec#spec_0001_pass (0.00 s)
+      exp_verbosity = <<-EOS.strip_heredoc
+        . = PassingSpec#spec_0001_pass (0.00 s)
       EOS
 
       assert_equal exp_verbosity, io.string

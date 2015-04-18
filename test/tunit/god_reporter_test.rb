@@ -51,17 +51,17 @@ module Tunit
       reporter.start
       reporter.record PassingTest.new.run
       reporter.report
-      exp_report = <<-EOS
-Run options: {}
+      exp_report = <<-EOS.strip_heredoc
+        Run options: {}
 
-# Running:
+        # Running:
 
-.
+        .
 
-Finished in 0.00
+        Finished in 0.00
 
-1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
-EOS
+        1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
+      EOS
 
       assert_equal exp_report, normalize_output(io.string)
     end
