@@ -2,8 +2,7 @@ require "minitest/autorun"
 require "tunit/test"
 require "stringio"
 
-require "sample/tests"
-require "sample/specs"
+Dir["./test/support/**/*.rb"].each { |f| require f }
 
 module Tunit
   class TestCase < Minitest::Test

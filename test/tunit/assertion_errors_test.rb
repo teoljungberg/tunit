@@ -16,7 +16,7 @@ module Tunit
     def test_location
       result          = FailingTest.new.run
       assertion_error = result.failure
-      exp_location    = %r(test/sample/tests.rb:\d{1,})
+      exp_location    = %r(sample/tests.rb:\d{1,})
 
       assert_match exp_location, assertion_error.location
     end
@@ -25,7 +25,7 @@ module Tunit
       result          = FailingTest.new.run
       assertion_error = result.failure
 
-      assert assertion_error.location.start_with? "test/sample/tests"
+      assert assertion_error.location.start_with? "test/support/sample/tests"
     end
 
     def test_result_code
@@ -50,7 +50,7 @@ module Tunit
     def test_location
       result          = SkippedTest.new.run
       assertion_error = result.failure
-      exp_location    = %r(test/sample/tests.rb:\d{1,})
+      exp_location    = %r(sample/tests.rb:\d{1,})
 
       assert_match exp_location, assertion_error.location
     end
@@ -77,7 +77,7 @@ module Tunit
     def test_location
       result          = ErrorTest.new.run
       assertion_error = result.failure
-      exp_location    = %r(test/sample/tests.rb:\d{1,})
+      exp_location    = %r(sample/tests.rb:\d{1,})
 
       assert_instance_of NotAnAssertion, result.failure
       assert_match exp_location, assertion_error.location
@@ -115,7 +115,7 @@ module Tunit
     def test_location
       result          = ErrorTest.new(:test_exception).run
       assertion_error = result.failure
-      exp_location    = %r(test/sample/tests.rb:\d{1,})
+      exp_location    = %r(sample/tests.rb:\d{1,})
 
       assert_instance_of UnexpectedError, result.failure
       assert_match exp_location, assertion_error.location

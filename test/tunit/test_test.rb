@@ -252,7 +252,7 @@ module Tunit
 
     def test_location_of_a_failing_test
       result       = FailingTest.new(:test_fail).run
-      exp_location = %r(Tunit::FailingTest#test_fail \[test/sample/tests.rb:\d{1,}\])
+      exp_location = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
 
       assert_match exp_location, result.location
     end
@@ -267,7 +267,7 @@ module Tunit
 
     def test_to_s_returns_the_failing_test
       result    = FailingTest.new(:test_fail).run
-      exp_match = %r(Tunit::FailingTest#test_fail \[test/sample/tests.rb:\d{1,}\])
+      exp_match = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
 
       assert_match exp_match, result.to_s
     end
