@@ -95,13 +95,11 @@ module Tunit
       refute string =~ regexp, msg
     end
 
-    def assert_raises *exceptions
-      msg = exceptions.pop if String === exceptions.last
-
+    def assert_raises exception
       yield
     rescue Exception => e
-      expected = exceptions.any? {|ex| ex === e }
-      assert expected, msg
+      msg = "Expected #{exception.inspect} to have been raised, got #{e.inspect}"
+      assert exception === e , msg
       e
     end
   end

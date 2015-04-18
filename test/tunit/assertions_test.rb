@@ -94,6 +94,18 @@ module Tunit
       end
     end
 
+    def test_assert_raises_wrong_exception
+      self.assertion_count = 2
+
+      e = tc.assert_raises Tunit::FailedAssertion do
+        tc.assert_raises Tunit::Test do tc.unexisting_method end
+      end
+
+      expected_message = /Expected Tunit::Test to have been raised, got #<NoMethodError: undefined method `unexisting_method'/
+
+      assert_match expected_message, e.message
+    end
+
     def test_assert_raises_returns_the_message
       self.assertion_count = 1
 
