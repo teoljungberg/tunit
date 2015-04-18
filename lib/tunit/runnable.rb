@@ -31,12 +31,7 @@ module Tunit
     end
 
     def self.run reporter, options = {}
-      filter = options.fetch(:filter) { '/./' }
-      filter = Regexp.new $1 if filter =~ /\/(.*)\//
-
-      filtered_methods = runnable_methods.select { |m|
-        filter === m || filter === "#{self}##{m}"
-      }
+      filtered_methods = filter_methods options
 
       filtered_methods.each { |test|
         reporter.record self.new(test).run
@@ -60,6 +55,15 @@ module Tunit
       public_instance_methods(true).
         grep(re).
         map(&:to_s)
+    end
+
+    def self.filter_methods options
+      filter = options.fetch(:filter) { '/./' }
+      filter = Regexp.new $1 if filter =~ /\/(.*)\//
+
+      runnable_methods.select { |method_name|
+        filter === method_name || filter === "#{self}##{method_name}"
+      }
     end
   end
 end
