@@ -26,7 +26,7 @@ module Tunit
       @order = new_order
     end
 
-    def self.order!
+    def self.randomize_off
       self.order = :alpha
     end
 

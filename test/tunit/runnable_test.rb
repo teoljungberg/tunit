@@ -46,9 +46,9 @@ module Tunit
       assert_equal :random, PassingTest.order
     end
 
-    def test_order_bang_orders_your_tests
+    def test_randomize_off
       sucky_test = Class.new(PassingTest) {
-        order!
+        randomize_off
       }
 
       assert_equal :alpha, sucky_test.order
