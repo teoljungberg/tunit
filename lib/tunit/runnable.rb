@@ -57,7 +57,9 @@ module Tunit
     private
 
     def self.methods_matching re
-      public_instance_methods(true).grep(re).map(&:to_s)
+      public_instance_methods(true).
+        grep(re).
+        map(&:to_s)
     end
   end
 end
