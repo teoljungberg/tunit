@@ -36,9 +36,6 @@ module Tunit
     end
   end
 
-  class NotAnAssertion < Error
-  end
-
   class UnexpectedError < Error
     def initialize exception
       super

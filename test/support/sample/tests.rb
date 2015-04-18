@@ -44,12 +44,8 @@ module Tunit
   end
 
   class ErrorTest < Test
-    def initialize test = :test_error
+    def initialize test = :test_exception
       super
-    end
-
-    def test_error
-      fail NotAnAssertion
     end
 
     def test_exception

@@ -79,7 +79,7 @@ module Tunit
       assertion_error = result.failure
       exp_location    = %r(sample/tests.rb:\d{1,})
 
-      assert_instance_of NotAnAssertion, result.failure
+      assert_instance_of UnexpectedError, result.failure
       assert_match exp_location, assertion_error.location
     end
 
