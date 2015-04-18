@@ -27,13 +27,24 @@ module Tunit
     end
 
     def report
-      total           = results.group_by {|r| r.failure.class }
-      total.default   = []
-
       self.total_time = Time.now - start_time
-      self.failures   = total[FailedAssertion].size
-      self.errors     = total[UnexpectedError].size
-      self.skips      = total[Skip].size
+      self.failures   = count_failures_for FailedAssertion
+      self.errors     = count_failures_for UnexpectedError
+      self.skips      = count_failures_for Skip
+    end
+
+    private
+
+    def count_failures_for error
+      total[error].size
+    end
+
+    def total
+      return @total if defined? @total
+
+      @total = results.group_by {|r| r.failure.class }
+      @total.default = []
+      @total
     end
   end
 end
