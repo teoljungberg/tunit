@@ -6,10 +6,6 @@ Dir["./test/support/**/*.rb"].each { |f| require f }
 
 module Tunit
   class TestCase < Minitest::Test
-    def io
-      @io ||= StringIO.new ""
-    end
-
     def teardown
       Runnable.runnables.clear
     end

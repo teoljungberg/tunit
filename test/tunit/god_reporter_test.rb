@@ -4,7 +4,8 @@ require 'tunit/god_reporter'
 module Tunit
   class GodReporterTest < TestCase
     def setup
-      @reporter = GodReporter.new
+      io = StringIO.new
+      @reporter = GodReporter.new(io)
       @reporter << SummaryReporter.new(io)
       @reporter << ProgressReporter.new(io)
     end
@@ -63,7 +64,7 @@ module Tunit
         1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
       EOS
 
-      assert_equal exp_report, normalize_output(io.string)
+      assert_equal exp_report, normalize_output(reporter.io.string)
     end
   end
 end

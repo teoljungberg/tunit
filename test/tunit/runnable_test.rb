@@ -55,12 +55,14 @@ module Tunit
     end
 
     def test_run_runs_all_tests_with_a_given_reporter
+      io = StringIO.new
       PassingTest.run dummy_reporter, io: io
 
       assert_equal dummy_reporter.assertions, PassingTest.runnable_methods.size
     end
 
     def test_run_runs_all_tests_with_matching_pattern
+      io = StringIO.new
       filter = "test_pass_one_more"
       matched_methods = PassingTest.runnable_methods.grep(/#{filter}/)
 

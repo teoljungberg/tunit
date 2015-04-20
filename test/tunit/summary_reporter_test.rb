@@ -4,6 +4,7 @@ require 'tunit/summary_reporter'
 module Tunit
   class SummaryReporterTest < TestCase
     def setup
+      io = StringIO.new
       @reporter = SummaryReporter.new io
     end
     attr_reader :reporter
@@ -17,7 +18,7 @@ module Tunit
 
       EOS
 
-      assert_equal exp_msg, io.string
+      assert_equal exp_msg, reporter.io.string
     end
 
     def test_report_statistics
@@ -81,6 +82,7 @@ module Tunit
     end
 
     def test_report_summay_does_not_show_skip_message_if_verbose
+      io = StringIO.new
       reporter = SummaryReporter.new io, verbose: true
       reporter.start
       reporter.record SkippedTest.new.run
@@ -94,6 +96,7 @@ module Tunit
 
     def test_report_only_shows_skips_if_verbose
       unverbose_reporter = self.reporter
+      io = StringIO.new
       unverbose_reporter.io = StringIO.new
       verbose_reporter = SummaryReporter.new io, verbose: true
 

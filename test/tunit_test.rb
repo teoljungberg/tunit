@@ -4,6 +4,7 @@ require 'tunit'
 class TunitTest < Tunit::TestCase
   def setup
     Tunit::Runnable.runnables = [Tunit::PassingTest]
+    io = StringIO.new
     Tunit.io = io
   end
 
