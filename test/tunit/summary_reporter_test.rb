@@ -31,7 +31,7 @@ module Tunit
       assert_equal "Finished in 0.00", normalize_output(stats)
     end
 
-    def test_report_statistics_returns_failed_assertions
+    def test_report_aggregated_results
       reporter.start
       reporter.record FailingTest.new.run
       reporter.report
