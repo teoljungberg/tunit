@@ -4,15 +4,21 @@ module Tunit
       self
     end
 
+    def location= new_location
+      @location = new_location
+    end
+
     def location
+      return @location if defined? @location
+
       last_before_assertion = ""
       backtrace.reverse_each do |line|
         break if line =~ /in .(assert|refute|skip|raise|fail)/
         last_before_assertion = line
       end
-      last_before_assertion
-        .sub(/:in .*$/, "")
-        .sub("#{Dir.pwd}/", "")
+      @location = last_before_assertion.
+        sub(/:in .*$/, "").
+        sub("#{Dir.pwd}/", "")
     end
 
     def result_code

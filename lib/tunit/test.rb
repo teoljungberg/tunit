@@ -29,6 +29,7 @@ module Tunit
           send hook
         end
       end
+
       self
     end
 
@@ -81,11 +82,7 @@ module Tunit
     def capture_exceptions
       yield
     rescue Skip => e
-      location = method(name).source_location.join(":")
-
-      redefine_method e.class, :location do
-        -> { location }
-      end
+      e.location = location_of_skipped_test
 
       self.failures << e
     rescue FailedAssertion => e
@@ -105,13 +102,8 @@ module Tunit
       end
     end
 
-    def redefine_method klass, method_name
-      return unless block_given?
-
-      klass.send :alias_method, "old_#{method_name}", method_name
-      klass.send :define_method, method_name, yield
-    ensure
-      klass.send :remove_method, "old_#{method_name}"
+    def location_of_skipped_test
+      method(name).source_location.join(":")
     end
   end
 end
