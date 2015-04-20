@@ -61,7 +61,7 @@ module Tunit
     end
 
     def test_run_runs_all_tests_with_matching_pattern
-      filter          = "test_pass_one_more"
+      filter = "test_pass_one_more"
       matched_methods = PassingTest.runnable_methods.grep(/#{filter}/)
 
       PassingTest.run dummy_reporter, io: io, filter: filter

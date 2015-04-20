@@ -6,7 +6,7 @@ module Tunit
     include Spec::Expect::Expectations
 
     def setup
-      self.tc                = Class.new(Spec).new "custom_spec"
+      self.tc = Class.new(Spec).new "custom_spec"
       self.expectation_count = 0
     end
     attr_accessor :tc, :expectation_count

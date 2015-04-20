@@ -15,14 +15,14 @@ module Tunit
 
       def to matcher
         assertion, real_value = matcher
-        exp_value             = value.call
+        exp_value = value.call
 
         klass.send assertion, exp_value, real_value
       end
 
       def not_to matcher
         assertion, real_value = matcher
-        exp_value             = value.call
+        exp_value = value.call
 
         klass.send negate(assertion), exp_value, real_value
       end
@@ -30,9 +30,10 @@ module Tunit
       private
 
       def negate assertion
-        assertion.
-          gsub(/(assert|refute)/, { "assert" => "refute",
-                                    "refute" => "assert" })
+        assertion.gsub(
+          /(assert|refute)/,
+          { "assert" => "refute", "refute" => "assert" }
+        )
       end
 
       public

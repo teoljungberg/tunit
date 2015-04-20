@@ -35,7 +35,7 @@ module Tunit
       reporter.record FailingTest.new.run
       reporter.report
 
-      aggregated_results     = reporter.send :aggregated_results
+      aggregated_results = reporter.send :aggregated_results
       exp_aggregated_results = <<-EOS.strip_heredoc
 
         1) Failure:
@@ -52,7 +52,7 @@ module Tunit
       reporter.record PassingTest.new.run
       reporter.report
 
-      summary     = reporter.send :summary
+      summary = reporter.send :summary
       exp_summary = "1 runs, 1 assertions, 0 failures, 0 errors, 0 skips"
 
       assert_equal exp_summary, summary
@@ -63,7 +63,7 @@ module Tunit
       reporter.record FailingTest.new(:test_empty).run
       reporter.report
 
-      summary     = reporter.send :summary
+      summary = reporter.send :summary
       exp_summary = /1 runs, 0 assertions, 0 failures, 0 errors, 1 skips/
 
       assert_match exp_summary, summary
@@ -74,7 +74,7 @@ module Tunit
       reporter.record ErrorTest.new(:test_exception).run
       reporter.report
 
-      summary     = reporter.send :summary
+      summary = reporter.send :summary
       exp_summary = /1 runs, 0 assertions, 0 failures, 1 errors, 0 skips/
 
       assert_match exp_summary, summary
@@ -86,16 +86,16 @@ module Tunit
       reporter.record SkippedTest.new.run
       reporter.report
 
-      summary          = reporter.send :summary
+      summary = reporter.send :summary
       summary_skip_msg = /#{SummaryReporter::SKIP_MSG}/
 
       refute_match summary_skip_msg, summary
     end
 
     def test_report_only_shows_skips_if_verbose
-      unverbose_reporter    = self.reporter
-      unverbose_reporter.io = StringIO.new ""
-      verbose_reporter      = SummaryReporter.new io, verbose: true
+      unverbose_reporter = self.reporter
+      unverbose_reporter.io = StringIO.new
+      verbose_reporter = SummaryReporter.new io, verbose: true
 
       verbose_reporter.start
       verbose_reporter.record SkippedTest.new(:test_skip).run

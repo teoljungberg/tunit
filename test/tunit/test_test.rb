@@ -30,7 +30,7 @@ module Tunit
     end
 
     def test_run_handles_failures
-      result  = FailingTest.new.run
+      result = FailingTest.new.run
 
       expected_message = "Failed assertion, no message given."
       failure = result.failure
@@ -50,7 +50,7 @@ module Tunit
     end
 
     def test_run_handles_skipped_tests
-      result  = SkippedTest.new.run
+      result = SkippedTest.new.run
 
       expected_message = "Skipped 'test_skip'"
       failure = result.failure
@@ -61,7 +61,7 @@ module Tunit
     end
 
     def test_run_skipped_tests_can_have_customized_messages
-      result  = SkippedTest.new(:test_skip_with_message).run
+      result = SkippedTest.new(:test_skip_with_message).run
 
       expected_message = "implement me when IQ > 80"
       failure = result.failure

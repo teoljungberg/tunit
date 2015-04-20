@@ -4,7 +4,7 @@ require 'tunit'
 class TunitTest < Tunit::TestCase
   def setup
     Tunit::Runnable.runnables = [Tunit::PassingTest]
-    Tunit.io                  = io
+    Tunit.io = io
   end
 
   def test_autorun_sets_installed_at_exit
