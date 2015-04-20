@@ -3,9 +3,9 @@ require_relative '../test_helper'
 module Tunit
   class TestTest < TestCase
     def test_PREFIX
-      exp_prefix = /^test_/
+      expected_prefix = /^test_/
 
-      assert_equal exp_prefix, Test::PREFIX
+      assert_equal expected_prefix, Test::PREFIX
     end
 
     def test_TEARDOWN_HOOKS
@@ -32,41 +32,41 @@ module Tunit
     def test_run_handles_failures
       result  = FailingTest.new.run
 
-      exp_msg = "Failed assertion, no message given."
+      expected_message = "Failed assertion, no message given."
       failure = result.failure
 
       assert_instance_of Tunit::FailedAssertion, failure
-      assert_equal exp_msg, failure.message
+      assert_equal expected_message, failure.message
     end
 
     def test_run_handles_empty_tests_as_skips
       result  = FailingTest.new(:test_empty).run
 
-      exp_msg = "Empty test, <Tunit::FailingTest#test_empty>"
+      expected_message = "Empty test, <Tunit::FailingTest#test_empty>"
       failure = result.failure
 
       assert_instance_of Tunit::Skip, failure
-      assert_equal exp_msg, failure.message
+      assert_equal expected_message, failure.message
     end
 
     def test_run_handles_skipped_tests
       result  = SkippedTest.new.run
 
-      exp_msg = "Skipped 'test_skip'"
+      expected_message = "Skipped 'test_skip'"
       failure = result.failure
 
       assert_predicate result, :skipped?
       assert_instance_of Tunit::Skip, failure
-      assert_equal exp_msg, failure.message
+      assert_equal expected_message, failure.message
     end
 
     def test_run_skipped_tests_can_have_customized_messages
-      result  = SkippedTest.new(:test_skip_with_msg).run
+      result  = SkippedTest.new(:test_skip_with_message).run
 
-      exp_msg = "implement me when IQ > 80"
+      expected_message = "implement me when IQ > 80"
       failure = result.failure
 
-      assert_equal exp_msg, failure.message
+      assert_equal expected_message, failure.message
     end
 
     def test_run_saves_exceptions_as_failures
@@ -83,17 +83,17 @@ module Tunit
     end
 
     def test_run_execs_setup_before_each_run
-      exp_calls = []
+      expected_calls = []
 
       tc = Class.new PassingTest do
         define_method :setup do
-          exp_calls << :setup
+          expected_calls << :setup
         end
       end
 
       tc.new.run
 
-      assert_equal [:setup], exp_calls
+      assert_equal [:setup], expected_calls
     end
 
     def test_run_execs_before_and_after_setup
@@ -114,23 +114,23 @@ module Tunit
       end
 
       tc.new(:test_pass).run
-      exp_order = [:before_setup, :setup, :after_setup]
+      expected_order = [:before_setup, :setup, :after_setup]
 
-      assert_equal exp_order, setup_order
+      assert_equal expected_order, setup_order
     end
 
     def test_run_execs_teardown_after_each_run
-      exp_calls = []
+      expected_calls = []
 
       tc = Class.new PassingTest do
         define_method :teardown do
-          exp_calls << :teardown
+          expected_calls << :teardown
         end
       end
 
       tc.new.run
 
-      assert_equal [:teardown], exp_calls
+      assert_equal [:teardown], expected_calls
     end
 
     def test_run_execs_before_and_after_teardown
@@ -151,9 +151,9 @@ module Tunit
       end
 
       tc.new(:test_pass).run
-      exp_order = [:before_teardown, :teardown, :after_teardown]
+      expected_order = [:before_teardown, :teardown, :after_teardown]
 
-      assert_equal exp_order, teardown_order
+      assert_equal expected_order, teardown_order
     end
 
     def test_run_captures_any_errors_and_skips_the_hook_that_raised_the_error
@@ -174,9 +174,9 @@ module Tunit
       end
 
       tc.new(:test_pass).run
-      exp_order = [:teardown, :after_teardown]
+      expected_order = [:teardown, :after_teardown]
 
-      assert_equal exp_order, teardown_order
+      assert_equal expected_order, teardown_order
     end
 
     def test_skip
@@ -251,25 +251,25 @@ module Tunit
     end
 
     def test_location_of_a_failing_test
-      result       = FailingTest.new(:test_fail).run
-      exp_location = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
+      result = FailingTest.new(:test_fail).run
+      expected_location = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
 
-      assert_match exp_location, result.location
+      assert_match expected_location, result.location
     end
 
     def test_to_s_returns_the_klass_and_test
       result = PassingTest.new(:test_pass).run
-      exp_klass_and_test = "Tunit::PassingTest#test_pass"
+      expected_klass_and_test = "Tunit::PassingTest#test_pass"
 
-      assert_equal exp_klass_and_test, result.to_s
+      assert_equal expected_klass_and_test, result.to_s
       assert_equal result.to_s, result.location
     end
 
     def test_to_s_returns_the_failing_test
-      result    = FailingTest.new(:test_fail).run
-      exp_match = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
+      result = FailingTest.new(:test_fail).run
+      expected_match = %r(Tunit::FailingTest#test_fail \[test/support/sample/tests.rb:\d{1,}\])
 
-      assert_match exp_match, result.to_s
+      assert_match expected_match, result.to_s
     end
   end
 end

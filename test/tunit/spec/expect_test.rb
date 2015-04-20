@@ -10,10 +10,10 @@ module Tunit
         end
       }
 
-      k = klass.new "spec_0001_passes"
-      k.run
+      instance = klass.new "spec_0001_passes"
+      instance.run
 
-      assert_equal 1, k.assertions
+      assert_equal 1, instance.assertions
     end
 
     def test_to_sends_assertions
@@ -23,10 +23,10 @@ module Tunit
         end
       }
 
-      k = klass.new "spec_0001_passes"
-      k.run
+      instance = klass.new "spec_0001_passes"
+      instance.run
 
-      assert_equal 1, k.assertions
+      assert_equal 1, instance.assertions
     end
 
     def test_not_to_sends_refutions
@@ -36,10 +36,10 @@ module Tunit
         end
       }
 
-      k = klass.new "spec_0001_passes"
-      k.run
+      instance = klass.new "spec_0001_passes"
+      instance.run
 
-      assert_equal 1, k.assertions
+      assert_equal 1, instance.assertions
     end
 
     def test_expect_must_be_inside_an_it_block
@@ -73,28 +73,28 @@ module Tunit
         end
       }
 
-      k = klass.new "spec_0001_passes"
-      k.run
+      instance = klass.new "spec_0001_passes"
+      instance.run
     end
 
     def test_respond_to_missing_maps_expectation_matchers_to_assertions
-      k = Class.new(Spec).new :test
+      instance = Class.new(Spec).new :test
 
-      assert_respond_to k, :eq
-      assert_equal ["assert_equal", 42], k.eq(42)
+      assert_respond_to instance, :eq
+      assert_equal ["assert_equal", 42], instance.eq(42)
     end
 
     def test_respond_to_missing_maps_expectation_matchers_to_refutions
-      k = Class.new(Spec).new :test
+      instance = Class.new(Spec).new :test
 
-      assert_respond_to k, :not_match
-      assert_equal ["refute_match", 42], k.not_match(42)
+      assert_respond_to instance, :not_match
+      assert_equal ["refute_match", 42], instance.not_match(42)
     end
 
     def test_respond_to_missing_only_maps_to_assertions_and_refutions
-      k = Class.new(Spec).new :test
+      instance = Class.new(Spec).new :test
 
-      refute_respond_to k, :jikes
+      refute_respond_to instance, :jikes
     end
 
     def test_method_missing_executes_assertions_from_the_caller_class
@@ -104,10 +104,10 @@ module Tunit
         end
       }
 
-      k = klass.new "spec_0001_passes"
-      k.run
+      instance = klass.new "spec_0001_passes"
+      instance.run
 
-      assert_equal 2, k.assertions
+      assert_equal 2, instance.assertions
     end
   end
 end

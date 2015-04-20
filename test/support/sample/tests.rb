@@ -38,7 +38,7 @@ module Tunit
       skip
     end
 
-    def test_skip_with_msg
+    def test_skip_with_message
       skip "implement me when IQ > 80"
     end
   end

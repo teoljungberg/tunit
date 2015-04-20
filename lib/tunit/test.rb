@@ -32,12 +32,12 @@ module Tunit
       self
     end
 
-    def skip msg = nil
+    def skip message = nil
       method_in_backtrace_regexp = /`.*'/
       method_responsible = caller[0][method_in_backtrace_regexp][1..-2]
-      msg ||= "Skipped '#{method_responsible}'"
+      message ||= "Skipped '#{method_responsible}'"
 
-      fail Skip, msg
+      fail Skip, message
     end
 
     def passed?
@@ -105,13 +105,13 @@ module Tunit
       end
     end
 
-    def redefine_method klass, method
+    def redefine_method klass, method_name
       return unless block_given?
 
-      klass.send :alias_method, "old_#{method}", method
-      klass.send :define_method, method, yield
+      klass.send :alias_method, "old_#{method_name}", method_name
+      klass.send :define_method, method_name, yield
     ensure
-      klass.send :remove_method, "old_#{method}"
+      klass.send :remove_method, "old_#{method_name}"
     end
   end
 end

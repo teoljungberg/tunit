@@ -13,7 +13,7 @@ module Tunit
       assert_includes klass.runnable_methods, "spec_0001_does_the_thing"
     end
 
-    def test_it_blocks_does_not_require_a_desc
+    def test_it_blocks_does_not_require_a_description
       klass = Class.new(Spec) {
         it do end
       }
@@ -25,20 +25,20 @@ module Tunit
       klass = Class.new(Spec)
       klass.before { "here!" }
 
-      k = klass.new :test
+      instance = klass.new :test
 
-      assert_respond_to k, :setup
-      assert_equal "here!", k.setup
+      assert_respond_to instance, :setup
+      assert_equal "here!", instance.setup
     end
 
     def test_after_is_converted_to_teardown
       klass = Class.new(Spec)
       klass.after { "there!" }
 
-      k = klass.new :test
+      instance = klass.new :test
 
-      assert_respond_to k, :teardown
-      assert_equal "there!", k.teardown
+      assert_respond_to instance, :teardown
+      assert_equal "there!", instance.teardown
     end
 
     def test_describe_is_converted_to_a_test_klass_with_test_methods
