@@ -1,5 +1,5 @@
 # Tunit
-[![Build Status](https://travis-ci.org/teoljungberg/tunit.svg?branch=master)](https://travis-ci.org/teoljungberg/tunitunit)
+[![Build Status](https://travis-ci.org/teoljungberg/tunit.svg?branch=master)](https://travis-ci.org/teoljungberg/tunit)
 
 `tunit` is my take on building a testing framework, it's heavily influenced by
 [minitest](https://github.com/seattlerb/minitest).
